@@ -9,7 +9,7 @@ export default defineConfig({
         minify: false,
         outDir: "dist/scripts",
         watch: {
-            include: "src/**"
+            include: "src/**/*.ts"
         },
         rollupOptions: {
             input: "src/main.ts",

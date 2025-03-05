@@ -1,13 +1,17 @@
 import { Fadeable } from "./Fadeable";
 
-export abstract class FadeableDocument implements Fadeable {
+export default abstract class FadeableDocument implements Fadeable {
     
-    constructor(private element: any) {}
+    constructor(protected element: TokenDocument | Token | TileDocument | Tile | any) {}
 
     fade(): Promise<any> {
         return new Promise((resolve, reject) => {
-            this.#startFade(this.element);
-            resolve("Fade completed");
+            if (this.element.isInvalid)
+                reject("Invalid fadeable element")
+            else {
+                this.#startFade(this.element);
+                resolve("Fade completed");
+            }
         })
     }
 
