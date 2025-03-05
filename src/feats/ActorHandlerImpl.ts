@@ -28,7 +28,7 @@ export default class ActorHandlerImpl implements ActorHandler{
     }
 
     private isRole(roleName: string): boolean {
-        return this.actor.system.roleInfo?.activeRole === roleName;
+        return this.actor?.system.roleInfo.activeRole === roleName;
     }
 
     public getId(): string {

@@ -1,23 +1,29 @@
-import RHM from "../RHM";
+import {FLAGS, RHM} from "../RHM";
+import { templateFactory } from "../templates/TemplateFactory";
 
 function hookUp() {
     Hooks.on("renderTokenHUD", config);
 }
 
-function config() {
-    let template = Handlebars.compile("{{> modules/acorip/templates/token-hub-jack-inout.hbs}}")
-
-    attachJackInButton(template({}), game.users?.current);
+function config(tokenHUD: TokenHUD) {
+    attachJackInButton(tokenHUD);
 }
 
-function attachJackInButton(partialHtml: string, user: User): void {
-    console.log(user);
-    console.log(RHM.getPlayerTokenHandlers());
+function attachJackInButton(tokenHUD: TokenHUD): void {
+    let tokenHandler = RHM.getTokenHandlerById(tokenHUD.object.document.id);
+    let isNetrunningFlag = tokenHandler.getFlag(FLAGS.NETRUNNING);
 
-    let tokenHandler = RHM.getTokenHandlerForUser(user);
-    
-    if (tokenHandler?.getActorHandler().isNetrunner())
-        $("form#token-hud div.col.right").append(partialHtml);
+    let template = templateFactory.createTokenHUDJackInOutTemplate();
+
+    if (tokenHandler?.getActorHandler().isNetrunner()) {
+        $("form#token-hud div.col.right")
+        .append(
+            template({
+                active: (isNetrunningFlag ? "active" : ""),
+                tokenId: tokenHandler.getId()
+            })
+        ).on("click", (_) => tokenHandler.jack(!isNetrunningFlag));
+    }
 }
 
 export default {hookUp}

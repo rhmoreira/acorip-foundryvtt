@@ -1,8 +1,8 @@
-import FadeableDocument from "./FadeableDocument";
+import FadeableElement from "./FadeableElement";
 
-export default class TileHandler extends FadeableDocument {
+export default class TileHandler extends FadeableElement<Tile> {
     
-    constructor(tile: TileDocument | Tile) {
+    constructor(tile: Tile) {
         super(tile);
     }
 

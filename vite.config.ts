@@ -7,7 +7,7 @@ export default defineConfig({
         sourcemap: false,
         emptyOutDir: true,
         minify: false,
-        outDir: "dist/scripts",
+        outDir: "C:\\Users\\rhmor\\AppData\\Local\\FoundryVTT\\Data\\modules\\acorip\\scripts",
         watch: {
             include: "src/**/*.ts"
         },
@@ -25,7 +25,7 @@ export default defineConfig({
         copy({
             targets: [{
                 src: ["src/", "!src/**/*.ts"],
-                dest: "dist",
+                dest: "C:\\Users\\rhmor\\AppData\\Local\\FoundryVTT\\Data\\modules\\acorip",
                 expandDirectories: true,
                 onlyFiles: true
             }],

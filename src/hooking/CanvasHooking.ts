@@ -1,5 +1,5 @@
 import { PlayerTokenHandler } from "../feats/TokenHandler";
-import RHM from "../RHM";
+import { RHM } from "../RHM";
 
 function hookUp(){
     Hooks.on("canvasReady", config)
