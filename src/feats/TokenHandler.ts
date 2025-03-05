@@ -1,13 +1,21 @@
-import ActorHelperImpl from "./ActorHelperImpl";
+import ActorHandlerImpl from "./ActorHandlerImpl";
 import FadeableDocument from "./FadeableDocument";
 
 class TokenHandler extends FadeableDocument {
-    constructor(token: TokenDocument | Token, protected actorHelper: ActorHelper = new ActorHelperImpl(token.actor)) {
+    constructor(token: TokenDocument | Token, protected actorHandler: ActorHandler = new ActorHandlerImpl(token.actor)) {
         super(token);
     }
 
     public getToken(): TokenDocument | Token {
         return this.element as TokenDocument | Token;
+    }
+
+    public getId(): string {
+        return this.getToken().id;
+    }
+
+    public getActorHandler(): ActorHandler {
+        return this.actorHandler;
     }
 }
 
@@ -20,14 +28,18 @@ class PlayerTokenHandler extends TokenHandler {
         }
     }
 
+    public isOwner(user: User): boolean {
+        return this.actorHandler.getId() === user?.character.id;
+    }
+
     public jackIn(): void {
-        if (this.actorHelper.isNetrunner()) {
+        if (this.actorHandler.isNetrunner()) {
 
         }
     }
 
     public jackOut(): void {
-        if (this.actorHelper.isNetrunner()) {
+        if (this.actorHandler.isNetrunner()) {
             
         }
     } 

@@ -23,5 +23,8 @@ export default class RHM {
         return RHM.game?.acorip?.handlers?.playerTokenHandlers || [];
     }
 
+    public static getTokenHandlerForUser(user: User): PlayerTokenHandler {
+        return this.getPlayerTokenHandlers().find(handler => handler.isOwner(user));
+    }
 
 }

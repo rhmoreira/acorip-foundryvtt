@@ -1,5 +1,7 @@
-interface ActorHelper {
+interface ActorHandler {
     
+    getId(): string;
+
     isBlackICE(): boolean;
     isNetrunner(): boolean;
     isSolo(): boolean;

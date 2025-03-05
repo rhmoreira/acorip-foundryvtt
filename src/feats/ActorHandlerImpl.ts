@@ -1,4 +1,4 @@
-export default class ActorHelperImpl implements ActorHelper{
+export default class ActorHandlerImpl implements ActorHandler{
     
     constructor(private actor: Actor | any) {}
 
@@ -29,6 +29,10 @@ export default class ActorHelperImpl implements ActorHelper{
 
     private isRole(roleName: string): boolean {
         return this.actor.system.roleInfo?.activeRole === roleName;
+    }
+
+    public getId(): string {
+        return this.actor.id;
     }
 
 }
