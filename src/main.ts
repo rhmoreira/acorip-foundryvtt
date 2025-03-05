@@ -5,12 +5,9 @@ Hooks.once("init", () => {
         "modules/acorip/templates/token-hub-jack-inout.hbs"
     ]);
 
-    if (!game.acorip) {
-        game.acorip = new RHM();
-    }
-    game.acorip.init();
+    RHM.init();
 });
 
 Hooks.on("ready", () => {
-    console.log(game.acorip.playerTokenHandlers);
+    console.log("Module acoriP loaded!");
 })

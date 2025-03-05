@@ -1,19 +1,27 @@
-import { TokenHandler } from "./feats/TokenHandler";
+import { PlayerTokenHandler } from "./feats/TokenHandler";
 import CanvasHooking from "./hooking/CanvasHooking";
 import RenderTokenHUDHooking from "./hooking/RenderTokenHUDHooking";
 
-export default class RHM extends Application {
+export default class RHM {
 
-    constructor() {
-        super();
-    }
+    private static game: any = game as any;
 
-    public init(): void {
+    private constructor() {}
+
+    public static init(): void {
         CanvasHooking.hookUp();
         RenderTokenHUDHooking.hookUp();
     }
 
-    public static getTokenHandlerById(tokenHandlers: TokenHandler[], id: string): TokenHandler | undefined {
-        return tokenHandlers.find(handler => handler.getToken().id === id)
+    public static setPlayerTokenHandlers(tokenHandlers: PlayerTokenHandler[]): void {
+        if (!RHM.game.acorip.handlers) RHM.game.acorip.handlers = {};
+        
+        RHM.game.acorip.handlers.playerTokenHandlers = tokenHandlers;
     }
+
+    public static getPlayerTokenHandlers(): PlayerTokenHandler[] {
+        return RHM.game?.acorip?.handlers?.playerTokenHandlers || [];
+    }
+
+
 }
