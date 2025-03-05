@@ -1,0 +1,23 @@
+{
+    "id": "acorip",
+    "title": "RHM acoriP",
+    "description": "CPR Utility Module",
+    "authors": [
+      {
+        "name": "Renato H M"
+      }
+    ],
+    "version": "0.0.1-SNAPSHOT",
+    "compatibility": {
+      "minimum": "11",
+      "verified": "11"
+    },
+    "languages": [
+      {
+        "lang": "en",
+        "name": "English",
+        "path": "lang/en.json"
+      }
+    ],
+    "esmodules": ["scripts/main.js"]
+   }

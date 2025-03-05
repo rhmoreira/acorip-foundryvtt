@@ -1,0 +1,34 @@
+{
+    "acorip": {
+        "features": {
+            "token": {
+                "toggle-image": "Change appearance",
+                "jack-in": "Jack-In",
+                "jack-out": "Jack-Out",
+                "black-ice": {
+                    "roll-initiative": "Roll Black-ICE initiative"
+                }
+            }
+
+        },
+        "messages": {
+            "black-ice": {
+                "not-in-combat": "Black-ICE '{TokenName}' is not in combat"
+            },
+            "token": {
+                "image-changed": "{TokenName} changed his/her appearance"
+            }
+        },
+        "labels": {
+            "confirm": "Confirm",
+            "friendly": "Friendly",
+            "friendly-alt": "Friendly 2",
+            "combat-pistol": "Combat (Pistol)",
+            "combat-smg": "Combat (SMG)",
+            "combat-shotgun": "Combat (Shotgun)",
+            "combat-rifle": "Combat (Rifle)",
+            "combat-bow": "Combat (Bow)"
+
+        }
+    }
+}
