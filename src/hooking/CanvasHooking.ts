@@ -21,7 +21,7 @@ function loadTokenHandlers(_: Canvas): void {
             ?.filter(token => token.actor?.id === userCharacter.id)
             .map(token => new PlayerTokenHandler(token));
     
-    RHM.setPlayerTokenHandlers(tokenHandlers || []);
+    RHM.setPlayerTokenHandlers(tokenHandlers);
 }
 
 export default {hookUp}

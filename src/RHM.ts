@@ -4,11 +4,13 @@ import RenderTokenHUDHooking from "./hooking/RenderTokenHUDHooking";
 
 export default class RHM {
 
-    private static game: any = game as any;
+    private static game: any;
 
     private constructor() {}
 
     public static init(): void {
+        RHM.game = <any> game;
+        RHM.game.acorip = {};
         CanvasHooking.hookUp();
         RenderTokenHUDHooking.hookUp();
     }
@@ -20,7 +22,7 @@ export default class RHM {
     }
 
     public static getPlayerTokenHandlers(): PlayerTokenHandler[] {
-        return RHM.game?.acorip?.handlers?.playerTokenHandlers || [];
+        return RHM.game.acorip.handlers.playerTokenHandlers;
     }
 
     public static getTokenHandlerForUser(user: User): PlayerTokenHandler {

@@ -11,10 +11,13 @@ function config() {
 }
 
 function attachJackInButton(partialHtml: string, user: User): void {
+    console.log(user);
+    console.log(RHM.getPlayerTokenHandlers());
+
     let tokenHandler = RHM.getTokenHandlerForUser(user);
     
-    if (user?.isGM || tokenHandler?.getActorHandler().isNetrunner())
-        $("div.col.right").append(partialHtml);
+    if (tokenHandler?.getActorHandler().isNetrunner())
+        $("form#token-hud div.col.right").append(partialHtml);
 }
 
 export default {hookUp}
