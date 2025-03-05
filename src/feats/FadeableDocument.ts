@@ -52,7 +52,7 @@ export abstract class FadeableDocument implements Fadeable {
                 clearInterval(fade);
                 update = {...update, alpha: fadeOptions.alphaLimit};
             }
-            canvas?.scene?.updateEmbeddedDocuments(element.documentName, [update]);
+            canvas?.scene?.updateEmbeddedDocuments(element.documentName || element.document?.documentName, [update]);
         }, interval);
     }
     
