@@ -1,4 +1,4 @@
-import { PlayerTokenHandler } from "./feats/TokenHandler";
+import { PlayerTokenManager } from "./feats/TokenManager";
 import CanvasHooking from "./hooking/CanvasHooking";
 import RenderTokenHUDHooking from "./hooking/RenderTokenHUDHooking";
 import { templateFactory } from "./templates/TemplateFactory";
@@ -24,22 +24,22 @@ class RHM {
         RenderTokenHUDHooking.hookUp();
     }
 
-    public static setPlayerTokenHandlers(tokenHandlers: PlayerTokenHandler[]): void {
-        if (!RHM.game.acorip.handlers) RHM.game.acorip.handlers = {};
+    public static setPlayerTokenManagers(tokenManagers: PlayerTokenManager[]): void {
+        if (!RHM.game.acorip.managers) RHM.game.acorip.managers = {};
         
-        RHM.game.acorip.handlers.playerTokenHandlers = tokenHandlers;
+        RHM.game.acorip.managers.playerTokenManagers = tokenManagers;
     }
 
-    public static getPlayerTokenHandlers(): PlayerTokenHandler[] {
-        return RHM.game.acorip.handlers.playerTokenHandlers;
+    public static getPlayerTokenManagers(): PlayerTokenManager[] {
+        return RHM.game.acorip.managers.playerTokenManagers;
     }
 
-    public static getTokenHandlerById(tokenId: string): PlayerTokenHandler {
-        return this.getPlayerTokenHandlers().find(handler => handler.getId() === tokenId);
+    public static getTokenManagerById(tokenId: string): PlayerTokenManager {
+        return this.getPlayerTokenManagers().find(manager => manager.getId() === tokenId);
     }
 
-    public static getTokenHandlerByUser(user: User): PlayerTokenHandler {
-        return this.getPlayerTokenHandlers().find(handler => handler.isOwner(user));
+    public static getTokenManagerByUser(user: User): PlayerTokenManager {
+        return this.getPlayerTokenManagers().find(manager => manager.isOwner(user));
     }
 
 }

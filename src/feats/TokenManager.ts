@@ -3,7 +3,7 @@ import { FLAGS, MODULE_ID } from "../RHM";
 import ActorHandlerImpl from "./ActorHandlerImpl";
 import FadeableElement from "./FadeableElement";
 
-class TokenHandler extends FadeableElement<TokenDocument> {
+class TokenManager extends FadeableElement<TokenDocument> {
     constructor(token: TokenDocument, protected actorHandler: ActorHandler = new ActorHandlerImpl(token.actor)) {
         super(token);
     }
@@ -39,7 +39,7 @@ class TokenHandler extends FadeableElement<TokenDocument> {
     }
 }
 
-class PlayerTokenHandler extends TokenHandler {
+class PlayerTokenManager extends TokenManager {
     
     constructor(token: TokenDocument) {
         super(token);
@@ -61,6 +61,6 @@ class PlayerTokenHandler extends TokenHandler {
 }
 
 export {
-    TokenHandler,
-    PlayerTokenHandler
+    TokenManager,
+    PlayerTokenManager
 }
