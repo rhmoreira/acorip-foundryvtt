@@ -1,51 +1,33 @@
 import { PlayerTokenManager } from "./feats/TokenManager";
-import CanvasHooking from "./hooking/CanvasHooking";
-import RenderTokenHUDHooking from "./hooking/RenderTokenHUDHooking";
-import { templateFactory } from "./templates/TemplateFactory";
-
-const MODULE_ID: string = "acorip";
-const FLAGS = {
-    INVALID_TOKEN: "Invalid Token",
-    NETRUNNING: "Netrunning"
-}
 
 class RHM {
+    private game: any;
 
-    private static game: any;
+    public init(): void {
+        this.game = <any> game;
+        this.game.acorip = {};
+    }
 
-    private constructor() {}
-
-    public static init(): void {
-        RHM.game = <any> game;
-        RHM.game.acorip = {};
+    public setPlayerTokenManagers(tokenManagers: PlayerTokenManager[]): void {        
+        if (!this.game.acorip.managers) this.game.acorip.managers = {};
         
-        templateFactory.init();
-        CanvasHooking.hookUp();
-        RenderTokenHUDHooking.hookUp();
+        this.game.acorip.managers.playerTokenManagers = tokenManagers;
     }
 
-    public static setPlayerTokenManagers(tokenManagers: PlayerTokenManager[]): void {
-        if (!RHM.game.acorip.managers) RHM.game.acorip.managers = {};
-        
-        RHM.game.acorip.managers.playerTokenManagers = tokenManagers;
+    public getPlayerTokenManagers(): PlayerTokenManager[] {
+        return this.game.acorip.managers.playerTokenManagers;
     }
 
-    public static getPlayerTokenManagers(): PlayerTokenManager[] {
-        return RHM.game.acorip.managers.playerTokenManagers;
-    }
-
-    public static getTokenManagerById(tokenId: string): PlayerTokenManager {
+    public getTokenManagerById(tokenId: string): PlayerTokenManager {
         return this.getPlayerTokenManagers().find(manager => manager.getId() === tokenId);
     }
 
-    public static getTokenManagerByUser(user: User): PlayerTokenManager {
+    public getTokenManagerByUser(user: User): PlayerTokenManager {
         return this.getPlayerTokenManagers().find(manager => manager.isOwner(user));
     }
 
 }
 
-export {
-    RHM,
-    MODULE_ID,
-    FLAGS
-}
+const INSTANCE = new RHM();
+
+export default INSTANCE as RHM;

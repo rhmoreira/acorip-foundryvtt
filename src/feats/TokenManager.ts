@@ -1,5 +1,6 @@
 import { toggleJackEffect } from "../events/JackEventHandler";
-import { FLAGS, MODULE_ID } from "../RHM";
+import { FLAGS, MODULE_ID } from "../lib/Constants";;
+import ToggleTokenImageHandler from "../events/ToggleTokenImageHandler";
 import ActorHandlerImpl from "./ActorHandlerImpl";
 import FadeableElement from "./FadeableElement";
 
@@ -56,6 +57,10 @@ class PlayerTokenManager extends TokenManager {
             super.setFlag(FLAGS.NETRUNNING, inOut);
             toggleJackEffect(this.getToken());
         }
+    }
+
+    public toggleTokenImage(): void {
+        new ToggleTokenImageHandler(this.getToken().object).toggleTokenImage();
     }
 
 }

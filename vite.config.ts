@@ -23,12 +23,20 @@ export default defineConfig({
     },
     plugins: [
         copy({
-            targets: [{
-                src: ["src/", "!src/**/*.ts"],
-                dest: "C:\\Users\\rhmor\\AppData\\Local\\FoundryVTT\\Data\\modules\\acorip",
-                expandDirectories: true,
-                onlyFiles: true
-            }],
+            targets: [
+                {
+                    src: ["src/events/**.js"],
+                    dest: "C:\\Users\\rhmor\\AppData\\Local\\FoundryVTT\\Data\\modules\\acorip\\scripts",
+                    expandDirectories: true,
+                    onlyFiles: true
+                },
+                {
+                    src: ["src/", "!src/**/*.ts", "!src/**/*.js"],
+                    dest: "C:\\Users\\rhmor\\AppData\\Local\\FoundryVTT\\Data\\modules\\acorip",
+                    expandDirectories: true,
+                    onlyFiles: true
+                }
+            ],
             flatten: false,
             hook: "writeBundle",
         }),
