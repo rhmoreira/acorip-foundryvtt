@@ -26,7 +26,12 @@ function attachJackInButton(_: TokenHUD, tokenManager: PlayerTokenManager): void
                 active: (isNetrunningFlag ? "active" : ""),
                 tokenId: tokenManager.getId()
             })
-        ).on("click", (_) => tokenManager.jack(!isNetrunningFlag));
+        ).children()
+        .last()
+        .on("click", (event) => {
+            console.log($(event.target.parentNode).attr("data-action"));
+            tokenManager.jack(!isNetrunningFlag)
+        });
     }
 }
 
@@ -34,7 +39,11 @@ function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenM
     let template = templateFactory.createTemplate(TEMPLATES.TOKEN_HUD_TOGGLE_IMAGE);
     $("form#token-hud div.col.right")
         .append(template({moduleId: MODULE_ID, tokenId: tokenHUD.object}))
-        .on("click", (_) => tokenManager.toggleTokenImage());
+        .children()
+        .last()
+        .on("click", (_) => {
+            tokenManager.toggleTokenImage()
+        });
 }
 
 export default {hookUp}

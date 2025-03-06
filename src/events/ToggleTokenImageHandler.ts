@@ -1,20 +1,15 @@
 import { templateFactory, TEMPLATES } from "../lib/TemplateFactory";
 
-const dialogOptions = {
-    title: "Alterar instância do token",
-    buttons: {confirm: {label: "Confirmar"}},
-    default: "confirm"
-};
-
 export default class ToggleTokenImageHandler {
     constructor(private token: Token){}
 
     public toggleTokenImage(): void{
         let dialogContent = templateFactory.createTemplate(TEMPLATES.TOKEN_TOGGLE_IMAGE_DIALOG);
         new Dialog({
-            ...dialogOptions,
+            title: "Alterar instância do token",
             content: dialogContent({}),
-            close: (html: any) => this.applyStance(this, html)
+            buttons: {confirm: {label: "Confirmar", callback: (html: any) => this.applyStance(this, html)}},
+            default: "confirm",
         }).render(true);
     }
     
