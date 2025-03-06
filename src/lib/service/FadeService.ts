@@ -1,5 +1,5 @@
-import { Fadeable, FadeType } from "../feats/Fadeable";
-import { templateFactory, TEMPLATES } from "./TemplateFactory";
+import { Fadeable, FadeType } from "../../feats/Fadeable";
+import { templateFactory, TEMPLATES } from "../TemplateFactory";
 
 export default class FadeService {
 

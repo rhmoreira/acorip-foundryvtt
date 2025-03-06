@@ -1,4 +1,4 @@
-import { templateFactory, TEMPLATES } from "../lib/TemplateFactory";
+import { templateFactory, TEMPLATES } from "../TemplateFactory";
 
 export default class ToggleTokenImageHandler {
 

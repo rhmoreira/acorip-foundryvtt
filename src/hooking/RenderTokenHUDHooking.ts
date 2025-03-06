@@ -2,7 +2,7 @@ import { PlayerTokenManager } from "../lib/TokenManager";
 import { FLAGS, MODULE_ID } from "../lib/Constants";
 import { templateFactory, TEMPLATES } from "../lib/TemplateFactory";
 import RHM from "../RHM";
-import FadeService from "../lib/FadeService";
+import FadeService from "../lib/service/FadeService";
 
 const TOKEN_HUD_PARENT_SELECTOR = "form#token-hud";
 const HUD_PLACEMENT = {
