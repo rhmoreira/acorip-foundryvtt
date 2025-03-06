@@ -1,16 +1,19 @@
 import { templateFactory, TEMPLATES } from "../lib/TemplateFactory";
 
 export default class ToggleTokenImageHandler {
+
+    private readonly content = templateFactory.parseTemplate(TEMPLATES.TOKEN_TOGGLE_IMAGE_DIALOG);
+
     constructor(private token: Token){}
 
     public toggleTokenImage(): void{
-        let dialogContent = templateFactory.createTemplate(TEMPLATES.TOKEN_TOGGLE_IMAGE_DIALOG);
-        new Dialog({
+        const dialogOptions: DialogData = {
             title: "Alterar instância do token",
-            content: dialogContent({}),
-            buttons: {confirm: {label: "Confirmar", callback: (html: any) => this.applyStance(this, html)}},
+            content: this.content,
+            buttons: {confirm: {label: "Confirmar", callback: this.applyStance.bind(this)}},
             default: "confirm",
-        }).render(true);
+        };
+        new Dialog(dialogOptions).render(true);
     }
     
 
@@ -27,12 +30,12 @@ export default class ToggleTokenImageHandler {
         ChatMessage.create(messageContent);
     }
 
-    private applyStance(_this: ToggleTokenImageHandler, html: any) {
+    private applyStance(html: any): void {
         let stance = html.find('select[name=\'token_instance\']').val();
-        let tokenUpdate = _this.changeTokenImage(stance);    
+        let tokenUpdate = this.changeTokenImage(stance);    
 
-        _this.updateToken([tokenUpdate]);
-        _this.notifyChange();
+        this.updateToken([tokenUpdate]);
+        this.notifyChange();
     }
 
 }

@@ -1,11 +1,8 @@
-import { PlayerTokenManager } from "../feats/TokenManager";
+import { PlayerTokenManager } from "../lib/TokenManager";
 
 function hookUp(): Promise<PlayerTokenManager[]>{
     return new Promise((resolve, _) => {
-        Hooks.on("canvasReady", (canvas) => {
-            let managers = config(canvas);
-            resolve(managers);
-        });
+        Hooks.on("canvasReady", (canvas) => resolve(config(canvas)) );
     })
 }
 

@@ -1,4 +1,4 @@
-import { PlayerTokenManager } from "./feats/TokenManager";
+import { PlayerTokenManager } from "./lib/TokenManager";
 
 class RHM {
     private game: any;

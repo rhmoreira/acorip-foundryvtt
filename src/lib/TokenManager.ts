@@ -2,15 +2,23 @@ import { toggleJackEffect } from "../events/JackEventHandler";
 import { FLAGS, MODULE_ID } from "../lib/Constants";;
 import ToggleTokenImageHandler from "../events/ToggleTokenImageHandler";
 import ActorHandlerImpl from "./ActorHandlerImpl";
-import FadeableElement from "./FadeableElement";
+import { Fadeable } from "../feats/Fadeable";
+import { EMBEDDED_DOCUMENT_TYPES } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/constants.mjs";
 
-class TokenManager extends FadeableElement<TokenDocument> {
-    constructor(token: TokenDocument, protected actorHandler: ActorHandler = new ActorHandlerImpl(token.actor)) {
-        super(token);
+class TokenManager implements Fadeable {
+    
+    constructor(private token: TokenDocument, protected actorHandler: ActorHandler = new ActorHandlerImpl(token.actor)) {}
+
+    public getDocumentName(): EMBEDDED_DOCUMENT_TYPES {
+        return this.getToken().documentName;
+    }
+
+    public createFadeUpdate(newAlpha: number): any {
+        return {_id: this.token.id, alpha: newAlpha};
     }
 
     public getToken(): TokenDocument{
-        return this.element;
+        return this.token;
     }
 
     public getId(): string {
@@ -22,7 +30,7 @@ class TokenManager extends FadeableElement<TokenDocument> {
     }
 
     protected invalidate(): void {
-        this.element.update({
+        this.token.update({
             flags: {
                 MODULE_ID: {
                     [FLAGS.INVALID_TOKEN]: true
@@ -32,11 +40,11 @@ class TokenManager extends FadeableElement<TokenDocument> {
     }
 
     public setFlag(flag: string, value: any): void {
-        this.element.setFlag(MODULE_ID, flag as never, value as never);
+        this.token.setFlag(MODULE_ID, flag as never, value as never);
     }
 
     public getFlag(flag: string): any {
-        return this.element.getFlag(MODULE_ID, flag as never);
+        return this.token.getFlag(MODULE_ID, flag as never);
     }
 }
 
