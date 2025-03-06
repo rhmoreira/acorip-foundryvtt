@@ -1,6 +1,5 @@
 import copy from "rollup-plugin-copy";
 import { defineConfig } from "vite";
-import glob from "glob";
 
 export default defineConfig({
     build: {
