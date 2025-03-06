@@ -17,33 +17,26 @@ function config(tokenHUD: TokenHUD) {
 function attachJackInButton(_: TokenHUD, tokenManager: PlayerTokenManager): void {
     let isNetrunningFlag = tokenManager.getFlag(FLAGS.NETRUNNING);
     let template = templateFactory.createTemplate(TEMPLATES.TOKEN_HUD_JACK_INOUT);
-
-    if (tokenManager?.getActorHandler().isNetrunner()) {
-        $("form#token-hud div.col.right")
-        .append(
-            template({
-                moduleId: MODULE_ID,
-                active: (isNetrunningFlag ? "active" : ""),
-                tokenId: tokenManager.getId()
-            })
-        ).children()
-        .last()
-        .on("click", (event) => {
-            console.log($(event.target.parentNode).attr("data-action"));
-            tokenManager.jack(!isNetrunningFlag)
-        });
-    }
+    attachHudButtonEvent(
+        template({moduleId: MODULE_ID, active: (isNetrunningFlag ? "active" : ""), tokenId: tokenManager.getId()}),
+        (_) => tokenManager.jack(!isNetrunningFlag)
+    );
 }
 
 function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenManager) {
     let template = templateFactory.createTemplate(TEMPLATES.TOKEN_HUD_TOGGLE_IMAGE);
+    attachHudButtonEvent(
+        template({moduleId: MODULE_ID, tokenId: tokenHUD.object}),
+        (_) => tokenManager.toggleTokenImage()
+    );
+}
+
+function attachHudButtonEvent(content: string, callback: (event: JQuery.ClickEvent<HTMLElement>) => void) {
     $("form#token-hud div.col.right")
-        .append(template({moduleId: MODULE_ID, tokenId: tokenHUD.object}))
+        .append(content)
         .children()
         .last()
-        .on("click", (_) => {
-            tokenManager.toggleTokenImage()
-        });
+        .on("click", (_) => callback(_));
 }
 
 export default {hookUp}
