@@ -17,10 +17,7 @@ function config(tokenHUD: TokenHUD) {
 function attachJackInButton(_: TokenHUD, tokenManager: PlayerTokenManager): void {
     let isNetrunningFlag = tokenManager.getFlag(FLAGS.NETRUNNING);
     let template = templateFactory.createTemplate(TEMPLATES.TOKEN_HUD_JACK_INOUT);
-    console.log(template({
-        active: (isNetrunningFlag ? "active" : ""),
-        tokenId: tokenManager.getId()
-    }))
+
     if (tokenManager?.getActorHandler().isNetrunner()) {
         $("form#token-hud div.col.right")
         .append(
@@ -36,7 +33,7 @@ function attachJackInButton(_: TokenHUD, tokenManager: PlayerTokenManager): void
 function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenManager) {
     let template = templateFactory.createTemplate(TEMPLATES.TOKEN_HUD_TOGGLE_IMAGE);
     $("form#token-hud div.col.right")
-        .append(template({tokenId: tokenHUD.object}))
+        .append(template({moduleId: MODULE_ID, tokenId: tokenHUD.object}))
         .on("click", (_) => tokenManager.toggleTokenImage());
 }
 
