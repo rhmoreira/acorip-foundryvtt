@@ -1,15 +1,15 @@
 import CanvasHooking from "./hooking/CanvasHooking";
 import RenderTokenHUDHooking from "./hooking/TokenHUDHooking";
-import TokenServiceLocator from "./lib/service/TokenServiceLocator";
+import tokenServiceManager from "./lib/service/TokenServiceManager";
 import { templateFactory } from "./lib/TemplateFactory";
 
 Hooks.once("init", () => {
     templateFactory.init();
-    TokenServiceLocator.init();
+    tokenServiceManager.init();
 
     CanvasHooking.hookUp({
         ready: {
-            tokenServices: (services) => TokenServiceLocator.services = services
+            tokens: tokenServiceManager.include.bind(tokenServiceManager)
         }
     });
     

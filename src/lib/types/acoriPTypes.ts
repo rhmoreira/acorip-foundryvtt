@@ -1,6 +1,5 @@
 import { EMBEDDED_DOCUMENT_TYPES } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/constants.mjs";
 import { TEMPLATES } from "../Constants";
-import { TokenService } from "../service/TokenService";
 
 export type DocumentType = EMBEDDED_DOCUMENT_TYPES;
 
@@ -9,7 +8,7 @@ export type TemplateType = typeof TEMPLATES[TemplateKeys];
 
 export type CanvasHookCallbacks = {
     ready: {
-        tokenServices: (managers: TokenService[]) => void
+        tokens: (...tokens: TokenDocument[]) => void
     }
 };
 

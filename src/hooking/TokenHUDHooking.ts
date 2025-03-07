@@ -2,7 +2,7 @@ import { TokenService } from "../lib/service/TokenService";
 import { templateFactory } from "../lib/TemplateFactory";
 import FadeService from "../lib/service/FadeService";
 import { FLAGS, MODULE_ID, TEMPLATES } from "../lib/Constants";
-import TokenServiceLocator from "../lib/service/TokenServiceLocator";
+import tokenServiceLocator from "../lib/service/TokenServiceManager";
 
 const TOKEN_HUD_PARENT_SELECTOR = "form#token-hud";
 const HUD_PLACEMENT = {
@@ -16,7 +16,7 @@ function hookUp() {
 }
 
 function config(tokenHUD: TokenHUD) {
-    let tokenService = TokenServiceLocator.getById(tokenHUD.object.document.id);
+    let tokenService = tokenServiceLocator.getById(tokenHUD.object.document.id);
 
     attachJackInButton(tokenHUD, tokenService);
     attatchToggleImageButton(tokenHUD, tokenService);
