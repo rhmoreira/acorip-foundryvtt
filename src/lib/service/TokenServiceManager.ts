@@ -5,7 +5,7 @@ class TokenServiceManager {
 
     private _services: TokenService[] = [];
 
-    public get services(): TokenService[] {return this._services};
+    public get services(): readonly TokenService[] {return this._services};
 
     constructor() {}
 
