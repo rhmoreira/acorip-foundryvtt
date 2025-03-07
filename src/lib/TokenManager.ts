@@ -1,15 +1,15 @@
 import { toggleJackEffect } from "./service/NetrunningService";
-import { FLAGS, MODULE_ID } from "../lib/Constants";;
 import ToggleTokenImageHandler from "./service/ToggleTokenImageService";
 import ActorHandlerImpl from "./ActorHandlerImpl";
 import { Fadeable } from "../feats/Fadeable";
-import { EMBEDDED_DOCUMENT_TYPES } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/constants.mjs";
+import { DocumentType } from "./types/acoriPTypes";
+import { FLAGS, MODULE_ID } from "./Constants";
 
 class TokenManager implements Fadeable {
     
     constructor(private token: TokenDocument, protected actorHandler: ActorHandler = new ActorHandlerImpl(token.actor)) {}
 
-    public getDocumentName(): EMBEDDED_DOCUMENT_TYPES {
+    public getDocumentName(): DocumentType {
         return this.getToken().documentName;
     }
 

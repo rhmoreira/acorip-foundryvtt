@@ -13,6 +13,8 @@ Hooks.once("init", () => {
     
 });
 
+CONFIG.debug.hooks = true;
+
 Hooks.on("ready", () => {
     console.log("Module acoriP loaded!");
 })

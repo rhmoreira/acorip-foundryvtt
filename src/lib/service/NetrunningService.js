@@ -1,4 +1,4 @@
-const EFFECT_NAME = "Netrunning";
+import { MODULE_ID } from "../Constants";
 
 function toggleJackEffect(token) {
     let netrunningEffect = Sequencer.EffectManager.getEffects({object: token, name: EFFECT_NAME });
@@ -11,7 +11,7 @@ function toggleJackEffect(token) {
                 .opacity(0.5)
                 .fadeIn(100)
                 .attachTo(token)
-                .file("modules/acorip/assets/animations/netrunning.webm")
+                .file(`modules/${MODULE_ID}/assets/animations/netrunning.webm`)
                 .scaleToObject(1.3)
                 .fadeOut(100)
                 .name(EFFECT_NAME)

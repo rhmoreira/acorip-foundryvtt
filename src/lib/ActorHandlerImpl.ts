@@ -1,9 +1,9 @@
 export default class ActorHandlerImpl implements ActorHandler{
     
-    constructor(private actor: Actor | any) {}
+    constructor(private actor: Actor) {}
 
     public isBlackICE(): boolean {
-        return this.actor.type === "blackIce";
+        return (this.actor.type as string) === "blackIce";
     }
     public isNetrunner(): boolean {
         return this.isRole("Netrunner");
@@ -28,7 +28,7 @@ export default class ActorHandlerImpl implements ActorHandler{
     }
 
     private isRole(roleName: string): boolean {
-        return this.actor?.system.roleInfo.activeRole === roleName;
+        return (this.actor?.system as any).roleInfo.activeRole === roleName;
     }
 
     public getId(): string {

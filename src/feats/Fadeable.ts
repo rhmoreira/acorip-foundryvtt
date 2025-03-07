@@ -1,9 +1,9 @@
-import { EMBEDDED_DOCUMENT_TYPES } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/constants.mjs";
+import { DocumentType } from "../lib/types/acoriPTypes";
 
 type FadeType = "in" | "out";
 
 interface Fadeable {
-    getDocumentName(): EMBEDDED_DOCUMENT_TYPES;
+    getDocumentName(): DocumentType;
     createFadeUpdate(newAlpha: number): any;
 }
 

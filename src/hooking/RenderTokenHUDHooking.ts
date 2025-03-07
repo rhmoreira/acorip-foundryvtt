@@ -1,8 +1,8 @@
 import { PlayerTokenManager } from "../lib/TokenManager";
-import { FLAGS, MODULE_ID } from "../lib/Constants";
-import { templateFactory, TEMPLATES } from "../lib/TemplateFactory";
+import { templateFactory } from "../lib/TemplateFactory";
 import RHM from "../RHM";
 import FadeService from "../lib/service/FadeService";
+import { FLAGS, MODULE_ID, TEMPLATES } from "../lib/Constants";
 
 const TOKEN_HUD_PARENT_SELECTOR = "form#token-hud";
 const HUD_PLACEMENT = {
@@ -27,7 +27,7 @@ function attachJackInButton(_: TokenHUD, tokenManager: PlayerTokenManager): void
     if (tokenManager.getActorHandler().isNetrunner()) {
         let isNetrunningFlag = tokenManager.getFlag(FLAGS.NETRUNNING);
         let template = templateFactory.parseTemplate(
-            TEMPLATES.TOKEN_HUD_JACK_INOUT,
+            TEMPLATES.tokenHudJackIn,
             {moduleId: MODULE_ID, active: (isNetrunningFlag ? "active" : ""), tokenId: tokenManager.getId()}
         );
         attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenManager.jack(!isNetrunningFlag));
@@ -36,7 +36,7 @@ function attachJackInButton(_: TokenHUD, tokenManager: PlayerTokenManager): void
 
 function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenManager) {
     let template = templateFactory.parseTemplate(
-        TEMPLATES.TOKEN_HUD_TOGGLE_IMAGE,
+        TEMPLATES.tokenHudToggleImage,
         {moduleId: MODULE_ID, tokenId: tokenHUD.object}
     );
     attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenManager.toggleTokenImage());
@@ -45,7 +45,7 @@ function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenM
 function attatchFadeImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenManager) {
     if (game.users.current.isGM) {
         let template = templateFactory.parseTemplate(
-            TEMPLATES.TOKEN_HUD_FADE_IMAGE,
+            TEMPLATES.tokenHudFadeImage,
             {moduleId: MODULE_ID, tokenId: tokenHUD.object}
         );
         attachHudButtonEvent(HUD_PLACEMENT.left, template, (_) => {

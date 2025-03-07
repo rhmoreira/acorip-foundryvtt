@@ -1,9 +1,10 @@
 import { Fadeable, FadeType } from "../../feats/Fadeable";
-import { templateFactory, TEMPLATES } from "../TemplateFactory";
+import { TEMPLATES } from "../Constants";
+import { templateFactory } from "../TemplateFactory";
 
 export default class FadeService {
 
-    private content: string = templateFactory.parseTemplate(TEMPLATES.FADE_ELEMENT_DIALOG);
+    private content: string = templateFactory.parseTemplate(TEMPLATES.fadeElementDialog);
 
     constructor(private fadeable: Fadeable){}
 

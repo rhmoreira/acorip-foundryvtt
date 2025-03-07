@@ -1,8 +1,9 @@
-import { templateFactory, TEMPLATES } from "../TemplateFactory";
+import { TEMPLATES } from "../Constants";
+import { templateFactory } from "../TemplateFactory";
 
 export default class ToggleTokenImageHandler {
 
-    private readonly content = templateFactory.parseTemplate(TEMPLATES.TOKEN_TOGGLE_IMAGE_DIALOG);
+    private readonly content = templateFactory.parseTemplate(TEMPLATES.tokenToggleImageDialog);
 
     constructor(private token: Token){}
 

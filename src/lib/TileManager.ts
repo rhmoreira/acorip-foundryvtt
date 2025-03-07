@@ -1,11 +1,11 @@
-import { EMBEDDED_DOCUMENT_TYPES } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/constants.mjs";
 import { Fadeable } from "../feats/Fadeable";
+import { DocumentType } from "./types/acoriPTypes";
 
 export default class TileHandler implements Fadeable {
     
     constructor(private tile: TileDocument) {}
 
-    getDocumentName(): EMBEDDED_DOCUMENT_TYPES {
+    public getDocumentName(): DocumentType {
         return this.tile.documentName;
     }
 
