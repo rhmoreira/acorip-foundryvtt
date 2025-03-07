@@ -5,6 +5,7 @@ import { templateFactory } from "./lib/TemplateFactory";
 
 Hooks.once("init", () => {
     templateFactory.init();
+    TokenServiceLocator.init();
 
     CanvasHooking.hookUp({
         ready: {
@@ -12,7 +13,6 @@ Hooks.once("init", () => {
         }
     });
     
-    TokenServiceLocator.init();
     RenderTokenHUDHooking.hookUp();    
 });
 
