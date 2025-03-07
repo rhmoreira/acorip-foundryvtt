@@ -1,18 +1,19 @@
 import CanvasHooking from "./hooking/CanvasHooking";
 import RenderTokenHUDHooking from "./hooking/TokenHUDHooking";
+import TokenServiceLocator from "./lib/service/TokenServiceLocator";
 import { templateFactory } from "./lib/TemplateFactory";
-import RHM from "./RHM";
 
 Hooks.once("init", () => {
-    
     templateFactory.init();
 
-    let tokenManagersPromise = CanvasHooking.hookUp();
+    CanvasHooking.hookUp({
+        ready: {
+            tokenServices: (services) => TokenServiceLocator.services = services
+        }
+    });
     
-    RHM.init(tokenManagersPromise);
-
-    RenderTokenHUDHooking.hookUp();
-    
+    TokenServiceLocator.init();
+    RenderTokenHUDHooking.hookUp();    
 });
 
 CONFIG.debug.hooks = true;

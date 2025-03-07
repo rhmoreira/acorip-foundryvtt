@@ -1,8 +1,8 @@
-import { TokenManager } from "../lib/TokenManager";
+import { TokenService } from "../lib/service/TokenService";
 import { templateFactory } from "../lib/TemplateFactory";
-import RHM from "../RHM";
 import FadeService from "../lib/service/FadeService";
 import { FLAGS, MODULE_ID, TEMPLATES } from "../lib/Constants";
+import TokenServiceLocator from "../lib/service/TokenServiceLocator";
 
 const TOKEN_HUD_PARENT_SELECTOR = "form#token-hud";
 const HUD_PLACEMENT = {
@@ -16,40 +16,40 @@ function hookUp() {
 }
 
 function config(tokenHUD: TokenHUD) {
-    let tokenManager = RHM.getTokenManagerById(tokenHUD.object.document.id);
+    let tokenService = TokenServiceLocator.getById(tokenHUD.object.document.id);
 
-    attachJackInButton(tokenHUD, tokenManager);
-    attatchToggleImageButton(tokenHUD, tokenManager);
-    attatchFadeImageButton(tokenHUD, tokenManager);
+    attachJackInButton(tokenHUD, tokenService);
+    attatchToggleImageButton(tokenHUD, tokenService);
+    attatchFadeImageButton(tokenHUD, tokenService);
 }
 
-function attachJackInButton(_: TokenHUD, tokenManager: TokenManager): void {
-    if (tokenManager.getActorHandler().isNetrunner()) {
-        let isNetrunningFlag = tokenManager.getFlag(FLAGS.NETRUNNING);
+function attachJackInButton(_: TokenHUD, tokenService: TokenService): void {
+    if (tokenService.getActorHandler().isNetrunner()) {
+        let isNetrunningFlag = tokenService.getFlag(FLAGS.NETRUNNING);
         let template = templateFactory.parseTemplate(
             TEMPLATES.tokenHudJackIn,
-            {moduleId: MODULE_ID, active: (isNetrunningFlag ? "active" : ""), tokenId: tokenManager.getId()}
+            {moduleId: MODULE_ID, active: (isNetrunningFlag ? "active" : ""), tokenId: tokenService.getId()}
         );
-        attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenManager.jack(!isNetrunningFlag));
+        attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenService.jack(!isNetrunningFlag));
     }
 }
 
-function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: TokenManager) {
+function attatchToggleImageButton(tokenHUD: TokenHUD, tokenService: TokenService) {
     let template = templateFactory.parseTemplate(
         TEMPLATES.tokenHudToggleImage,
         {moduleId: MODULE_ID, tokenId: tokenHUD.object}
     );
-    attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenManager.toggleTokenImage());
+    attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenService.toggleTokenImage());
 }
 
-function attatchFadeImageButton(tokenHUD: TokenHUD, tokenManager: TokenManager) {
+function attatchFadeImageButton(tokenHUD: TokenHUD, tokenService: TokenService) {
     if (game.users.current.isGM) {
         let template = templateFactory.parseTemplate(
             TEMPLATES.tokenHudFadeImage,
             {moduleId: MODULE_ID, tokenId: tokenHUD.object}
         );
         attachHudButtonEvent(HUD_PLACEMENT.left, template, (_) => {
-            new FadeService(tokenManager).fade();
+            new FadeService(tokenService).fade();
         });
     }
 }

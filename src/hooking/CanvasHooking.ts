@@ -1,28 +1,29 @@
-import { TokenManager } from "../lib/TokenManager";
+import { TokenService } from "../lib/service/TokenService";
+import { CanvasHookCallbacks } from "../lib/types/acoriPTypes";
 
-function hookUp(): Promise<TokenManager[]>{
-    return new Promise((resolve, _) => {
-        Hooks.on("canvasReady", (canvas) => resolve(config(canvas)) );
-    })
+function hookUp(canvasCallbacks: CanvasHookCallbacks): void {
+        Hooks.on("canvasReady", canvas => {
+            canvasCallbacks.ready.tokenServices(config(canvas))
+        });
 }
 
-function config(_: Canvas): TokenManager[] {
-    return loadTokenManagers(_);
+function config(_: Canvas): TokenService[] {
+    return loadTokenServices(_);
 }
 
-function loadTokenManagers(_: Canvas): TokenManager[] {
-    let tokenManagers: TokenManager[];
+function loadTokenServices(_: Canvas): TokenService[] {
+    let tokenServices: TokenService[];
     let currentUser = game.users?.current;
     let userCharacter = currentUser?.character;
     
     if (currentUser?.isGM)
-        tokenManagers = game.scenes?.current?.tokens?.map(token => new TokenManager(token));
+        tokenServices = game.scenes?.current?.tokens?.map(token => new TokenService(token));
     else if (currentUser?.hasPlayerOwner && !!userCharacter)
-        tokenManagers = game.scenes?.current?.tokens
+        tokenServices = game.scenes?.current?.tokens
             ?.filter(token => token.actor?.id === userCharacter.id)
-            .map(token => new TokenManager(token));
+            .map(token => new TokenService(token));
     
-    return tokenManagers;
+    return tokenServices;
 }
 
 export default {hookUp}

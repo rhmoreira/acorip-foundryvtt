@@ -1,11 +1,11 @@
-import { toggleJackEffect } from "./service/NetrunningService";
-import ToggleTokenImageHandler from "./service/ToggleTokenImageService";
-import ActorHandlerImpl from "./ActorHandlerImpl";
-import { Fadeable } from "../feats/Fadeable";
-import { DocumentType } from "./types/acoriPTypes";
-import { FLAGS, MODULE_ID } from "./Constants";
+import { toggleJackEffect } from "./NetrunningService";
+import ToggleTokenImageHandler from "./ToggleTokenImageService";
+import ActorHandlerImpl from "../ActorHandlerImpl";
+import { Fadeable } from "../../feats/Fadeable";
+import { DocumentType } from "../types/acoriPTypes";
+import { FLAGS, MODULE_ID } from "../Constants";
 
-abstract class BaseTokenManager implements Fadeable {
+abstract class BaseTokenService implements Fadeable {
     
     constructor(private token: TokenDocument, protected actorHandler: ActorHandler = new ActorHandlerImpl(token.actor)) {}
 
@@ -48,7 +48,7 @@ abstract class BaseTokenManager implements Fadeable {
     }
 }
 
-class TokenManager extends BaseTokenManager {
+class TokenService extends BaseTokenService {
     
     constructor(token: TokenDocument) {
         super(token);
@@ -72,6 +72,6 @@ class TokenManager extends BaseTokenManager {
 }
 
 export {
-    BaseTokenManager,
-    TokenManager
+    BaseTokenService,
+    TokenService
 }
