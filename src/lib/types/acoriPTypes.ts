@@ -2,9 +2,7 @@ import { EMBEDDED_DOCUMENT_TYPES } from "@league-of-foundry-developers/foundry-v
 import { TEMPLATES } from "../Constants";
 import { TokenService } from "../service/TokenService";
 
-
 export type DocumentType = EMBEDDED_DOCUMENT_TYPES;
-export type ArrayELement<ArrayType extends unknown> = ArrayType extends (infer ElementType) ? ElementType : never;
 
 type TemplateKeys = keyof typeof TEMPLATES;
 export type TemplateType = typeof TEMPLATES[TemplateKeys];
