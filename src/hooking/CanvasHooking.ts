@@ -1,26 +1,26 @@
-import { PlayerTokenManager } from "../lib/TokenManager";
+import { TokenManager } from "../lib/TokenManager";
 
-function hookUp(): Promise<PlayerTokenManager[]>{
+function hookUp(): Promise<TokenManager[]>{
     return new Promise((resolve, _) => {
         Hooks.on("canvasReady", (canvas) => resolve(config(canvas)) );
     })
 }
 
-function config(_: Canvas): PlayerTokenManager[] {
+function config(_: Canvas): TokenManager[] {
     return loadTokenManagers(_);
 }
 
-function loadTokenManagers(_: Canvas): PlayerTokenManager[] {
-    let tokenManagers: PlayerTokenManager[];
+function loadTokenManagers(_: Canvas): TokenManager[] {
+    let tokenManagers: TokenManager[];
     let currentUser = game.users?.current;
     let userCharacter = currentUser?.character;
     
     if (currentUser?.isGM)
-        tokenManagers = game.scenes?.current?.tokens?.map(token => new PlayerTokenManager(token));
+        tokenManagers = game.scenes?.current?.tokens?.map(token => new TokenManager(token));
     else if (currentUser?.hasPlayerOwner && !!userCharacter)
         tokenManagers = game.scenes?.current?.tokens
             ?.filter(token => token.actor?.id === userCharacter.id)
-            .map(token => new PlayerTokenManager(token));
+            .map(token => new TokenManager(token));
     
     return tokenManagers;
 }

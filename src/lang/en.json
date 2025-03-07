@@ -3,8 +3,8 @@
         "features": {
             "token": {
                 "toggle-image": "Change appearance",
-                "jack-in": "Jack-In",
-                "jack-out": "Jack-Out",
+                "jack-in-out": "Jack In/Out",
+                "toggle-fade": "Fade In/Out",
                 "black-ice": {
                     "roll-initiative": "Roll Black-ICE initiative"
                 }
@@ -13,13 +13,16 @@
         },
         "messages": {
             "black-ice": {
-                "not-in-combat": "Black-ICE '{TokenName}' is not in combat"
+                "not-in-combat": "Black-ICE '{tokenName}' is not in combat"
             },
             "token": {
-                "image-changed": "{TokenName} changed his/her appearance"
+                "image-changed": "{tokenName} changed token's appearance"
             }
         },
         "labels": {
+            "fade": "Fade",
+            "change_token_stance": "Change token stance",
+            "choose_stance": "Choose the desired stance",
             "confirm": "Confirm",
             "friendly": "Friendly",
             "friendly-alt": "Friendly 2",

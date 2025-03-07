@@ -5,7 +5,7 @@ import { Fadeable } from "../feats/Fadeable";
 import { DocumentType } from "./types/acoriPTypes";
 import { FLAGS, MODULE_ID } from "./Constants";
 
-class TokenManager implements Fadeable {
+abstract class BaseTokenManager implements Fadeable {
     
     constructor(private token: TokenDocument, protected actorHandler: ActorHandler = new ActorHandlerImpl(token.actor)) {}
 
@@ -48,12 +48,10 @@ class TokenManager implements Fadeable {
     }
 }
 
-class PlayerTokenManager extends TokenManager {
+class TokenManager extends BaseTokenManager {
     
     constructor(token: TokenDocument) {
         super(token);
-        if (!token.actor?.hasPlayerOwner)
-            super.invalidate();
     }
 
     public isOwner(user: User): boolean {
@@ -74,6 +72,6 @@ class PlayerTokenManager extends TokenManager {
 }
 
 export {
-    TokenManager,
-    PlayerTokenManager
+    BaseTokenManager,
+    TokenManager
 }

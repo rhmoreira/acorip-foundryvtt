@@ -10,9 +10,9 @@ export default class FadeService {
 
     public fade(): void {
         const dialogOptions: DialogData = {
-            title: "Fade",
+            title: game.i18n.localize("acorip.labels.fade"),
             content: this.content,
-            buttons: {confirmar: {label: "Confirmar", callback: this.initFade.bind(this)}},
+            buttons: {confirmar: {label: game.i18n.localize("acorip.labels.confirm"), callback: this.initFade.bind(this)}},
             default: "confirmar"
           };
 

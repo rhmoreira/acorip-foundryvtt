@@ -1,4 +1,4 @@
-import { PlayerTokenManager } from "../lib/TokenManager";
+import { TokenManager } from "../lib/TokenManager";
 import { templateFactory } from "../lib/TemplateFactory";
 import RHM from "../RHM";
 import FadeService from "../lib/service/FadeService";
@@ -23,7 +23,7 @@ function config(tokenHUD: TokenHUD) {
     attatchFadeImageButton(tokenHUD, tokenManager);
 }
 
-function attachJackInButton(_: TokenHUD, tokenManager: PlayerTokenManager): void {
+function attachJackInButton(_: TokenHUD, tokenManager: TokenManager): void {
     if (tokenManager.getActorHandler().isNetrunner()) {
         let isNetrunningFlag = tokenManager.getFlag(FLAGS.NETRUNNING);
         let template = templateFactory.parseTemplate(
@@ -34,7 +34,7 @@ function attachJackInButton(_: TokenHUD, tokenManager: PlayerTokenManager): void
     }
 }
 
-function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenManager) {
+function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: TokenManager) {
     let template = templateFactory.parseTemplate(
         TEMPLATES.tokenHudToggleImage,
         {moduleId: MODULE_ID, tokenId: tokenHUD.object}
@@ -42,7 +42,7 @@ function attatchToggleImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenM
     attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenManager.toggleTokenImage());
 }
 
-function attatchFadeImageButton(tokenHUD: TokenHUD, tokenManager: PlayerTokenManager) {
+function attatchFadeImageButton(tokenHUD: TokenHUD, tokenManager: TokenManager) {
     if (game.users.current.isGM) {
         let template = templateFactory.parseTemplate(
             TEMPLATES.tokenHudFadeImage,

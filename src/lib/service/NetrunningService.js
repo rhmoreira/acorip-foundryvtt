@@ -1,9 +1,9 @@
-import { MODULE_ID } from "../Constants";
+import { MODULE_ID, NETRUNNING } from "../Constants";
 
 function toggleJackEffect(token) {
-    let netrunningEffect = Sequencer.EffectManager.getEffects({object: token, name: EFFECT_NAME });
+    let netrunningEffect = Sequencer.EffectManager.getEffects({object: token, name: NETRUNNING });
     if(netrunningEffect.length)
-        Sequencer.EffectManager.endEffects({object: token, name: EFFECT_NAME })
+        Sequencer.EffectManager.endEffects({object: token, name: NETRUNNING })
      else 
         new Sequence()
                 .effect()
@@ -14,7 +14,7 @@ function toggleJackEffect(token) {
                 .file(`modules/${MODULE_ID}/assets/animations/netrunning.webm`)
                 .scaleToObject(1.3)
                 .fadeOut(100)
-                .name(EFFECT_NAME)
+                .name(NETRUNNING)
                 .persist()
                 .play()
 }

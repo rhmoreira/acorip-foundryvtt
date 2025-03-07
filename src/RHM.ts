@@ -1,29 +1,43 @@
-import { PlayerTokenManager } from "./lib/TokenManager";
+import { TokenManager } from "./lib/TokenManager";
 
 class RHM {
-    private game: any;
+    private _tokenManagers: TokenManager[];
+    
+    public get tokenManagers(): TokenManager[] {return this._tokenManagers;}    
 
-    public init(): void {
-        this.game = <any> game;
-        this.game.acorip = {};
+    public init(initialTokenManagers: Promise<TokenManager[]>): void {
+
+        initialTokenManagers.then(managers => this._tokenManagers = managers);
+
+        Hooks.on("createToken", this.handleTokenCreation.bind(this));
+        Hooks.on("deleteToken", this.handleTokenDeletion.bind(this));
     }
 
-    public setPlayerTokenManagers(tokenManagers: PlayerTokenManager[]): void {        
-        if (!this.game.acorip.managers) this.game.acorip.managers = {};
+    public getTokenManagerById(tokenId: string): TokenManager {
+        return this._tokenManagers.find(manager => manager.getId() === tokenId);
+    }
+
+    public getTokenManagerByUser(user: User): TokenManager {
+        return this._tokenManagers.find(manager => manager.isOwner(user));
+    }
+
+    private handleTokenDeletion(tokenDocument: TokenDocument): void {
+        let managerIndex = this._tokenManagers.findIndex(manager => manager.getId() === tokenDocument.id)
         
-        this.game.acorip.managers.playerTokenManagers = tokenManagers;
+        if (managerIndex >= 0 && this.isUserAllowed(tokenDocument))
+            this._tokenManagers.splice(managerIndex, 1);
     }
 
-    public getPlayerTokenManagers(): PlayerTokenManager[] {
-        return this.game.acorip.managers.playerTokenManagers;
+    private handleTokenCreation(tokenDocument: TokenDocument): void {
+        let managerIndex = this._tokenManagers.findIndex(manager => manager.getId() === tokenDocument.id)
+        
+        if (managerIndex >= 0 && this.isUserAllowed(tokenDocument))
+            this._tokenManagers.push(new TokenManager(tokenDocument));
     }
 
-    public getTokenManagerById(tokenId: string): PlayerTokenManager {
-        return this.getPlayerTokenManagers().find(manager => manager.getId() === tokenId);
-    }
-
-    public getTokenManagerByUser(user: User): PlayerTokenManager {
-        return this.getPlayerTokenManagers().find(manager => manager.isOwner(user));
+    private isUserAllowed(tokenDocument: TokenDocument): boolean {
+        let currentUser = game.users.current;
+        return currentUser.isGM || currentUser.character.id === tokenDocument.actor.id
     }
 
 }
