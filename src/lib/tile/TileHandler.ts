@@ -1,5 +1,5 @@
-import { Fadeable } from "../feats/Fadeable";
-import { DocumentType } from "./types/acoriPTypes";
+import { Fadeable } from "../../feats/Fadeable";
+import { DocumentType } from "../types/acoriPTypes";
 
 export default class TileHandler implements Fadeable {
     

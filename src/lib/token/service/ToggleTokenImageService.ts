@@ -1,5 +1,5 @@
-import { TEMPLATES } from "../Constants";
-import { templateFactory } from "../TemplateFactory";
+import { TEMPLATES } from "../../Constants";
+import { templateFactory } from "../../TemplateFactory";
 
 export default class ToggleTokenImageHandler {
 

@@ -1,9 +1,9 @@
-import { toggleJackEffect } from "./NetrunningService";
+import { Fadeable } from "../../../feats/Fadeable";
+import ActorHandlerImpl from "../../actor/ActorHandlerImpl";
+import { FLAGS, MODULE_ID } from "../../Constants";
+import { toggleJackEffect } from "../../service/NetrunningService";
+import { DocumentType } from "../../types/acoriPTypes";
 import ToggleTokenImageHandler from "./ToggleTokenImageService";
-import ActorHandlerImpl from "../ActorHandlerImpl";
-import { Fadeable } from "../../feats/Fadeable";
-import { DocumentType } from "../types/acoriPTypes";
-import { FLAGS, MODULE_ID } from "../Constants";
 
 abstract class BaseTokenService implements Fadeable {
     
@@ -68,7 +68,6 @@ class TokenService extends BaseTokenService {
     public toggleTokenImage(): void {
         new ToggleTokenImageHandler(this.getToken().object).toggleTokenImage();
     }
-
 }
 
 export {

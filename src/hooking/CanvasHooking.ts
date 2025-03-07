@@ -1,9 +1,10 @@
 import { CanvasHookCallbacks } from "../lib/types/acoriPTypes";
 
-function hookUp(canvasCallbacks: CanvasHookCallbacks): void {
-        Hooks.on("canvasReady", canvas => {
-            canvasCallbacks.ready.tokens(...config(canvas))
-        });
+function hookUp(canvasCallbacks: CanvasHookCallbacks = {}): void {
+    Hooks.on("canvasReady", canvas => {
+        canvasCallbacks.tokens?.(...config(canvas))
+        canvasCallbacks.ready?.(canvas)
+    });
 }
 
 function config(_: Canvas): TokenDocument[] {

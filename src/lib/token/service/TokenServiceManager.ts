@@ -1,4 +1,5 @@
-import TokenCRUDHooking from "../../hooking/TokenCRUDHooking";
+import CanvasHooking from "../../../hooking/CanvasHooking";
+import TokenCRUDHooking from "../hooking/TokenCRUDHooking";
 import { TokenService } from "./TokenService";
 
 class TokenServiceManager {
@@ -10,17 +11,14 @@ class TokenServiceManager {
     constructor() {}
 
     public init(): void {
+        CanvasHooking.hookUp({
+            tokens: this.include.bind(this)
+        });
         TokenCRUDHooking.hookUp({
             create: this.create.bind(this),
             delete: this.delete.bind(this),
         });
-    }
-
-    public include(...tokens: TokenDocument[]): void {
-        tokens.forEach(token => {
-            this.create(token);
-        });        
-    }
+    }    
 
     public getById(tokenId: string): TokenService {
         return this._services.find(service => service.getId() === tokenId);
@@ -30,6 +28,12 @@ class TokenServiceManager {
         return this._services.find(service => service.isOwner(user));
     }
 
+    private include(...tokens: TokenDocument[]): void {
+        tokens.forEach(token => {
+            this.create(token);
+        });        
+    }
+    
     private delete(tokenDocument: TokenDocument): void {
         let serviceIndex = this._services.findIndex(service => service.getId() === tokenDocument.id)
         
