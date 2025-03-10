@@ -30,7 +30,7 @@ function attachJackInButton(_: TokenHUD, tokenService: TokenService): void {
             TEMPLATES.tokenHudJackIn,
             {moduleId: MODULE_ID, active: (isNetrunningFlag ? "active" : ""), tokenId: tokenService.getId()}
         );
-        attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenService.jack(!isNetrunningFlag));
+        attachHudButtonEvent(HUD_PLACEMENT.right, template, (_) => tokenService.jack());
     }
 }
 

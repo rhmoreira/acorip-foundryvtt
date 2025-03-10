@@ -7,7 +7,7 @@ import ToggleTokenImageHandler from "./ToggleTokenImageService";
 
 abstract class BaseTokenService implements Fadeable {
     
-    constructor(private token: TokenDocument, protected actorHandler: ActorHandler = new ActorHandlerImpl(token.actor)) {}
+    constructor(private token: TokenDocument, protected actorHandler: ActorHandler = !!token.actor ? new ActorHandlerImpl(token.actor): null) {}
 
     public getDocumentName(): DocumentType {
         return this.getToken().documentName;
@@ -46,6 +46,10 @@ abstract class BaseTokenService implements Fadeable {
     public getFlag(flag: string): any {
         return this.token.getFlag(MODULE_ID, flag as never);
     }
+
+    public isOwner(user: User): boolean {
+        return this.actorHandler?.getId() === user?.character.id;
+    }
 }
 
 class TokenService extends BaseTokenService {
@@ -54,13 +58,10 @@ class TokenService extends BaseTokenService {
         super(token);
     }
 
-    public isOwner(user: User): boolean {
-        return this.actorHandler.getId() === user?.character.id;
-    }
-
-    public jack(inOut: boolean): void {
-        if (this.actorHandler.isNetrunner()) {
-            super.setFlag(FLAGS.NETRUNNING, inOut);
+    public jack(): void {
+        let isNetrunning = this.getFlag(FLAGS.NETRUNNING);
+        if (this.actorHandler?.isNetrunner()) {
+            super.setFlag(FLAGS.NETRUNNING, !isNetrunning);
             toggleJackEffect(this.getToken());
         }
     }

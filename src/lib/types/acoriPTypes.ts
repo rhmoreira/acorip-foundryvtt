@@ -13,5 +13,7 @@ export type CanvasHookCallbacks = {
 
 export type TokenCRUDHookCallbacks = {
     create?: (token: TokenDocument) => void,
-    delete?: (token: TokenDocument) => void
+    delete?: (token: TokenDocument) => void,
+    update?: (token: TokenDocument) => void,
+    select?: (tokens: TokenDocument[]) => void
 };

@@ -1,0 +1,23 @@
+div.rhm.custom-token-buttons{
+    justify-content: center!important;
+    display: flex!important;
+}
+
+div.rhm.custom-token-buttons div.col{
+    cursor: pointer;
+    pointer-events: all;
+    background: rgba(68, 68, 68, 0.7);
+    padding: 0.5rem;
+}
+
+div.rhm.custom-token-buttons div.col:first-child{
+    border-radius: 15px 0px 0px 15px;
+}
+
+div.rhm.custom-token-buttons div.col:last-child{
+    border-radius: 0px 15px 15px 0px;
+}
+
+div.rhm.custom-token-buttons div.col:only-child{
+    border-radius: 15px 15px 15px 15px;
+}

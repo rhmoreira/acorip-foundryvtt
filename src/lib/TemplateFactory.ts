@@ -7,6 +7,7 @@ const TEMPLATES_FILES = {
     [TEMPLATES.tokenToggleImageDialog]: `modules/${MODULE_ID}/templates/token-toggle-image-dialog.hbs`,
     [TEMPLATES.tokenHudFadeImage]: `modules/${MODULE_ID}/templates/token-hud-fade-image.hbs`,
     [TEMPLATES.fadeElementDialog]: `modules/${MODULE_ID}/templates/fade-element-dialog.hbs`,
+    [TEMPLATES.tokenCanvasControls]: `modules/${MODULE_ID}/templates/player-token-interface-controls.hbs`,
 }
 
 class TemplateFactory {

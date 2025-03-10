@@ -1,3 +1,7 @@
+export const TOKEN_CONTROL_EVENTS = {
+    created: "tokenServiceCreated",
+    deleted: "tokenServiceDeleted"
+}
 export const MODULE_ID: string = "acorip";
 export const FLAGS = {
     INVALID_TOKEN: "Invalid Token",
@@ -12,4 +16,5 @@ export const TEMPLATES = {
     tokenToggleImageDialog: "TOKEN_TOGGLE_IMAGE_DIALOG",
     tokenHudFadeImage: "TOKEN_HUD_FADE_IMAGE",
     fadeElementDialog: "FADE_ELEMENT_DIALOG",
+    tokenCanvasControls: "TOKEN_CANVAS_CONTROLS",
 } as const
