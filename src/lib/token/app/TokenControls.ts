@@ -1,7 +1,7 @@
 import { MaybePromise } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
 import { MODULE_ID, TOKEN_CONTROL_EVENTS } from "../../Constants";
 import { TokenService } from "../service/TokenService";
-import CanvasHooking from "../hooking/CanvasHooking";
+import CanvasHooking from "../../CanvasHooking";
 
 export class TokenControls extends Application {
  
@@ -101,13 +101,8 @@ export class TokenControls extends Application {
         new TokenControls();
         CanvasHooking.hookUp({
             ready: (_) => {
-                (ui as any).rhmTokenControls?.close();
                 new TokenControls();
             }
-        });
-        Hooks.on(TOKEN_CONTROL_EVENTS.created, (tokenService: TokenService) => {
-            if (!(ui as any).rhmTokenControls)
-                new TokenControls()._onTokenServiceCreated(tokenService);
         });
     }
 }

@@ -1,4 +1,4 @@
-import CanvasHooking from "../hooking/CanvasHooking";
+import CanvasHooking from "../../CanvasHooking";
 import { TOKEN_CONTROL_EVENTS } from "../../Constants";
 import TokenCRUDHooking from "../hooking/TokenCRUDHooking";
 import { TokenService } from "./TokenService";
