@@ -13,6 +13,7 @@ class TokenServiceManager {
 
     public init(): void {
         CanvasHooking.hookUp({
+            ready: (_) => this._services.clear(),
             tokens: this.include.bind(this)
         });
         TokenCRUDHooking.hookUp({

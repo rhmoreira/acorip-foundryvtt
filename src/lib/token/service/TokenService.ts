@@ -62,7 +62,7 @@ class TokenService extends BaseTokenService {
         let isNetrunning = this.getFlag(FLAGS.NETRUNNING);
         if (this.actorHandler?.isNetrunner()) {
             super.setFlag(FLAGS.NETRUNNING, !isNetrunning);
-            toggleJackEffect(this.getToken());
+            toggleJackEffect(this.getToken().object);
         }
     }
 

@@ -2,8 +2,8 @@ import { CanvasHookCallbacks } from "../lib/types/acoriPTypes";
 
 function hookUp(canvasCallbacks: CanvasHookCallbacks = {}): void {
     Hooks.on("canvasReady", canvas => {
-        canvasCallbacks.tokens?.(...loadTokenServices(canvas))
         canvasCallbacks.ready?.(canvas)
+        canvasCallbacks.tokens?.(...loadTokenServices(canvas))
     });
 }
 
