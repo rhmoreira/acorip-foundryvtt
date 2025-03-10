@@ -1,4 +1,4 @@
-import { CanvasHookCallbacks } from "../lib/types/acoriPTypes";
+import { CanvasHookCallbacks } from "../../types/acoriPTypes";
 
 function hookUp(canvasCallbacks: CanvasHookCallbacks = {}): void {
     Hooks.on("canvasReady", canvas => {
