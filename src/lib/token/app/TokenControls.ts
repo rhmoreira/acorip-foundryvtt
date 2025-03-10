@@ -96,7 +96,11 @@ export class TokenControls extends Application {
         }
     }
 
-    public static init(): TokenControls {
-        return new TokenControls();
+    public static init(): void {
+        new TokenControls();
+        Hooks.on(TOKEN_CONTROL_EVENTS.created, (tokenService: TokenService) => {
+            if ((ui as any).rhmTokenControls.isClosed)
+                new TokenControls()._onTokenServiceCreated(tokenService);
+        });
     }
 }
