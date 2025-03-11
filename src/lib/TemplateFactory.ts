@@ -2,12 +2,13 @@ import { MODULE_ID, TEMPLATES } from "./Constants";
 import { TemplateType } from "./types/acoriPTypes";
 
 const TEMPLATES_FILES = {
-    [TEMPLATES.tokenHudJackIn]: `modules/${MODULE_ID}/templates/token-hud-jack-inout.hbs`,
-    [TEMPLATES.tokenHudToggleImage]: `modules/${MODULE_ID}/templates/token-hud-toggle-image.hbs`,
+    [TEMPLATES.tokenHudJackIn]:         `modules/${MODULE_ID}/templates/token-hud-jack-inout.hbs`,
+    [TEMPLATES.tokenHudToggleImage]:    `modules/${MODULE_ID}/templates/token-hud-toggle-image.hbs`,
     [TEMPLATES.tokenToggleImageDialog]: `modules/${MODULE_ID}/templates/token-toggle-image-dialog.hbs`,
-    [TEMPLATES.tokenHudFadeImage]: `modules/${MODULE_ID}/templates/token-hud-fade-image.hbs`,
-    [TEMPLATES.fadeElementDialog]: `modules/${MODULE_ID}/templates/fade-element-dialog.hbs`,
-    [TEMPLATES.tokenCanvasControls]: `modules/${MODULE_ID}/templates/player-token-interface-controls.hbs`,
+    [TEMPLATES.tokenHudFadeImage]:      `modules/${MODULE_ID}/templates/token-hud-fade-image.hbs`,
+    [TEMPLATES.fadeElementDialog]:      `modules/${MODULE_ID}/templates/fade-element-dialog.hbs`,
+    [TEMPLATES.tokenCanvasControls]:    `modules/${MODULE_ID}/templates/player-token-interface-controls.hbs`,
+    [TEMPLATES.rollRequestDialog]:      `modules/${MODULE_ID}/templates/roll-request.hbs`,
 }
 
 class TemplateFactory {

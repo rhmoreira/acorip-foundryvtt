@@ -1,7 +1,7 @@
 import { MODULE_ID } from "../Constants";
 import UIControls from "./UIControls";
 
-class GameMasterUIControls extends UIControls {
+export default class GameMasterUIControls extends UIControls {
     
     constructor(){
         super("rhmGMControls");

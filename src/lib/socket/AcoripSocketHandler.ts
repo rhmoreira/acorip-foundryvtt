@@ -1,3 +1,4 @@
+import AcoripLog from "../AcoripLog";
 import { MODULE_ID } from "../Constants";
 import { SocketAction } from "../types/acoriPTypes";
 import AttributeRollSocketActionHandler from "./AttributeRollSocketActionHandler";
@@ -34,11 +35,13 @@ class AcoripSocketHandler {
     }
 
     public static register(): void {
+        let skillRollHandler = new SkillRollSocketActionHandler();
+        let attrRollHandler = new AttributeRollSocketActionHandler();
+        let diceRollHandler = new DiceRollSocketActionHandler();
+        let rollRequestHandler = new RequestRollSocketActionHandler([skillRollHandler, attrRollHandler , diceRollHandler]);
+
         (game.modules?.get(MODULE_ID) as any).socketHandler = new AcoripSocketHandler(
-            new RequestRollSocketActionHandler(),
-            new SkillRollSocketActionHandler(),
-            new AttributeRollSocketActionHandler(),
-            new DiceRollSocketActionHandler()
+            skillRollHandler, attrRollHandler, diceRollHandler, rollRequestHandler
         );
     }
 }

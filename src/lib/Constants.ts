@@ -17,4 +17,5 @@ export const TEMPLATES = {
     tokenHudFadeImage: "TOKEN_HUD_FADE_IMAGE",
     fadeElementDialog: "FADE_ELEMENT_DIALOG",
     tokenCanvasControls: "TOKEN_CANVAS_CONTROLS",
+    rollRequestDialog: "ROLL_REQUEST_DIALOG",
 } as const

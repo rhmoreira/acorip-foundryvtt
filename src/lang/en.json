@@ -17,6 +17,10 @@
             },
             "token": {
                 "image-changed": "{tokenName} changed token's appearance"
+            },
+            "roll-request": {
+                "title": "{rollType} roll request",
+                "message": "GM has requested a ({rollValue}) roll"
             }
         },
         "labels": {
@@ -31,8 +35,10 @@
             "combat-shotgun": "Combat (Shotgun)",
             "combat-rifle": "Combat (Rifle)",
             "combat-bow": "Combat (Bow)",
-            "skill-roll-request": "Request Skill roll"
-
+            "roll-request": "Request roll",
+            "skill": "Skill",
+            "attribute": "Attribute",
+            "dice": "Dice"
         }
     }
 }
