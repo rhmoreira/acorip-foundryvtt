@@ -1,4 +1,4 @@
-import { SocketRequestRollActionData } from "../../../types/acoriPTypes";
+import { SocketRequestRollActionData } from "../types/acoriPTypes";
 import SocketActionHandler from "./SocketActionHandler";
 
 export default class RequestRollSocketActionHandler implements SocketActionHandler<"requestRoll", SocketRequestRollActionData>{

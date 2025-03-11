@@ -1,4 +1,4 @@
-import { SocketAction } from "../../../types/acoriPTypes";
+import { SocketAction } from "../types/acoriPTypes";
 
 export default interface SocketActionHandler<Action extends keyof SocketAction, Data extends SocketAction[Action]> {
 

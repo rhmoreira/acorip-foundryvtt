@@ -1,5 +1,5 @@
-import { MODULE_ID } from "../../../Constants";
-import { SocketAction } from "../../../types/acoriPTypes";
+import { MODULE_ID } from "../Constants";
+import { SocketAction } from "../types/acoriPTypes";
 import AttributeRollSocketActionHandler from "./AttributeRollSocketActionHandler";
 import DiceRollSocketActionHandler from "./DiceRollSocketActionHandler";
 import RequestRollSocketActionHandler from "./RequestRollSocketActionHandler";

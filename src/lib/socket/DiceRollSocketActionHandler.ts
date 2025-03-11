@@ -1,4 +1,4 @@
-import { SocketRequestDiceRollActionData } from "../../../types/acoriPTypes";
+import { SocketRequestDiceRollActionData } from "../types/acoriPTypes";
 import SocketActionHandler from "./SocketActionHandler";
 
 export default class DiceRollSocketActionHandler implements SocketActionHandler<"rollDice", SocketRequestDiceRollActionData>{
