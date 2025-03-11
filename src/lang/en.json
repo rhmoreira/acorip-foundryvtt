@@ -30,7 +30,8 @@
             "combat-smg": "Combat (SMG)",
             "combat-shotgun": "Combat (Shotgun)",
             "combat-rifle": "Combat (Rifle)",
-            "combat-bow": "Combat (Bow)"
+            "combat-bow": "Combat (Bow)",
+            "skill-roll-request": "Request Skill roll"
 
         }
     }

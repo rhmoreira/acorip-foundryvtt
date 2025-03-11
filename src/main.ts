@@ -1,17 +1,26 @@
 import "./styles/rhm.css"
-import RenderTokenHUDHooking from "./lib/token/hooking/TokenHUDHooking";
 import { templateFactory } from "./lib/TemplateFactory";
 import tokenServiceManager from "./lib/token/service/TokenServiceManager";
-import { TokenControls } from "./lib/token/app/TokenControls";
+import { TokenUIControls } from "./lib/app/TokenUIControls";
+import AcoripSocketHandler from "./lib/token/service/socket/AcoripSocketHandler";
+import TokenHUDHooking from "./lib/hooking/TokenHUDHooking";
+import { MODULE_ID } from "./lib/Constants";
 
 Hooks.once("init", () => {
-    TokenControls.init();
-
-    templateFactory.init();
+    AcoripSocketHandler.init();
     tokenServiceManager.init();
-
-    RenderTokenHUDHooking.hookUp();    
+    templateFactory.init();
 });
+
+Hooks.on("setup", () => {
+    (CONFIG as any)[MODULE_ID] = {
+        logging: {
+            enabled: true
+        }
+    };
+    TokenUIControls.init();
+    TokenHUDHooking.hookUp();
+})
 
 Hooks.on("ready", () => {
     console.log("Module acoriP loaded!");

@@ -2,6 +2,7 @@
     "id": "acorip",
     "title": "RHM acoriP",
     "description": "CPR Utility Module",
+    "socket": true,
     "authors": [
       {
         "name": "Renato H M"

@@ -1,6 +1,6 @@
-import CanvasHooking from "../../CanvasHooking";
 import { TOKEN_CONTROL_EVENTS } from "../../Constants";
-import TokenCRUDHooking from "../hooking/TokenCRUDHooking";
+import CanvasHooking from "../../hooking/CanvasHooking";
+import TokenCRUDHooking from "../../hooking/TokenCRUDHooking";
 import { TokenService } from "./TokenService";
 
 class TokenServiceManager {
@@ -13,7 +13,7 @@ class TokenServiceManager {
 
     public init(): void {
         CanvasHooking.hookUp({
-            ready: (_) => this._services.clear(),
+            ready: () => this._services.clear(),
             tokens: this.include.bind(this)
         });
         TokenCRUDHooking.hookUp({

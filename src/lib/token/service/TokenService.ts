@@ -1,7 +1,7 @@
 import { Fadeable } from "../../../feats/Fadeable";
 import ActorHandlerImpl from "../../actor/ActorHandlerImpl";
 import { FLAGS, MODULE_ID } from "../../Constants";
-import { toggleJackEffect } from "../../service/NetrunningService";
+import { toggleJackEffect } from "../../effect/NetrunningEffect";
 import { DocumentType } from "../../types/acoriPTypes";
 import ToggleTokenImageHandler from "./ToggleTokenImageService";
 
