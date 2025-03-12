@@ -9,6 +9,7 @@ const TEMPLATES_FILES = {
     [TEMPLATES.fadeElementDialog]:      `modules/${MODULE_ID}/templates/fade-element-dialog.hbs`,
     [TEMPLATES.tokenCanvasControls]:    `modules/${MODULE_ID}/templates/player-token-interface-controls.hbs`,
     [TEMPLATES.rollRequestDialog]:      `modules/${MODULE_ID}/templates/roll-request.hbs`,
+    [TEMPLATES.diceRollChatMessage]:    `modules/${MODULE_ID}/templates/dice-roll-chatmessage.hbs`,
 }
 
 class TemplateFactory {

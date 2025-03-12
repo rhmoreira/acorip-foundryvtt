@@ -21,8 +21,11 @@ class AcoripSocketHandler {
 
     private registerSocketHandler(): void {
         game.socket?.on(this.socketId, (data: SocketAction[keyof SocketAction]) => {
-            let actionHandler = this.customSocketHandlers.get(data.action) || this.defaultSocketActionHandlers.get(data.action);
-            actionHandler?.handle(data);
+            let canProceed = !!data.userId ? data.userId === game.user.id : true;
+            if (canProceed) {
+                let actionHandler = this.customSocketHandlers.get(data.action) || this.defaultSocketActionHandlers.get(data.action);
+                actionHandler?.handle(data);
+            }
         });
     }
 

@@ -1,0 +1,49 @@
+<div class="rollcard">
+  <div class="rollcard-top">
+    <div class="cpr-block chat-rollTitle-stat">
+      <div class="text-center text-padding-top text-normal text-semi">
+        {{rolledItem}}
+      </div>
+      <div class="text-center text-small">
+        {{rollType}}
+      </div>
+    </div>
+  </div>
+  <div class="rollcard-bottom">
+    <div class="cpr-block">
+      <div class="d10-rollcard-data">
+        <div class="d10-dice-div">
+            {{#if critSuccess}}
+                <img class="d10" src="systems/cyberpunk-red-core/icons/dice/red/d10_10_preem.svg">
+                <i class="fas fa-plus"></i>
+                <img class="d10" src="systems/cyberpunk-red-core/icons/dice/red/d10_{{secondRoll}}.svg">
+            {{else if critFailure}}
+                <img class="d10" src="systems/cyberpunk-red-core/icons/dice/black/d10_1_fail.svg">
+                <i class="fas fa-minus"></i>
+                <img class="d10" src="systems/cyberpunk-red-core/icons/dice/black/d10_{{secondRoll}}.svg">
+            {{else}}
+                <img class="d10" src="systems/cyberpunk-red-core/icons/dice/black/d10_{{firstRoll}}.svg">
+            {{/if}}
+        </div>
+        <div class="d10-number-div">
+          <a><span class="clickable text-semi" data-action="toggleVisibility" data-visible-element="d10-data-details">{{rollTotal}}</span></a>
+        </div>
+        {{#if skillRoll}}
+        <div class="d10-data-div">
+          <div class="d10-data-details hide">
+            <div class="text-normal text-semi">{{statName}} + {{statValue}}</div>
+            <div class="text-normal text-semi">
+              {{rolledItem}} + {{skillValue}}
+            </div>
+            {{#if mods}}
+            <div class="text-normal text-semi">
+              Mods + {{mods}}
+            </div>
+            {{/if}}
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

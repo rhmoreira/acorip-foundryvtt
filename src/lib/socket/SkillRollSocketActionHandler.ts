@@ -1,3 +1,5 @@
+import { TEMPLATES } from "../Constants";
+import { templateFactory } from "../TemplateFactory";
 import { SocketRollSkillActionData } from "../types/acoriPTypes";
 import BaseRollActionHandler from "./BaseRollActionHandler";
 import SocketActionHandler from "./SocketActionHandler";
@@ -20,7 +22,7 @@ export default class SkillRollSocketActionHandler extends BaseRollActionHandler 
         let actor = game.user.character;
         let skill = game.user.character.items.find(i => (i.type as any) === "skill" && i.name === data.data.skillName);
 
-        let skillRoll = (skill as any)._createSkillRoll(actor);
+        let skillRoll = (skill as any).createRoll(skill.type, actor);
 
         skillRoll.handleRollDialog({}, actor, skill)
         .then( (confirmed: boolean) => {
@@ -28,17 +30,28 @@ export default class SkillRollSocketActionHandler extends BaseRollActionHandler 
                 skillRoll
                     .roll()
                     .then(() => {
-                        ChatMessage.create({
-                            content: 
-                                `<h2>Teste de '${skillRoll.skillName}' de <strong>(${actor.name})</strong></h2>
-                                    <p> <strong>${skillRoll.statName}</strong>: ${skillRoll.statValue} </p>
-                                    <p> <strong>${skillRoll.skillName}</strong>: ${skillRoll.skillValue} </p>
-                                    <p> <strong>Mod</strong>: ${skillRoll.mods.map( (mod: any) => mod.value).reduce((sum: number, value: number) => sum+value, 0)} <p>
-                                <h3><strong>Total</strong>: ${skillRoll.resultTotal}</h3>`
-                            
-                        })
+                        let templateParams = this.createMessageRollParams(skillRoll);
+                        let content = templateFactory.parseTemplate(TEMPLATES.diceRollChatMessage, templateParams);
+                        ChatMessage.create({content});
                     })
             }
         });
+    }
+
+    private createMessageRollParams(skillRoll: any): any {
+        return {
+            rolledItem: skillRoll.skillName,
+            rollType: "Skill",
+            critSuccess: skillRoll._roll._total === 10,
+            critFailure: skillRoll._roll._total === 1,
+            firstRoll: skillRoll._roll._total,
+            secondRoll: skillRoll._critRoll?._total,
+            rollTotal: skillRoll.resultTotal,
+            skillRoll: true,
+            statName: skillRoll.statName,
+            statValue: skillRoll.statValue,
+            skillValue: skillRoll.skillValue,
+            mods: skillRoll.mods.map( (mod: any) => mod.value).reduce((sum: number, value: number) => sum+value, 0)
+        }
     }
 }

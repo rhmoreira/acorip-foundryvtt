@@ -18,4 +18,6 @@ export const TEMPLATES = {
     fadeElementDialog: "FADE_ELEMENT_DIALOG",
     tokenCanvasControls: "TOKEN_CANVAS_CONTROLS",
     rollRequestDialog: "ROLL_REQUEST_DIALOG",
+    diceRollChatMessage: "DICE_ROLL_CHAT_MESSAGE",
+    
 } as const

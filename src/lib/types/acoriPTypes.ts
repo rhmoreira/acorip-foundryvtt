@@ -35,7 +35,7 @@ export type SocketAction = {
     "rollDice": SocketRequestDiceRollActionData,
 }
 
-export type SocketActionData = {action: keyof SocketAction};
+export type SocketActionData = {action: keyof SocketAction, userId?: string,};
 
 export interface SocketRequestRollActionData extends SocketActionData {
     action: "requestRoll",
@@ -47,7 +47,6 @@ export interface SocketRequestRollActionData extends SocketActionData {
 export interface SocketRollSkillActionData extends SocketActionData {
     action: "rollSkill",
     data: {
-        userId: string,
         skillName: string
     }
 }
@@ -55,7 +54,6 @@ export interface SocketRollSkillActionData extends SocketActionData {
 export interface SocketRequestAttributeRollActionData extends SocketActionData {
     action: "rollAttribute",
     data: { 
-        userId: string,
         attributeName: string
     }
 }
@@ -63,7 +61,6 @@ export interface SocketRequestAttributeRollActionData extends SocketActionData {
 export interface SocketRequestDiceRollActionData extends SocketActionData {
     action: "rollDice",
     data: {
-        userId: string,
         formula: string
     }
 }

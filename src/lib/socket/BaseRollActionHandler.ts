@@ -2,7 +2,7 @@ import { TEMPLATES } from "../Constants";
 import { templateFactory } from "../TemplateFactory";
 
 export default abstract class BaseRollActionHandler {
-    
+
     protected requestRoll(rollType: string, rollValue: string, rollFn: () => void): void {
         this.showRollDialog(rollType, rollValue, rollFn);
     }
