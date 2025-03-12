@@ -29,11 +29,7 @@ export default class SkillRollSocketActionHandler extends BaseRollActionHandler 
             if (confirmed) {
                 skillRoll
                     .roll()
-                    .then(() => {
-                        let templateParams = this.createMessageRollParams(skillRoll);
-                        let content = templateFactory.parseTemplate(TEMPLATES.diceRollChatMessage, templateParams);
-                        ChatMessage.create({content});
-                    })
+                    .then(() => super.showMessageResult(this.createMessageRollParams(skillRoll)) )
             }
         });
     }

@@ -5,6 +5,7 @@ import { TokenUIControls } from "./lib/app/TokenUIControls";
 import AcoripSocketHandler from "./lib/socket/AcoripSocketHandler";
 import TokenHUDHooking from "./lib/hooking/TokenHUDHooking";
 import { MODULE_ID } from "./lib/Constants";
+import GameMasterUIControls from "./lib/app/GameMasterUIControls";
 
 Hooks.once("init", () => {
     AcoripSocketHandler.init();
@@ -18,6 +19,7 @@ Hooks.on("setup", () => {
             enabled: true
         }
     };
+    GameMasterUIControls.init();
     TokenUIControls.init();
     TokenHUDHooking.hookUp();
 })

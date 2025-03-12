@@ -1,9 +1,10 @@
 import { MODULE_ID } from "../Constants";
+import CanvasHooking from "../hooking/CanvasHooking";
 import UIControls from "./UIControls";
 
 export default class GameMasterUIControls extends UIControls {
     
-    constructor(){
+    private constructor(){
         super("rhmGMControls");
     }
 
@@ -26,6 +27,7 @@ export default class GameMasterUIControls extends UIControls {
 
     override activateListeners(html: JQuery): void {
         super.activateListeners(html);
+        console.log(this.element[0]);
         document.querySelector("footer#ui-bottom").prepend(this.element[0]);
 
         this.element.find("div.rhm.col").each((_, html) => {
@@ -39,5 +41,16 @@ export default class GameMasterUIControls extends UIControls {
                 }
             })            
         })
+    }
+
+    public static init(): void {
+        if (game.user.isGM) {
+            new GameMasterUIControls().render(true);
+            CanvasHooking.hookUp({
+                ready: () => {
+                    new GameMasterUIControls().render(true);
+                }
+            });
+        }        
     }
 }

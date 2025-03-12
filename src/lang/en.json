@@ -35,7 +35,7 @@
             "combat-shotgun": "Combat (Shotgun)",
             "combat-rifle": "Combat (Rifle)",
             "combat-bow": "Combat (Bow)",
-            "roll-request": "Request roll",
+            "request-player-roll": "Request player roll",
             "skill": "Skill",
             "attribute": "Attribute",
             "dice": "Dice"

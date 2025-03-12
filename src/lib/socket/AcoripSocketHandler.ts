@@ -1,4 +1,3 @@
-import AcoripLog from "../AcoripLog";
 import { MODULE_ID } from "../Constants";
 import { SocketAction } from "../types/acoriPTypes";
 import AttributeRollSocketActionHandler from "./AttributeRollSocketActionHandler";
@@ -50,7 +49,6 @@ class AcoripSocketHandler {
 }
 
 function init(): void {
-    console.log(game.socket);
     AcoripSocketHandler.register();
 }
 
