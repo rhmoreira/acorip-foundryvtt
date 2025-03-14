@@ -26,7 +26,9 @@
             "select-skill": "Select one skill",
             "select-stat": "Select one Stat",
             "select-players": "Select at least one player",
-            "input-dice-formula": "Type in the desired dice formula"
+            "dice-formula-required": "Type in the desired dice formula",
+            "invalid-option": "Invalid option",
+            "invalid-dice-formula": "Invalid dice formula"
         },
         "labels": {
             "fade": "Fade",

@@ -7,18 +7,32 @@ export default class DiceRollSocketActionHandler extends BaseRollActionHandler i
     handle(data: SocketRequestDiceRollActionData): void {
         super.requestRoll(
             game.i18n.localize("acorip.labels.dice"),
-            `[Dice => ${data.data.formula}]`,
-            () => { this.rollSkill(data) }
+            `Dice => ${data.data.formula}`,
+            () => { this.rollDice(data) }
         );
     }
     getAction(): "rollDice" {
         return "rollDice";
     }
 
-    private rollSkill(data: SocketRequestDiceRollActionData): void {
+    private rollDice(data: SocketRequestDiceRollActionData): void {
         Roll.create(data.data.formula)
             .roll()
-            .then(_ => {
+            .then(roll => {
+                
             });
+    }
+
+    private createMessageRollParams(statRoll: any): any {
+        return {
+            rolledItem: `${statRoll.statName} (${statRoll.statValue})`,
+            rollType: "Stat",
+            critSuccess: statRoll._roll._total === 10,
+            critFailure: statRoll._roll._total === 1,
+            firstRoll: statRoll._roll._total,
+            secondRoll: statRoll._critRoll?._total,
+            rollTotal: statRoll.resultTotal,
+            skillRoll: false
+        }
     }
 }

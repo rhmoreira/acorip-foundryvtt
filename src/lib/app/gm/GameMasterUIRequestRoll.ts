@@ -53,37 +53,72 @@ export default class GameMasterUIRequestRoll extends BaseUI<RequestRollFormData>
         this.validateInput(formData.userIds, "acorip.messages.select-players");
         
         let action = $(event.submitter).data("action");
-        switch (action) {
-            case "rollSkill":
-                this.sendRollSkill(formData);
-                break;
-            default:
-                throw Error("Not implemented");
-                break;
-        }      
-    }
-
-    private sendRollSkill(formData: RequestRollFormData): void {
-        this.validateInput(formData.skill, "acorip.messages.select-skill");
-        let actionData: SocketRequestRollActionData = {
+        let requestRoll: SocketRequestRollActionData = {
             action: "requestRoll",
             userIds: formData.userIds,
-            request: {
-                action: "rollSkill",
-                data: {skillName: formData.skill}
-            } 
-        }
+            request: undefined
+        };
 
+        switch (action) {
+            case "rollSkill":
+                this.setRollSkillRequest(formData, requestRoll);
+                break;
+            case "rollStat":
+                this.setRollStatRequest(formData, requestRoll);
+                break;
+            case "rollDice":
+                await this.setDiceRequest(formData, requestRoll);
+                break;
+            default:
+                super.showMessage("acorip.messages.invalid-option", "error");
+                throw Error("Invalid option");
+        }
+        
+        this.sendAction(requestRoll);
+    }
+
+    private setRollSkillRequest(formData: RequestRollFormData, requestRoll: SocketRequestRollActionData): void {
+        this.validateInput(formData.skill, "acorip.messages.select-skill");
+        requestRoll.request = {
+            action: "rollSkill",
+            data: {skillName: formData.skill}
+        };
+    }
+
+    private setRollStatRequest(formData: RequestRollFormData, requestRoll: SocketRequestRollActionData): void {
+        this.validateInput(formData.stat, "acorip.messages.select-stat");
+        requestRoll.request = {
+            action: "rollAttribute",
+            data: {attributeName: formData.stat}
+        }
+    }
+
+    private async setDiceRequest(formData: RequestRollFormData, requestRoll: SocketRequestRollActionData) {
+        this.validateInput(formData.diceFormula, "acorip.messages.dice-formula-required");
+
+        return Roll.create(formData.diceFormula)
+            .evaluate()
+            .then(_ => {
+                return requestRoll.request = {
+                    action: "rollDice",
+                    data: {formula: formData.diceFormula}
+                };
+            }).catch(error => {
+                super.showMessage("acorip.messages.invalid-dice-formula", "error");
+                throw error;
+            });        
+    }
+
+    private sendAction(action: SocketRequestRollActionData): void {
         AcoripSocketHandler
             .getInstance()
-            .emit(actionData);
+            .emit(action);
     }
 
     private validateInput(input: any, errorMessage: string): void {
         if (!input) {
-            let localizedError = game.i18n.localize(errorMessage);
-            ui.notifications.error(game.i18n.localize(localizedError));
-            throw Error(localizedError);
+            let message = super.showMessage(errorMessage, "error");
+            throw Error(message);
         }
     }
 

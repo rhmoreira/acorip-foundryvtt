@@ -37,6 +37,8 @@ export default abstract class BaseUI<FormData> extends FormApplication {
         this.toggleTabsActiveBehavior();        
     }
 
+    protected override async _updateObject(_: Event, __?: object): Promise<unknown> { return true; }
+
     private toggleTabsActiveBehavior(): void {
         let jQElement = $(this.element[0]);
         let headerLabels = jQElement.find(".rhm.tag-header label.rhm-tab-label");
@@ -50,5 +52,11 @@ export default abstract class BaseUI<FormData> extends FormApplication {
             $(".tab-current").removeClass(".tab-current").addClass("hide");
             $(content).addClass("tab-current").removeClass("hide")
         })
+    }
+
+    protected showMessage(messageProperty: string, type: "error" | "info" | "warn"): string {
+        let localizedError = game.i18n.localize(messageProperty);
+        ui.notifications[type](game.i18n.localize(localizedError));
+        return localizedError;
     }
 }

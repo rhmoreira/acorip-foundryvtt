@@ -4,7 +4,7 @@ import { TokenService } from "../token/service/TokenService";
 import BaseUI from "./BaseUI";
 import CanvasHooking from "../hooking/CanvasHooking";
 
-export class TokenUIControls extends BaseUI {
+export class TokenUIControls extends BaseUI<any> {
  
     private tokenService: TokenService;
 
@@ -16,7 +16,7 @@ export class TokenUIControls extends BaseUI {
         ]);
     }
     
-    static override get defaultOptions(): ApplicationOptions {
+    static override get defaultOptions(): FormApplicationOptions {
         return {
             ...super.defaultOptions,
             id: "rhmTokenControls",
@@ -48,7 +48,7 @@ export class TokenUIControls extends BaseUI {
         })
     }
 
-    override getData(_?: Partial<ApplicationOptions>): MaybePromise<object> {
+    override getData(_?: Partial<FormApplicationOptions>): MaybePromise<object> {
         return {
             netrunner: this.tokenService.getActorHandler().isNetrunner(),
             moduleId: MODULE_ID

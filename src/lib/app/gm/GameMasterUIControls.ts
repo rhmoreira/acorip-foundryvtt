@@ -3,13 +3,13 @@ import CanvasHooking from "../../hooking/CanvasHooking";
 import BaseUI from "../BaseUI";
 import GameMasterUIRequestRoll from "./GameMasterUIRequestRoll";
 
-export default class GameMasterUIControls extends BaseUI {
+export default class GameMasterUIControls extends BaseUI<any> {
     
     private constructor(){
         super("rhmGMControls");
     }
 
-    static override get defaultOptions(): ApplicationOptions {
+    static override get defaultOptions(): FormApplicationOptions {
         return {
             ...super.defaultOptions,
             id: "rhmGMControls",
@@ -20,7 +20,7 @@ export default class GameMasterUIControls extends BaseUI {
         }
     }
 
-    override async getData(_?: Partial<ApplicationOptions>): Promise<any> {
+    override async getData(_?: Partial<FormApplicationOptions>): Promise<any> {
         return {
             moduleId: MODULE_ID
         }        

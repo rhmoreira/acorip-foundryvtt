@@ -33,22 +33,16 @@
             </div>
         </div>
         <div class="rhm stats hide">
-            <div class="rhm grid" style="--rhm-grid-columns: 7; --rhm-grid-column-min: 2rem">
+            <div class="rhm grid" style="--rhm-grid-columns: auto-fit; --rhm-grid-column-min: 1rem">
                 {{#each stats}}
-                    <div></div>
-                    <div></div>
-                    <div></div>
                     <div class="rhm item-row text-nowrap">
                         <input id="stat_{{statName}}" type="radio" name="stat" value="{{statName}}">
                         <label for="stat_{{statName}}">{{upperCase statName}}</label>
                     </div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
                 {{/each}}
             </div>
             <div class="rhm-btn-area">
-                <button class="rhm-btn rhm-btn-submit" type="submit" data-action="rollAttribute">{{localize 'acorip.labels.request-stat-roll'}}</button>
+                <button class="rhm-btn rhm-btn-submit" type="submit" data-action="rollStat">{{localize 'acorip.labels.request-stat-roll'}}</button>
             </div>
         </div>
         <div class="rhm dice-formula hide">
