@@ -1,8 +1,9 @@
-import { MODULE_ID } from "../Constants";
-import CanvasHooking from "../hooking/CanvasHooking";
-import UIControls from "./UIControls";
+import { MODULE_ID } from "../../Constants";
+import CanvasHooking from "../../hooking/CanvasHooking";
+import BaseUI from "../BaseUI";
+import GameMasterUIRequestRoll from "./GameMasterUIRequestRoll";
 
-export default class GameMasterUIControls extends UIControls {
+export default class GameMasterUIControls extends BaseUI {
     
     private constructor(){
         super("rhmGMControls");
@@ -27,14 +28,14 @@ export default class GameMasterUIControls extends UIControls {
 
     override activateListeners(html: JQuery): void {
         super.activateListeners(html);
-        console.log(this.element[0]);
         document.querySelector("footer#ui-bottom").prepend(this.element[0]);
 
         this.element.find("div.rhm.col").each((_, html) => {
             html.addEventListener("click", (_) => {
                 let action = html.dataset.action;
                 switch (action) {
-                    case "skillRoll":
+                    case "requestRoll":
+                        new GameMasterUIRequestRoll(true);
                         break;
                     default:
                         break;

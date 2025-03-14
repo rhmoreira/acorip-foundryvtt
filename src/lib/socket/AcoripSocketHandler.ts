@@ -1,3 +1,4 @@
+import AcoripLog from "../AcoripLog";
 import { MODULE_ID } from "../Constants";
 import { SocketAction } from "../types/acoriPTypes";
 import AttributeRollSocketActionHandler from "./AttributeRollSocketActionHandler";
@@ -20,7 +21,7 @@ class AcoripSocketHandler {
 
     private registerSocketHandler(): void {
         game.socket?.on(this.socketId, (data: SocketAction[keyof SocketAction]) => {
-            let canProceed = !!data.userId ? data.userId === game.user.id : true;
+            let canProceed = data.userIds?.includes(game.user.id);
             if (canProceed) {
                 let actionHandler = this.customSocketHandlers.get(data.action) || this.defaultSocketActionHandlers.get(data.action);
                 actionHandler?.handle(data);
@@ -29,6 +30,7 @@ class AcoripSocketHandler {
     }
 
     public emit<Action extends keyof SocketAction>(data: SocketAction[Action]): void {
+        AcoripLog.info("Emitting socket event", data);
         game.socket?.emit(this.socketId, data);
     }
 
@@ -52,4 +54,8 @@ function init(): void {
     AcoripSocketHandler.register();
 }
 
-export default {init}
+function getInstance(): AcoripSocketHandler {
+    return (game.modules?.get(MODULE_ID) as any).socketHandler;
+}
+
+export default {init, getInstance}

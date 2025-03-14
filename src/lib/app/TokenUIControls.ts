@@ -1,10 +1,10 @@
 import { MaybePromise } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
 import { MODULE_ID, TOKEN_CONTROL_EVENTS } from "../Constants";
 import { TokenService } from "../token/service/TokenService";
-import UIControls from "./UIControls";
+import BaseUI from "./BaseUI";
 import CanvasHooking from "../hooking/CanvasHooking";
 
-export class TokenUIControls extends UIControls {
+export class TokenUIControls extends BaseUI {
  
     private tokenService: TokenService;
 

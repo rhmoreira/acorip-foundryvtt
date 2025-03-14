@@ -35,7 +35,7 @@ export type SocketAction = {
     "rollDice": SocketRequestDiceRollActionData,
 }
 
-export type SocketActionData = {action: keyof SocketAction, userId?: string,};
+export type SocketActionData = {action: keyof SocketAction, userIds?: string[]};
 
 export interface SocketRequestRollActionData extends SocketActionData {
     action: "requestRoll",

@@ -1,23 +1,108 @@
-div.rhm.custom-token-buttons, div.rhm.gm-controls{
+:root {
+    --rhm-grid-columns: auto-fit;
+    --rhm-grid-column-min: 12rem
+}
+
+.rhm.control-buttons{
     justify-content: center!important;
     display: flex!important;
 }
 
-div.rhm.custom-token-buttons div.col, div.rhm.gm-controls div.col{
+.rhm.control-buttons div.col{
     cursor: pointer;
     pointer-events: all;
     background: rgba(68, 68, 68, 0.7);
     padding: 0.5rem;
 }
 
-div.rhm.custom-token-buttons div.col:first-child, div.rhm.gm-controls div.col:first-child{
+.rhm.control-buttons div.col:first-child{
     border-radius: 15px 0px 0px 15px;
 }
 
-div.rhm.custom-token-buttons div.col:last-child, div.rhm.gm-controls div.col:last-child{
+.rhm.control-buttons div.col:last-child{
     border-radius: 0px 15px 15px 0px;
 }
 
-div.rhm.custom-token-buttons div.col:only-child, div.rhm.gm-controls div.col:only-child{
+.rhm.control-buttons div.col:only-child{
     border-radius: 15px 15px 15px 15px;
 }
+
+.rhm.gm-roll-request, .rhm.logged-users, .rhm.sorted-skills, .rhm.dice-formula{
+    height: 100%;
+}
+
+
+.rhm.users, .rhm.sorted-skills, .rhm.stats, .rhm.dice-formula {
+    height: auto;
+    margin: 10px;
+    border: 3px solid rgb(185 2 2);
+    border-radius: 4px;
+}
+
+.rhm.stats .rhm.item-row {
+    border: 3px solid rgb(185 2 2);
+    padding: 5px;
+}
+
+.rhm.item-row:nth-child(odd) {
+    background-color: rgb(255 195 182);
+}
+
+.rhm.grid {
+    display: grid;
+    grid-template-columns: repeat(var(--rhm-grid-columns), minmax(var(--rhm-grid-column-min), 1fr));
+    grid-auto-rows: minmax(1rem, 2fr);
+}
+
+.rhm.grid-v {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 2rem;
+}
+
+.rhm.tag-header label {
+    cursor: pointer;
+    background-color: rgb(116, 116, 116);
+    color: white;
+    padding: 6px;
+    border-width: 0px 0px 0px 0;
+    border-radius: 0px 0 13px 0;
+    border-style: solid;
+    border-color: red;
+    margin-right: -3px;
+}
+
+.rhm.tag-header label.header-label.active {
+    background-color: rgb(185 2 2);
+}
+
+.rhm-btn-area {
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.rhm.container {
+    border-radius: 5px;
+    border: 7px solid rgb(185 2 2);
+}
+
+.rhm-btn {
+    border: 2px solid black!important;
+    background-color: white!important;
+    color: black!important;
+    margin: 10px;
+}
+
+.rhm-btn-submit{
+    border-color: rgb(255 195 182)!important;
+    background: rgb(185 2 2)!important;
+    color: rgb(255 195 182)!important;
+}
+
+.rhm-btn-submit:hover {
+    background: rgb(255 195 182)!important;
+    color: rgb(185 2 2)!important;
+  }

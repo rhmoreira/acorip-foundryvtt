@@ -1,5 +1,66 @@
-<div class="cpr-block">
-    <p>
-        <strong class="text-normal">{{localize 'acorip.messages.roll-request.message' rollValue=rollValue}}</strong>
-    </p>
-</div>
+<form class="form-group">
+    <div class="rhm container">
+        <div class="rhm tag-header">
+            <label for="" class="rhm header-label active">{{localize 'acorip.labels.players'}}</label>
+        </div>
+        <div class="rhm users">
+            {{#unless users}}
+                {{localize 'acorip.messages.players-not-available'}}
+            {{/unless}}
+            {{#each users}}
+            <div class="form-check form-check-inline">
+                <input type="checkbox" id="user_{{id}}" name="userIds" class="form-check-input" value="{{id}}">
+                <label class="form-check-label" for="user_{{id}}">{{name}} {{#if character}} <strong>({{character.name}})</strong> {{/if}}</label>
+            </div>
+            {{/each}}
+        </div>
+        <div class="rhm tag-header">
+            <label for="skillTabRadio" class="rhm header-label rhm-tab-label active" data-content=".rhm.sorted-skills">{{localize 'acorip.labels.skill'}}</label>
+            <label for="statsTabRadio" class="rhm header-label rhm-tab-label" data-content=".rhm.stats">{{localize 'acorip.labels.stat'}}</label>
+            <label for="diceTabRadio" class="rhm header-label rhm-tab-label" data-content=".rhm.dice-formula">{{localize 'acorip.labels.dice'}}</label>
+        </div>
+        <div class="rhm sorted-skills tab-current">
+            <div class="rhm grid" style="--rhm-grid-columns: 3">
+                {{#each skills}}
+                    <div class="rhm item-row text-nowrap">
+                        <input id="skill_index_{{id}}" type="radio" name="skill" value="{{name}}">
+                        <label for="skill_index_{{id}}">{{name}}</label>
+                    </div>
+                {{/each}}
+            </div>
+             <div class="rhm-btn-area">
+                <button class="rhm-btn rhm-btn-submit" type="submit" data-action="rollSkill">{{localize 'acorip.labels.request-skill-roll'}}</button>
+            </div>
+        </div>
+        <div class="rhm stats hide">
+            <div class="rhm grid" style="--rhm-grid-columns: 7; --rhm-grid-column-min: 2rem">
+                {{#each stats}}
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="rhm item-row text-nowrap">
+                        <input id="stat_{{statName}}" type="radio" name="stat" value="{{statName}}">
+                        <label for="stat_{{statName}}">{{upperCase statName}}</label>
+                    </div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                {{/each}}
+            </div>
+            <div class="rhm-btn-area">
+                <button class="rhm-btn rhm-btn-submit" type="submit" data-action="rollAttribute">{{localize 'acorip.labels.request-stat-roll'}}</button>
+            </div>
+        </div>
+        <div class="rhm dice-formula hide">
+            <div class="rhm grid" style="--rhm-grid-columns: 2; --rhm-grid-column-min: 2rem">
+                <div class="rhm item-row text-nowrap">
+                    <label for="diceFormula">{{localize 'acorip.labels.dice-formula'}}</label>
+                    <input id="diceFormula" type="text" name="diceFormula">
+                </div>
+            </div>
+            <div class="rhm-btn-area">
+                <button class="rhm-btn rhm-btn-submit" type="submit" data-action="rollDice">{{localize 'acorip.labels.request-dice-roll'}}</button>
+            </div>
+        </div>
+    </div>
+</form>

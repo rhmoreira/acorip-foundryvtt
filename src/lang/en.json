@@ -21,7 +21,12 @@
             "roll-request": {
                 "title": "{rollType} roll request",
                 "message": "GM has requested a ({rollValue}) roll"
-            }
+            },
+            "players-not-available": "There are no players in the current game session",
+            "select-skill": "Select one skill",
+            "select-stat": "Select one Stat",
+            "select-players": "Select at least one player",
+            "input-dice-formula": "Type in the desired dice formula"
         },
         "labels": {
             "fade": "Fade",
@@ -37,8 +42,17 @@
             "combat-bow": "Combat (Bow)",
             "request-player-roll": "Request player roll",
             "skill": "Skill",
+            "skills": "Skills",
+            "stat": "Stat",
+            "stats": "Stats",
             "attribute": "Attribute",
-            "dice": "Dice"
+            "dice": "Dice",
+            "player": "Player",
+            "players": "Players",
+            "dice-formula": "Dice Formula",
+            "request-skill-roll": "Request skill roll",
+            "request-stat-roll": "Request stat roll",
+            "request-dice-roll": "Request dice roll"
         }
     }
 }
