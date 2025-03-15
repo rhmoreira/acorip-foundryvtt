@@ -16,14 +16,13 @@ export default class DiceRollSocketActionHandler extends BaseRollActionHandler i
     }
 
     private rollDice(data: SocketRequestDiceRollActionData) {
-        let messageId = randomID(16);
         Roll.create(data.data.formula)
             .roll()
             .then(async roll => {
                 await (game as any).dice3d.showForRoll(roll, game.user, true)
                 return roll;
             }).then(this.createMessageRollParams)
-            .then(params => super.showMessageResult(params, messageId));
+            .then(params => super.showMessageResult(params));
         
     }
 
