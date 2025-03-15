@@ -22,7 +22,7 @@ export default class DiceRollSocketActionHandler extends BaseRollActionHandler i
                 await (game as any).dice3d.showForRoll(roll, game.user, true)
                 return roll;
             }).then(this.createMessageRollParams)
-            .then(params => super.showMessageResult(params));
+            .then(super.showMessageResult);
         
     }
 
