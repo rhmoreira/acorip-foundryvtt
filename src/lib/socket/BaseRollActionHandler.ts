@@ -18,7 +18,7 @@ export default abstract class BaseRollActionHandler {
         new Dialog(dialogOptions).render(true);
     }
 
-    protected showMessageResult(resultParams: any): void {
+    protected showMessageResult(resultParams: any, id: string = randomID(16)): void {
         let content = templateFactory.parseTemplate(TEMPLATES.diceRollChatMessage, resultParams);
         ChatMessage.create({content});
     }

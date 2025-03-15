@@ -15,24 +15,24 @@ export default class DiceRollSocketActionHandler extends BaseRollActionHandler i
         return "rollDice";
     }
 
-    private rollDice(data: SocketRequestDiceRollActionData): void {
+    private rollDice(data: SocketRequestDiceRollActionData) {
+        let messageId = randomID(16);
         Roll.create(data.data.formula)
             .roll()
-            .then(roll => {
-                
-            });
+            .then(async roll => {
+                await (game as any).dice3d.showForRoll(roll, game.user, true)
+                return roll;
+            }).then(this.createMessageRollParams)
+            .then(params => super.showMessageResult(params, messageId));
+        
     }
 
-    private createMessageRollParams(statRoll: any): any {
-        return {
-            rolledItem: `${statRoll.statName} (${statRoll.statValue})`,
-            rollType: "Stat",
-            critSuccess: statRoll._roll._total === 10,
-            critFailure: statRoll._roll._total === 1,
-            firstRoll: statRoll._roll._total,
-            secondRoll: statRoll._critRoll?._total,
-            rollTotal: statRoll.resultTotal,
-            skillRoll: false
-        }
+    private createMessageRollParams(roll: Roll): any {
+        return  {
+            rolledItem: roll.formula,
+            rollType: game.i18n.localize('acorip.labels.dice-formula'),
+            rollTotal: eval(roll.result),
+            diceRoll: true
+        };
     }
 }

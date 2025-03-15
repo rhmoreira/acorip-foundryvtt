@@ -12,6 +12,7 @@
   <div class="rollcard-bottom">
     <div class="cpr-block">
       <div class="d10-rollcard-data">
+        {{#unless diceRoll}}
         <div class="d10-dice-div">
             {{#if critSuccess}}
                 <img class="d10" src="systems/cyberpunk-red-core/icons/dice/red/d10_10_preem.svg">
@@ -25,6 +26,7 @@
                 <img class="d10" src="systems/cyberpunk-red-core/icons/dice/black/d10_{{firstRoll}}.svg">
             {{/if}}
         </div>
+        {{/unless}}
         <div class="d10-number-div">
           <a><span class="clickable text-semi" data-action="toggleVisibility" data-visible-element="d10-data-details">{{rollTotal}}</span></a>
         </div>
