@@ -1,0 +1,50 @@
+<form class="form-group">
+    <h2>Toggle Token Image - Settings</h2>
+    <div class="form-group">
+        <label for="defaultTokenImagePath">{{localize 'acorip.labels.settings.token-toggle-image.default-path.name'}}</label>
+        <div class="form-fields">
+            <input type="text" id="defaultTokenImagePath" name="defaultTokenImagePath" value="{{defaultTokenImagePath}}">
+        </div>
+    </div>
+     <div class="form-group">
+        <label for="imgExt">{{localize 'acorip.labels.settings.token-toggle-image.img-file-ext'}}</label>
+        <div class="form-fields">
+            <input type="text" id="imgExt" name="imgfileExt" value="{{imgfileExt}}">
+        </div>
+        <p class="notes">{{localize 'acorip.labels.settings.token-toggle-image.img-file-ext-note'}}</p>
+    </div>
+    <div>
+        <table class="stance-table">
+            <thead>
+                <tr>
+                    <td colspan="3" align="center">{{localize 'acorip.labels.settings.token-toggle-image.stances'}}</td>
+                </tr>
+                <tr>
+                    <td align="center">{{localize 'acorip.labels.settings.token-toggle-image.stance-sufix'}}</td>
+                    <td align="center">{{localize 'acorip.labels.description'}}</td>
+                    <td align="center">
+                        <button type="button" class="rhm-tti-settings" data-action="addStance"><i class="fas fa-plus"></i></button>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                    {{#each stances}}
+                <tr id="stance_{{@index}}">
+                    <td>
+                        <input type="text" name="stances.{{@index}}.sufix" value="{{sufix}}" data-index="{{@index}}" data-attr="sufix">
+                    </td>
+                    <td>
+                        <input type="text" name="stances.{{@index}}.description" value="{{description}}" data-index="{{@index}}" data-attr="description">
+                    </td>
+                    <td>
+                        <button type="button" class="rhm-tti-settings" data-action="removeStance" data-index="{{@index}}"><i class="fas fa-minus"></i></button>
+                    </td>
+                </tr>
+                    {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <button type="submit"><i class="fas fa-save"></i>{{localize 'acorip.labels.save'}}</button>
+    </div>
+</form>

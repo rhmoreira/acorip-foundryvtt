@@ -1,60 +1,82 @@
 {
-    "acorip": {
-        "features": {
-            "token": {
-                "toggle-image": "Change appearance",
-                "jack-in-out": "Jack In/Out",
-                "toggle-fade": "Fade In/Out",
-                "black-ice": {
-                    "roll-initiative": "Roll Black-ICE initiative"
+    "acorip":{
+       "features":{
+          "token":{
+             "toggle-image":"Change appearance",
+             "jack-in-out":"Jack In/Out",
+             "toggle-fade":"Fade In/Out",
+             "black-ice":{
+                "roll-initiative":"Roll Black-ICE initiative"
+             }
+          }
+       },
+       "messages":{
+          "black-ice":{
+             "not-in-combat":"Black-ICE '{tokenName}' is not in combat"
+          },
+          "token":{
+             "image-changed":"{tokenName} has changed token's appearance"
+          },
+          "roll-request":{
+             "title":"{rollType} roll request",
+             "message":"GM has requested a ({rollValue}) roll"
+          },
+          "players-not-available":"There are no players in the current game session",
+          "select-skill":"Select one skill",
+          "select-stat":"Select one Stat",
+          "select-players":"Select at least one player",
+          "dice-formula-required":"Type in the desired dice formula",
+          "invalid-option":"Invalid option",
+          "invalid-dice-formula":"Invalid dice formula"
+       },
+       "labels":{
+          "settings":{
+             "configure":"Configure",
+             "token-toggle-image":{
+                "menu": {
+                    "hint": "Configure and manage token stances and the path to store token images"
+                },
+                "default-path":{
+                   "name":"Default token images path",
+                   "hint":"The default directory path where the images will be placed to be swapped between each other"
+                },
+                "stances":"Stances",
+                "stance-sufix":"sufix",
+                "img-file-ext":"File extension of the image",
+                "img-file-ext-note":"(Default is .png)",
+                "default":{
+                   "friendly":"Friendly",
+                   "friendly-alt":"Friendly 2",
+                   "combat-pistol":"Combat (Pistol)",
+                   "combat-smg":"Combat (SMG)",
+                   "combat-shotgun":"Combat (Shotgun)",
+                   "combat-rifle":"Combat (Rifle)",
+                   "combat-bow":"Combat (Bow)",
+                   "request-player-roll":"Request player roll"
                 }
-            }
-
-        },
-        "messages": {
-            "black-ice": {
-                "not-in-combat": "Black-ICE '{tokenName}' is not in combat"
-            },
-            "token": {
-                "image-changed": "{tokenName} changed token's appearance"
-            },
-            "roll-request": {
-                "title": "{rollType} roll request",
-                "message": "GM has requested a ({rollValue}) roll"
-            },
-            "players-not-available": "There are no players in the current game session",
-            "select-skill": "Select one skill",
-            "select-stat": "Select one Stat",
-            "select-players": "Select at least one player",
-            "dice-formula-required": "Type in the desired dice formula",
-            "invalid-option": "Invalid option",
-            "invalid-dice-formula": "Invalid dice formula"
-        },
-        "labels": {
-            "fade": "Fade",
-            "change_token_stance": "Change token stance",
-            "choose_stance": "Choose the desired stance",
-            "confirm": "Confirm",
-            "friendly": "Friendly",
-            "friendly-alt": "Friendly 2",
-            "combat-pistol": "Combat (Pistol)",
-            "combat-smg": "Combat (SMG)",
-            "combat-shotgun": "Combat (Shotgun)",
-            "combat-rifle": "Combat (Rifle)",
-            "combat-bow": "Combat (Bow)",
-            "request-player-roll": "Request player roll",
-            "skill": "Skill",
-            "skills": "Skills",
-            "stat": "Stat",
-            "stats": "Stats",
-            "attribute": "Attribute",
-            "dice": "Dice",
-            "player": "Player",
-            "players": "Players",
-            "dice-formula": "Dice Formula",
-            "request-skill-roll": "Request skill roll",
-            "request-stat-roll": "Request stat roll",
-            "request-dice-roll": "Request dice roll"
-        }
+             }
+          },
+          "value":"Value",
+          "description":"Description",
+          "fade":"Fade",
+          "change_token_stance":"Change token stance",
+          "choose_stance":"Choose the desired stance",
+          "confirm":"Confirm",
+          "save":"Save",
+          "skill":"Skill",
+          "skills":"Skills",
+          "stat":"Stat",
+          "stats":"Stats",
+          "attribute":"Attribute",
+          "dice":"Dice",
+          "player":"Player",
+          "players":"Players",
+          "dice-formula":"Dice Formula",
+          "request-skill-roll":"Request skill roll",
+          "request-stat-roll":"Request stat roll",
+          "request-dice-roll":"Request dice roll",
+          "add": "Add",
+          "remove": "Remove"
+       }
     }
-}
+ }

@@ -4,7 +4,7 @@ import { TokenService } from "../token/service/TokenService";
 import BaseUI from "./BaseUI";
 import CanvasHooking from "../hooking/CanvasHooking";
 
-export class TokenUIControls extends BaseUI<any> {
+export class TokenUIControls extends BaseUI {
  
     private tokenService: TokenService;
 
@@ -27,7 +27,7 @@ export class TokenUIControls extends BaseUI<any> {
         }
     }
 
-    override activateListeners(html: JQuery): void {
+    override async activateListeners(html: JQuery) {
         super.activateListeners(html);
         document.querySelector("footer#ui-bottom").prepend(this.element[0]);
 

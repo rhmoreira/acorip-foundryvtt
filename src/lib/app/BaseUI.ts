@@ -1,14 +1,14 @@
 import { UIControlHook } from "../types/acoriPTypes";
 
-export default abstract class BaseUI<FormData> extends FormApplication {
+export default abstract class BaseUI extends FormApplication {
 
     private hooks: UIControlHook[] = [];
     protected _closed = false;
     public get isClosed(): boolean {return this._closed;};
 
-    constructor(private uiControlPropertyName: string, protected data: FormData = {} as any) {
+    constructor(private uiControlPropertyName: string, private hasTabs: boolean = false) {
 
-        super(data || {});
+        super({});
         (ui as any)[this.uiControlPropertyName]?.close();
         (ui as any)[this.uiControlPropertyName] = this;
     }
@@ -31,10 +31,11 @@ export default abstract class BaseUI<FormData> extends FormApplication {
         return super.close();
     }
 
-    override activateListeners(html: JQuery): void {
+    override async activateListeners(html: JQuery) {
         super.activateListeners(html);
         
-        this.toggleTabsActiveBehavior();        
+        if (this.hasTabs)
+            this.toggleTabsActiveBehavior();        
     }
 
     protected override async _updateObject(_: Event, __?: object): Promise<unknown> { return true; }

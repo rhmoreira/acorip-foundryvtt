@@ -3,7 +3,7 @@ import CanvasHooking from "../../hooking/CanvasHooking";
 import BaseUI from "../BaseUI";
 import GameMasterUIRequestRoll from "./GameMasterUIRequestRoll";
 
-export default class GameMasterUIControls extends BaseUI<any> {
+export default class GameMasterUIControls extends BaseUI {
     
     private constructor(){
         super("rhmGMControls");
@@ -26,7 +26,7 @@ export default class GameMasterUIControls extends BaseUI<any> {
         }        
     }
 
-    override activateListeners(html: JQuery): void {
+    override async activateListeners(html: JQuery) {
         super.activateListeners(html);
         document.querySelector("footer#ui-bottom").prepend(this.element[0]);
 

@@ -8,6 +8,7 @@ import { MODULE_ID } from "./lib/Constants";
 import GameMasterUIControls from "./lib/app/gm/GameMasterUIControls";
 import GameMasterUIRequestRoll from "./lib/app/gm/GameMasterUIRequestRoll";
 import HandlebarsCustomHelpers from "./lib/HandlebarsCustomHelpers";
+import TokenToggleImageSettings from "./lib/settings/RHMSettings";
 
 Hooks.once("init", () => {
     AcoripSocketHandler.init();
@@ -17,6 +18,7 @@ Hooks.once("init", () => {
 });
 
 Hooks.on("setup", () => {
+    TokenToggleImageSettings.registerSettings();
     (CONFIG as any)[MODULE_ID] = {
         logging: {
             enabled: true

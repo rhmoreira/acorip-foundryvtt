@@ -10,7 +10,7 @@ interface RequestRollFormData{
     diceFormula: string;
 }
 
-export default class GameMasterUIRequestRoll extends BaseUI<RequestRollFormData>{
+export default class GameMasterUIRequestRoll extends BaseUI{
 
     private static SKILLS: {
         id: string,
@@ -22,7 +22,7 @@ export default class GameMasterUIRequestRoll extends BaseUI<RequestRollFormData>
     }[] = [];
 
     constructor(isRender: boolean = false){
-        super("rhmGMRequestRoll");
+        super("rhmGMRequestRoll", true);
         this.render(isRender);
     }
 
