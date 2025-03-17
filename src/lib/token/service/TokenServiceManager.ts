@@ -1,3 +1,4 @@
+import { setService } from "../../config";
 import { TOKEN_CONTROL_EVENTS } from "../../Constants";
 import CanvasHooking from "../../hooking/CanvasHooking";
 import TokenCRUDHooking from "../../hooking/TokenCRUDHooking";
@@ -11,15 +12,20 @@ class TokenServiceManager {
 
     constructor() {}
 
-    public init(): void {
+    public static init(): TokenServiceManager {
+        let instance = new TokenServiceManager();
         CanvasHooking.hookUp({
-            ready: () => this._services.clear(),
-            tokens: this.include.bind(this)
+            ready: () => instance._services.clear(),
+            tokens: instance.include.bind(instance)
         });
         TokenCRUDHooking.hookUp({
-            create: this.create.bind(this),
-            delete: this.delete.bind(this),
+            create: instance.create.bind(instance),
+            delete: instance.delete.bind(instance),
         });
+
+        setService(instance);
+
+        return instance;
     }    
 
     public getById(tokenId: string): TokenService {
@@ -71,6 +77,4 @@ class TokenServiceManager {
     }
 }
 
-const tokenServiceManager = new TokenServiceManager();
-
-export default tokenServiceManager
+export default TokenServiceManager

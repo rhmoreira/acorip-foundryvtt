@@ -1,14 +1,10 @@
 <form>
     <div class="form-group">
         <label>{{localize 'acorip.labels.choose_stance'}}</label>
-        <select name="token_instance">
-            <option value="_">{{localize 'acorip.labels.friendly'}}</option>
-            <option value="_alt_">{{localize 'acorip.labels.friendly-alt'}}</option>
-            <option value="_combat_rifle_">{{localize 'acorip.labels.combat-rifle'}}</option>
-            <option value="_combat_shotgun_">{{localize 'acorip.labels.combat-shotgun'}}</option>
-            <option value="_combat_pistol_">{{localize 'acorip.labels.combat-pistol'}}</option>
-            <option value="_combat_smg_">{{localize 'acorip.labels.combat-smg'}}</option>
-            <option value="_combat_bow_">{{localize 'acorip.labels.combat-bow'}}</option>
+        <select name="token_stance">
+            {{#each stances}}
+            <option value="{{suffix}}">{{description}}</option>
+            {{/each}}
         </select>
     </div>
 </form>

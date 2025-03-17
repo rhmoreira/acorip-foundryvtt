@@ -68,7 +68,7 @@ export interface SocketRequestDiceRollActionData extends SocketActionData {
 //### Settings ###
 export type ToggleTokenImageSettingsData = {
     stances: {
-        sufix: string,
+        suffix: string,
         description: string
     }[],
     defaultTokenImagePath: string,

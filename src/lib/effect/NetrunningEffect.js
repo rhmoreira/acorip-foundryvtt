@@ -1,4 +1,5 @@
-import { MODULE_ID, NETRUNNING } from "../Constants";
+import { getSetting } from "../config";
+import { LOCAL_SETTINGS_CONF, MODULE_ID, NETRUNNING } from "../Constants";
 
 function toggleJackEffect(token) {
     let netrunningEffect = Sequencer.EffectManager.getEffects({object: token, name: NETRUNNING });
@@ -11,7 +12,7 @@ function toggleJackEffect(token) {
                 .opacity(0.5)
                 .fadeIn(100)
                 .attachTo(token)
-                .file(`modules/${MODULE_ID}/assets/animations/netrunning.webm`)
+                .file(getSetting(LOCAL_SETTINGS_CONF.netrunningEffectFile.key))
                 .scaleToObject(1.3)
                 .fadeOut(100)
                 .name(NETRUNNING)

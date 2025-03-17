@@ -21,3 +21,14 @@ export const TEMPLATES = {
     diceRollChatMessage: "DICE_ROLL_CHAT_MESSAGE",
     
 } as const
+
+export const LOCAL_SETTINGS_CONF = {
+    toggleTokenImage: {
+        key: "toggleTokenImageSettings",
+        convert: (value: string) => JSON.parse(value)
+    },
+    netrunningEffectFile: {
+        key: "netrunningEffectFileSettings",
+        convert: (_: any) => _
+    }
+} as const

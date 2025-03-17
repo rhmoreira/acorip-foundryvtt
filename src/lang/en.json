@@ -41,7 +41,7 @@
                    "hint":"The default directory path where the images will be placed to be swapped between each other"
                 },
                 "stances":"Stances",
-                "stance-sufix":"sufix",
+                "stance-suffix":"suffix",
                 "img-file-ext":"File extension of the image",
                 "img-file-ext-note":"(Default is .png)",
                 "default":{
@@ -54,7 +54,11 @@
                    "combat-bow":"Combat (Bow)",
                    "request-player-roll":"Request player roll"
                 }
-             }
+             },
+             "netrunning-effect": {
+               "name": "Netrunning effect animation file",
+               "hint": "Relative path to the 'webm' file to be used as netrunning effect over the token"
+             } 
           },
           "value":"Value",
           "description":"Description",

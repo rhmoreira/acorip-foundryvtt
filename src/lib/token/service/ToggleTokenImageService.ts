@@ -1,16 +1,17 @@
-import { TEMPLATES } from "../../Constants";
+import { getSetting } from "../../config";
+import { LOCAL_SETTINGS_CONF, TEMPLATES } from "../../Constants";
 import { templateFactory } from "../../TemplateFactory";
+import { ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
 
 export default class ToggleTokenImageHandler {
-
-    private readonly content = templateFactory.parseTemplate(TEMPLATES.tokenToggleImageDialog);
 
     constructor(private token: Token){}
 
     public toggleTokenImage(): void{
+        let content = templateFactory.parseTemplate(TEMPLATES.tokenToggleImageDialog, getSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key))
         const dialogOptions: DialogData = {
             title: game.i18n.localize("acorip.labels.change_token_stance"),
-            content: this.content,
+            content: content,
             buttons: {confirm: {label: game.i18n.localize("acorip.labels.confirm"), callback: this.applyStance.bind(this)}},
             default: "confirm",
         };
@@ -23,7 +24,8 @@ export default class ToggleTokenImageHandler {
     }
 
     private changeTokenImage(stance: any): any {
-        return {_id: this.token.id, img: `assets/cyberpunk-red/${this.token.name}${stance}token.png`};
+        let toggleTokenSetting = getSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key) as ToggleTokenImageSettingsData;
+        return {_id: this.token.id, img: `${toggleTokenSetting.defaultTokenImagePath}${this.token.name}${stance}${toggleTokenSetting.imgfileExt}`};
     }
 
     private notifyChange(): void {
@@ -32,7 +34,7 @@ export default class ToggleTokenImageHandler {
     }
 
     private applyStance(html: any): void {
-        let stance = html.find('select[name=\'token_instance\']').val();
+        let stance = html.find('select[name=\'token_stance\']').val();
         let tokenUpdate = this.changeTokenImage(stance);    
 
         this.updateToken([tokenUpdate]);

@@ -60,7 +60,7 @@ class ToggleTokenImageSettingsMenu extends BaseUI{
                         this.render();
                         break;
                     case "addStance":
-                        this.localSettings.stances.push({sufix: "Custom sufix", description: "Custom Description"})
+                        this.localSettings.stances.push({suffix: "Custom suffix", description: "Custom Description"})
                         this.render();
                         break;
                 

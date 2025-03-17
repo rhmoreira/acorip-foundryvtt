@@ -20,7 +20,7 @@
                     <td colspan="3" align="center">{{localize 'acorip.labels.settings.token-toggle-image.stances'}}</td>
                 </tr>
                 <tr>
-                    <td align="center">{{localize 'acorip.labels.settings.token-toggle-image.stance-sufix'}}</td>
+                    <td align="center">{{localize 'acorip.labels.settings.token-toggle-image.stance-suffix'}}</td>
                     <td align="center">{{localize 'acorip.labels.description'}}</td>
                     <td align="center">
                         <button type="button" class="rhm-tti-settings" data-action="addStance"><i class="fas fa-plus"></i></button>
@@ -31,7 +31,7 @@
                     {{#each stances}}
                 <tr id="stance_{{@index}}">
                     <td>
-                        <input type="text" name="stances.{{@index}}.sufix" value="{{sufix}}" data-index="{{@index}}" data-attr="sufix">
+                        <input type="text" name="stances.{{@index}}.suffix" value="{{suffix}}" data-index="{{@index}}" data-attr="suffix">
                     </td>
                     <td>
                         <input type="text" name="stances.{{@index}}.description" value="{{description}}" data-index="{{@index}}" data-attr="description">
