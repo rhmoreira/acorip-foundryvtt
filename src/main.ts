@@ -6,7 +6,7 @@ import TokenHUDHooking from "./lib/hooking/TokenHUDHooking";
 import GameMasterUIControls from "./lib/app/gm/GameMasterUIControls";
 import GameMasterUIRequestRoll from "./lib/app/gm/GameMasterUIRequestRoll";
 import HandlebarsCustomHelpers from "./lib/HandlebarsCustomHelpers";
-import TokenToggleImageSettings from "./lib/settings/RHMSettings";
+import RHMSettings from "./lib/settings/RHMSettings";
 import { configure } from "./lib/config";
 import TokenServiceManager from "./lib/token/service/TokenServiceManager";
 
@@ -21,7 +21,7 @@ Hooks.once("init", () => {
 });
 
 Hooks.on("setup", () => {
-    TokenToggleImageSettings.registerSettings();
+    RHMSettings.registerSettings();
     GameMasterUIControls.init();
     TokenUIControls.init();
     TokenHUDHooking.hookUp();
