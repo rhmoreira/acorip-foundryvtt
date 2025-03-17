@@ -1,3 +1,4 @@
+import AcoripLog from "./AcoripLog";
 import { MODULE_ID } from "./Constants";
 
 function configure() {
@@ -12,6 +13,7 @@ function configure() {
 }
 
 function setSetting(key: any, value: any) {
+    AcoripLog.info(`Updating cached local settings ${key}=`, value);
     (CONFIG as any)[MODULE_ID].settings[key] = value;
 }
 

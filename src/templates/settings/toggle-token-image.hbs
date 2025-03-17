@@ -3,13 +3,23 @@
     <div class="form-group">
         <label for="defaultTokenImagePath">{{localize 'acorip.labels.settings.token-toggle-image.default-path.name'}}</label>
         <div class="form-fields">
+            {{#if isPlayer}}
+            <input type="hidden" name="defaultTokenImagePath" value="{{defaultTokenImagePath}}">
+            {{defaultTokenImagePath}}
+            {{else}}
             <input type="text" id="defaultTokenImagePath" name="defaultTokenImagePath" value="{{defaultTokenImagePath}}">
+            {{/if}}
         </div>
     </div>
      <div class="form-group">
         <label for="imgExt">{{localize 'acorip.labels.settings.token-toggle-image.img-file-ext'}}</label>
         <div class="form-fields">
+            {{#if isPlayer}}
+            <input type="hidden" name="imgfileExt" value="{{imgfileExt}}">
+            {{imgfileExt}}
+            {{else}}
             <input type="text" id="imgExt" name="imgfileExt" value="{{imgfileExt}}">
+            {{/if}}
         </div>
         <p class="notes">{{localize 'acorip.labels.settings.token-toggle-image.img-file-ext-note'}}</p>
     </div>
@@ -23,7 +33,11 @@
                     <td align="center">{{localize 'acorip.labels.settings.token-toggle-image.stance-suffix'}}</td>
                     <td align="center">{{localize 'acorip.labels.description'}}</td>
                     <td align="center">
+                        {{#if isPlayer}}
+                        <strong>{{localize 'acorip.labels.enabled'}}</strong>
+                        {{else}}
                         <button type="button" class="rhm-tti-settings" data-action="addStance"><i class="fas fa-plus"></i></button>
+                        {{/if}}
                     </td>
                 </tr>
             </thead>
@@ -36,9 +50,14 @@
                     <td>
                         <input type="text" name="stances.{{@index}}.description" value="{{description}}" data-index="{{@index}}" data-attr="description">
                     </td>
-                    <td>
+                    <td align="center">
+                        {{#if ../isPlayer}}
+                        <input type="checkbox" name="stances.{{@index}}.enabled" value="true" {{_if enabled 'checked' ''}}>
+                        {{else}}
+                        <input type="hidden" name="stances.{{@index}}.enabled" value="{{enabled}}">
                         <button type="button" class="rhm-tti-settings" data-action="removeStance" data-index="{{@index}}"><i class="fas fa-minus"></i></button>
-                    </td>
+                        {{/if}}
+                    </td>                    
                 </tr>
                     {{/each}}
             </tbody>

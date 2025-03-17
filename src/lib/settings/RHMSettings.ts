@@ -2,7 +2,8 @@
 import { setSetting } from "../config";
 import { LOCAL_SETTINGS_CONF, MODULE_ID } from "../Constants"
 import { ToggleTokenImageSettingsData } from "../types/acoriPTypes";
-import { ToggleTokenImageSettingsMenu } from "./app/ToggleTokenImageSettingMenu";
+import PlayerToggleTokenImageSettingMenu from "./app/PlayerToggleTokenImageSettingMenu";
+import ToggleTokenImageSettingsMenu from "./app/ToggleTokenImageSettingMenu";
 
 
 function registerSettings(): void {
@@ -15,12 +16,31 @@ function registerSettings(): void {
         restricted: true  
     });
 
+    game.settings.registerMenu(MODULE_ID, "playerTokenToggleImageMenu", {
+        name: "Player Toggle Token image",
+        label: game.i18n.localize("acorip.labels.settings.configure"),
+        hint: game.i18n.localize("acorip.labels.settings.token-toggle-image.menu.hint"),
+        icon: "fas fa-cog",
+        type: PlayerToggleTokenImageSettingMenu,
+        restricted: false
+    });
+
     (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.toggleTokenImage.key, {
         scope: "world",
         config: false,
         type: String,
         default: JSON.stringify(createToggleTokenImageDefaultSettings()),
-        onChange: (value: string) => setSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key, JSON.parse(value))
+        onChange: (value: string) => {
+            setSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key, JSON.parse(value));
+            (game.settings as any).set(MODULE_ID, LOCAL_SETTINGS_CONF.playerToggleTokenImage.key, value);
+        }
+    });
+
+    (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.playerToggleTokenImage.key, {
+        scope: "client",
+        config: false,
+        type: String,
+        onChange: (value: string) => setSetting(LOCAL_SETTINGS_CONF.playerToggleTokenImage.key, JSON.parse(value))
     });
 
     (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.netrunningEffectFile.key, {
@@ -29,6 +49,7 @@ function registerSettings(): void {
         scope: "world",
         config: true,
         type: String,
+        filePicker: true,
         default: `modules/${MODULE_ID}/assets/animations/netrunning.webm`,
         onChange: (value: string) => setSetting(LOCAL_SETTINGS_CONF.netrunningEffectFile.key, value)
     });
@@ -50,17 +71,17 @@ function updateLocalSettings(): void {
 function createToggleTokenImageDefaultSettings(): ToggleTokenImageSettingsData {
     return {
         stances: [
-            {suffix: "",                 description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.friendly")}
-            ,{suffix: "_alt_",           description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.friendly-alt")}
-            ,{suffix: "_combat_rifle_",  description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-rifle")}
-            ,{suffix: "_combat_shotgun_",description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-shotgun")}
-            ,{suffix: "_combat_pistol_", description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-pistol")}
-            ,{suffix: "_combat_smg_",    description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-smg")}
-            ,{ suffix: "_combat_bow_",   description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-bow")}
+             {enabled: true, suffix: "",                description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.friendly")}
+            ,{enabled: true, suffix: "_alt_",           description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.friendly-alt")}
+            ,{enabled: true, suffix: "_combat_rifle_",  description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-rifle")}
+            ,{enabled: true, suffix: "_combat_shotgun_",description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-shotgun")}
+            ,{enabled: true, suffix: "_combat_pistol_", description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-pistol")}
+            ,{enabled: true, suffix: "_combat_smg_",    description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-smg")}
+            ,{enabled: true, suffix: "_combat_bow_",    description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-bow")}
         ],
         defaultTokenImagePath: "assets/cyberpunk-red/",
         imgfileExt: ".png"
     }
 }
 
-export default {registerSettings}
+export default {registerSettings, updateLocalSettings}

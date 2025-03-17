@@ -1,14 +1,14 @@
 import BaseUI from "../../app/BaseUI";
-import { MODULE_ID } from "../../Constants";
+import { LOCAL_SETTINGS_CONF, MODULE_ID } from "../../Constants";
 import { ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
 import utils from "../../utils";
 
-class ToggleTokenImageSettingsMenu extends BaseUI{
+export default class ToggleTokenImageSettingsMenu extends BaseUI{
 
     private localSettings: ToggleTokenImageSettingsData;
 
-    constructor(){
-        super("toggleTokenImageSettings");
+    constructor(uiControlName?: string){
+        super(uiControlName ?? "toggleTokenImageSettings");
     }
 
     static override get defaultOptions(): FormApplicationOptions {
@@ -25,9 +25,9 @@ class ToggleTokenImageSettingsMenu extends BaseUI{
         }
     }
 
-    override async getData(_?: Partial<ApplicationOptions>): Promise<any> {
+    override async getData(_?: Partial<ApplicationOptions>): Promise<ToggleTokenImageSettingsData> {
         if (!this.localSettings)
-            this.localSettings = this.getSettings();
+            this.localSettings = this.getSettings(LOCAL_SETTINGS_CONF.toggleTokenImage.key);
 
         if (!this.localSettings.stances)
             this.localSettings.stances = [];
@@ -42,7 +42,7 @@ class ToggleTokenImageSettingsMenu extends BaseUI{
     }
 
     private attatchInputChangeListener(html: JQuery): void {
-        html.find(".stance-table input").on("change", (event) => {
+        html.find(".stance-table input").on("blur", (event) => {
             let { index, attr } =  event.target?.dataset;
             if (!!index && !!attr) {
                 (this.localSettings as any).stances[parseInt(index)][attr] = (event.target as any).value;
@@ -60,7 +60,7 @@ class ToggleTokenImageSettingsMenu extends BaseUI{
                         this.render();
                         break;
                     case "addStance":
-                        this.localSettings.stances.push({suffix: "Custom suffix", description: "Custom Description"})
+                        this.localSettings.stances.push({suffix: "Custom suffix", description: "Custom Description", enabled: true})
                         this.render();
                         break;
                 
@@ -70,23 +70,21 @@ class ToggleTokenImageSettingsMenu extends BaseUI{
             });
     }
 
-    override async _updateObject(_: any, formData?: ToggleTokenImageSettingsData) {
-       this.setSettings(utils.expandObj(formData) as ToggleTokenImageSettingsData);
+    override async _updateObject(_: any, formData?: any) {
+       this.setSettings(LOCAL_SETTINGS_CONF.toggleTokenImage.key, utils.expandObj(formData) as ToggleTokenImageSettingsData);
     }
 
     private removeStance(index: string): void {
         this.localSettings.stances?.splice(parseInt(index), 1);
     }
 
-    private getSettings(): ToggleTokenImageSettingsData {
-        let settings = (game.settings as any).get(MODULE_ID, "toggleTokenImageSettings");
+    protected getSettings<Settings extends ToggleTokenImageSettingsData>(key: string): Settings {
+        let settings = (game.settings as any).get(MODULE_ID, key);
         return JSON.parse(settings);
     }
 
-    private setSettings(settings: ToggleTokenImageSettingsData): void {
-        (game.settings as any).set(MODULE_ID, "toggleTokenImageSettings", JSON.stringify(settings));
+    protected setSettings<Settings extends ToggleTokenImageSettingsData>(key: string, settings: Settings): void {
+        (game.settings as any).set(MODULE_ID, key, !!settings ? JSON.stringify(settings) : settings);
     }
 
 }
-
-export {ToggleTokenImageSettingsMenu}

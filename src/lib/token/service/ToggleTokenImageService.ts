@@ -5,10 +5,17 @@ import { ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
 
 export default class ToggleTokenImageHandler {
 
-    constructor(private token: Token){}
+    private toggleOptionSettings: ToggleTokenImageSettingsData;
+
+    constructor(private token: Token){
+        this.toggleOptionSettings = 
+            (getSetting(LOCAL_SETTINGS_CONF.playerToggleTokenImage.key) 
+            ?? getSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key)) as ToggleTokenImageSettingsData;
+    }
 
     public toggleTokenImage(): void{
-        let content = templateFactory.parseTemplate(TEMPLATES.tokenToggleImageDialog, getSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key))
+        this.toggleOptionSettings.stances = this.toggleOptionSettings.stances.filter(s => s.enabled);
+        let content = templateFactory.parseTemplate(TEMPLATES.tokenToggleImageDialog, this.toggleOptionSettings)
         const dialogOptions: DialogData = {
             title: game.i18n.localize("acorip.labels.change_token_stance"),
             content: content,
@@ -24,8 +31,7 @@ export default class ToggleTokenImageHandler {
     }
 
     private changeTokenImage(stance: any): any {
-        let toggleTokenSetting = getSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key) as ToggleTokenImageSettingsData;
-        return {_id: this.token.id, img: `${toggleTokenSetting.defaultTokenImagePath}${this.token.name}${stance}${toggleTokenSetting.imgfileExt}`};
+        return {_id: this.token.id, img: `${this.toggleOptionSettings.defaultTokenImagePath}${this.token.name}${stance}${this.toggleOptionSettings.imgfileExt}`};
     }
 
     private notifyChange(): void {

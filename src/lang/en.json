@@ -60,6 +60,7 @@
                "hint": "Relative path to the 'webm' file to be used as netrunning effect over the token"
              } 
           },
+          "enabled": "Enabled",
           "value":"Value",
           "description":"Description",
           "fade":"Fade",
