@@ -16,8 +16,9 @@ export default class PlayerToggleTokenImageSettingMenu extends ToggleTokenImageS
     override async activateListeners(_: JQuery) {}
 
     override getData(options?: Partial<FormApplicationOptions>): Promise<any> {
+
         return new Promise<ToggleTokenImageSettingsData>((resolve, reject) => {
-            let playerSettings = super.getSettings(LOCAL_SETTINGS_CONF.playerToggleTokenImage.key);
+            let playerSettings = super.getSettings(LOCAL_SETTINGS_CONF.playerToggleTokenImage);
             !!playerSettings ? resolve(playerSettings) : reject(playerSettings);
         }).catch(_ => super.getData(options))
         .then(settings => {
@@ -29,7 +30,7 @@ export default class PlayerToggleTokenImageSettingMenu extends ToggleTokenImageS
     }
 
     override async _updateObject(_: any, formData?: any) {
-       super.setSettings(LOCAL_SETTINGS_CONF.playerToggleTokenImage.key, utils.expandObj(formData) as ToggleTokenImageSettingsData);
+       super.setSettings(LOCAL_SETTINGS_CONF.playerToggleTokenImage, utils.expandObj(formData) as ToggleTokenImageSettingsData);
     }
 
 }

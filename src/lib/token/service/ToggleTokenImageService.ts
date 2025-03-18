@@ -9,8 +9,8 @@ export default class ToggleTokenImageHandler {
 
     constructor(private token: Token){
         this.toggleOptionSettings = 
-            (getSetting(LOCAL_SETTINGS_CONF.playerToggleTokenImage.key) 
-            ?? getSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key)) as ToggleTokenImageSettingsData;
+            (getSetting(LOCAL_SETTINGS_CONF.playerToggleTokenImage) 
+            ?? getSetting(LOCAL_SETTINGS_CONF.toggleTokenImage)) as ToggleTokenImageSettingsData;
     }
 
     public toggleTokenImage(): void{

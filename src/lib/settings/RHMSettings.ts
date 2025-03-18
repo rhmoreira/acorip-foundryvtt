@@ -25,25 +25,25 @@ function registerSettings(): void {
         restricted: false
     });
 
-    (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.toggleTokenImage.key, {
+    (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.toggleTokenImage, {
         scope: "world",
         config: false,
-        type: String,
-        default: JSON.stringify(createToggleTokenImageDefaultSettings()),
+        type: Object,
+        default: createToggleTokenImageDefaultSettings(),
         onChange: (value: string) => {
-            setSetting(LOCAL_SETTINGS_CONF.toggleTokenImage.key, JSON.parse(value));
-            (game.settings as any).set(MODULE_ID, LOCAL_SETTINGS_CONF.playerToggleTokenImage.key, value);
+            setSetting(LOCAL_SETTINGS_CONF.toggleTokenImage, value);
+            (game.settings as any).set(MODULE_ID, LOCAL_SETTINGS_CONF.playerToggleTokenImage, value);
         }
     });
 
-    (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.playerToggleTokenImage.key, {
+    (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.playerToggleTokenImage, {
         scope: "client",
         config: false,
-        type: String,
-        onChange: (value: string) => setSetting(LOCAL_SETTINGS_CONF.playerToggleTokenImage.key, JSON.parse(value))
+        type: Object,
+        onChange: (value: string) => setSetting(LOCAL_SETTINGS_CONF.playerToggleTokenImage, value)
     });
 
-    (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.netrunningEffectFile.key, {
+    (game.settings as any).register(MODULE_ID, LOCAL_SETTINGS_CONF.netrunningEffectFile, {
         name: game.i18n.localize("acorip.labels.settings.netrunning-effect.name"),
         hint: game.i18n.localize("acorip.labels.settings.netrunning-effect.hint"),
         scope: "world",
@@ -51,7 +51,7 @@ function registerSettings(): void {
         type: String,
         filePicker: true,
         default: `modules/${MODULE_ID}/assets/animations/netrunning.webm`,
-        onChange: (value: string) => setSetting(LOCAL_SETTINGS_CONF.netrunningEffectFile.key, value)
+        onChange: (value: string) => setSetting(LOCAL_SETTINGS_CONF.netrunningEffectFile, value)
     });
 
     updateLocalSettings();
@@ -61,9 +61,9 @@ function updateLocalSettings(): void {
     let key: keyof typeof LOCAL_SETTINGS_CONF;
     for (key in LOCAL_SETTINGS_CONF) {
         let settingConf = LOCAL_SETTINGS_CONF[key];
-        let storedSetting = (game.settings as any).get(MODULE_ID, settingConf.key)
+        let storedSetting = (game.settings as any).get(MODULE_ID, settingConf)
 
-        setSetting(settingConf.key, settingConf.convert(storedSetting));
+        setSetting(settingConf, storedSetting);
     }
 
 }

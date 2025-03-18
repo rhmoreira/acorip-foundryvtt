@@ -23,23 +23,7 @@ export const TEMPLATES = {
 } as const
 
 export const LOCAL_SETTINGS_CONF = {
-    toggleTokenImage: {
-        key: "toggleTokenImageSettings",
-        convert: jsonParse
-    },
-    playerToggleTokenImage: {
-        key: "playerToggleTokenImageSettings",
-        convert: jsonParse
-    },
-    netrunningEffectFile: {
-        key: "netrunningEffectFileSettings",
-        convert: returnSelf
-    }
+    toggleTokenImage: "toggleTokenImageSettings",
+    playerToggleTokenImage: "playerToggleTokenImageSettings",
+    netrunningEffectFile: "netrunningEffectFileSettings"
 } as const
-
-function jsonParse(value: string): any {
-    return value ? JSON.parse(value) : null;
-}
-function returnSelf(value: any): any {
-    return value;
-}
