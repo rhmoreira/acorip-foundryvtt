@@ -22,7 +22,7 @@ export const TEMPLATES = {
     
 } as const
 
-export const LOCAL_SETTINGS_CONF = {
+export const SETTINGS_CONF = {
     toggleTokenImage: "toggleTokenImageSettings",
     playerToggleTokenImage: "playerToggleTokenImageSettings",
     netrunningEffectFile: "netrunningEffectFileSettings"

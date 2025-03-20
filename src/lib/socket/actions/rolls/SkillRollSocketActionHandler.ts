@@ -1,6 +1,6 @@
-import { SocketRollSkillActionData } from "../types/acoriPTypes";
+import { SocketRollSkillActionData } from "../../../types/acoriPTypes";
+import SocketActionHandler from "../SocketActionHandler";
 import BaseRollActionHandler from "./BaseRollActionHandler";
-import SocketActionHandler from "./SocketActionHandler";
 
 export default class SkillRollSocketActionHandler extends BaseRollActionHandler implements SocketActionHandler<"rollSkill", SocketRollSkillActionData>{
 

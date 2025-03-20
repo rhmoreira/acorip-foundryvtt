@@ -35,6 +35,7 @@ export default class GameMasterUIControls extends BaseUI {
                 let action = html.dataset.action;
                 switch (action) {
                     case "requestRoll":
+                        console.log(FilePicker.defaultOptions);
                         new GameMasterUIRequestRoll(true);
                         break;
                     default:

@@ -1,11 +1,12 @@
 import AcoripLog from "../AcoripLog";
 import { MODULE_ID } from "../Constants";
 import { SocketAction } from "../types/acoriPTypes";
-import AttributeRollSocketActionHandler from "./AttributeRollSocketActionHandler";
-import DiceRollSocketActionHandler from "./DiceRollSocketActionHandler";
-import RequestRollSocketActionHandler from "./RequestRollSocketActionHandler";
-import SkillRollSocketActionHandler from "./SkillRollSocketActionHandler";
-import SocketActionHandler from "./SocketActionHandler";
+import AttributeRollSocketActionHandler from "./actions/rolls/AttributeRollSocketActionHandler";
+import DiceRollSocketActionHandler from "./actions/rolls/DiceRollSocketActionHandler";
+import RequestRollSocketActionHandler from "./actions/rolls/RequestRollSocketActionHandler";
+import SkillRollSocketActionHandler from "./actions/rolls/SkillRollSocketActionHandler";
+import SocketActionHandler from "./actions/SocketActionHandler";
+import UpdateClientSettingsActionHandler from "./actions/UpdateClientSettingsActionHandler";
 
 class AcoripSocketHandler {
     
@@ -44,9 +45,15 @@ class AcoripSocketHandler {
         let diceRollHandler = new DiceRollSocketActionHandler();
         let rollRequestHandler = new RequestRollSocketActionHandler([skillRollHandler, attrRollHandler , diceRollHandler]);
 
-        (game.modules?.get(MODULE_ID) as any).socketHandler = new AcoripSocketHandler(
-            skillRollHandler, attrRollHandler, diceRollHandler, rollRequestHandler
-        );
+        let actionHandlers = [
+            skillRollHandler,
+            attrRollHandler,
+            diceRollHandler,
+            rollRequestHandler,
+            new UpdateClientSettingsActionHandler()
+        ];
+
+        (game.modules?.get(MODULE_ID) as any).socketHandler = new AcoripSocketHandler(...actionHandlers);
     }
 }
 

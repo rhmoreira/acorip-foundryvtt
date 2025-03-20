@@ -1,5 +1,5 @@
 import { getSetting } from "../../config";
-import { LOCAL_SETTINGS_CONF, TEMPLATES } from "../../Constants";
+import { SETTINGS_CONF, TEMPLATES } from "../../Constants";
 import { templateFactory } from "../../TemplateFactory";
 import { ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
 
@@ -9,8 +9,8 @@ export default class ToggleTokenImageHandler {
 
     constructor(private token: Token){
         this.toggleOptionSettings = 
-            (getSetting(LOCAL_SETTINGS_CONF.playerToggleTokenImage) 
-            ?? getSetting(LOCAL_SETTINGS_CONF.toggleTokenImage)) as ToggleTokenImageSettingsData;
+            (getSetting(SETTINGS_CONF.playerToggleTokenImage) 
+            ?? getSetting(SETTINGS_CONF.toggleTokenImage)) as ToggleTokenImageSettingsData;
     }
 
     public toggleTokenImage(): void{

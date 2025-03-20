@@ -1,9 +1,12 @@
 import BaseUI from "../../app/BaseUI";
-import { LOCAL_SETTINGS_CONF, MODULE_ID } from "../../Constants";
+import { MODULE_ID } from "../../Constants";
 import { ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
 import utils from "../../utils";
+import { TokenSettingHelper } from "../settingsHelper";
 
 export default class ToggleTokenImageSettingsMenu extends BaseUI{
+
+    protected readonly tokenSettingHelper: TokenSettingHelper = new TokenSettingHelper();
 
     private localSettings: ToggleTokenImageSettingsData;
 
@@ -27,7 +30,7 @@ export default class ToggleTokenImageSettingsMenu extends BaseUI{
 
     override async getData(_?: Partial<ApplicationOptions>): Promise<ToggleTokenImageSettingsData> {
         if (!this.localSettings)
-            this.localSettings = this.getSettings(LOCAL_SETTINGS_CONF.toggleTokenImage);
+            this.localSettings = this.tokenSettingHelper.toggleTokenImageSetting as ToggleTokenImageSettingsData;
 
         if (!this.localSettings.stances)
             this.localSettings.stances = [];
@@ -71,19 +74,11 @@ export default class ToggleTokenImageSettingsMenu extends BaseUI{
     }
 
     override async _updateObject(_: any, formData?: any) {
-       this.setSettings(LOCAL_SETTINGS_CONF.toggleTokenImage, utils.expandObj(formData) as ToggleTokenImageSettingsData);
+        this.tokenSettingHelper.toggleTokenImageSetting = utils.expandObj(formData) as ToggleTokenImageSettingsData;
     }
 
     private removeStance(index: string): void {
         this.localSettings.stances?.splice(parseInt(index), 1);
-    }
-
-    protected getSettings<Settings extends ToggleTokenImageSettingsData>(key: string): Settings {
-        return (game.settings as any).get(MODULE_ID, key);
-    }
-
-    protected setSettings<Settings extends ToggleTokenImageSettingsData>(key: string, settings: Settings): void {
-        (game.settings as any).set(MODULE_ID, key, settings);
     }
 
 }

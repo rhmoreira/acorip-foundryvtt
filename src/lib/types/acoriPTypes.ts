@@ -33,6 +33,7 @@ export type SocketAction = {
     "rollSkill": SocketRollSkillActionData,
     "rollAttribute": SocketRequestAttributeRollActionData,
     "rollDice": SocketRequestDiceRollActionData,
+    "updateSettings": UpdateSettingsActionData
 }
 
 export type SocketActionData = {action: keyof SocketAction, userIds?: string[]};
@@ -62,6 +63,14 @@ export interface SocketRequestDiceRollActionData extends SocketActionData {
     action: "rollDice",
     data: {
         formula: string
+    }
+}
+
+export interface UpdateSettingsActionData extends SocketActionData {
+    action: "updateSettings",
+    data: {
+        key: string,
+        settings: any
     }
 }
 
