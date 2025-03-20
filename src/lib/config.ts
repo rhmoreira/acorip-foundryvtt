@@ -12,12 +12,12 @@ function configure() {
     (CONFIG as any)[MODULE_ID].services = {};
 }
 
-function setSetting(key: any, value: any) {
+function setConfigSetting(key: any, value: any) {
     AcoripLog.info(`Updating cached local settings ${key}=`, value);
     (CONFIG as any)[MODULE_ID].settings[key] = value;
 }
 
-function getSetting(key: any) {
+function getConfigSetting(key: any) {
     return (CONFIG as any)[MODULE_ID].settings[key];
 }
 
@@ -29,4 +29,4 @@ function getService<S>(service: new () => S): S {
     return (CONFIG as any)[MODULE_ID].services[service.name];
 }
 
-export {configure, setSetting, getSetting, setService, getService}
+export {configure, setConfigSetting, getConfigSetting, setService, getService}

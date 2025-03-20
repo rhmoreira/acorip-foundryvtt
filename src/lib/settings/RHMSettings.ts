@@ -1,9 +1,10 @@
 
-import { setSetting } from "../config";
+import { setConfigSetting } from "../config";
 import { SETTINGS_CONF, MODULE_ID } from "../Constants"
 import { ToggleTokenImageSettingsData } from "../types/acoriPTypes";
 import PlayerToggleTokenImageSettingMenu from "./app/PlayerToggleTokenImageSettingMenu";
 import ToggleTokenImageSettingsMenu from "./app/ToggleTokenImageSettingMenu";
+import { getSetting, TokenSettingHelper } from "./PersistedSettingsHelper";
 
 
 function registerSettings(): void {
@@ -31,8 +32,8 @@ function registerSettings(): void {
         type: Object,
         default: createToggleTokenImageDefaultSettings(),
         onChange: (value: string) => {
-            setSetting(SETTINGS_CONF.toggleTokenImage, value);
-            (game.settings as any).set(MODULE_ID, SETTINGS_CONF.playerToggleTokenImage, value);
+            setConfigSetting(SETTINGS_CONF.toggleTokenImage, value);
+            new TokenSettingHelper().playerToggleTokenImageSetting = value;
         }
     });
 
@@ -40,7 +41,7 @@ function registerSettings(): void {
         scope: "client",
         config: false,
         type: Object,
-        onChange: (value: string) => setSetting(SETTINGS_CONF.playerToggleTokenImage, value)
+        onChange: (value: string) => setConfigSetting(SETTINGS_CONF.playerToggleTokenImage, value)
     });
 
     (game.settings as any).register(MODULE_ID, SETTINGS_CONF.netrunningEffectFile, {
@@ -51,19 +52,19 @@ function registerSettings(): void {
         type: String,
         filePicker: true,
         default: `modules/${MODULE_ID}/assets/animations/netrunning.webm`,
-        onChange: (value: string) => setSetting(SETTINGS_CONF.netrunningEffectFile, value)
+        onChange: (value: string) => setConfigSetting(SETTINGS_CONF.netrunningEffectFile, value)
     });
 
-    updateLocalSettings();
+    updateConfigSettings();
 }
 
-function updateLocalSettings(): void {
+function updateConfigSettings(): void {
     let key: keyof typeof SETTINGS_CONF;
     for (key in SETTINGS_CONF) {
         let settingConf = SETTINGS_CONF[key];
-        let storedSetting = (game.settings as any).get(MODULE_ID, settingConf)
+        let storedSetting = getSetting(settingConf);
 
-        setSetting(settingConf, storedSetting);
+        setConfigSetting(settingConf, storedSetting);
     }
 
 }

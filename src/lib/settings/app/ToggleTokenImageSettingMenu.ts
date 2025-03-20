@@ -2,7 +2,7 @@ import BaseUI from "../../app/BaseUI";
 import { MODULE_ID } from "../../Constants";
 import { ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
 import utils from "../../utils";
-import { TokenSettingHelper } from "../settingsHelper";
+import { TokenSettingHelper } from "../PersistedSettingsHelper";
 
 export default class ToggleTokenImageSettingsMenu extends BaseUI{
 

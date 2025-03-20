@@ -1,4 +1,4 @@
-import { setSetting } from "../../settings/settingsHelper";
+import { setSetting } from "../../settings/PersistedSettingsHelper";
 import { UpdateSettingsActionData } from "../../types/acoriPTypes";
 import SocketActionHandler from "./SocketActionHandler";
 
