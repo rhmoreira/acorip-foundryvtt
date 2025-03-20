@@ -6,6 +6,9 @@
             {{#if isPlayer}}
             <input type="hidden" name="defaultTokenImagePath" value="{{defaultTokenImagePath}}">
             {{defaultTokenImagePath}}
+            <button type="button" class="rhm upload-token-image" title="{{localize 'acorip.labels.upload-files'}}">
+                <i class="fas fa-file-import fa-fw"></i>
+            </button>
             {{else}}
             <input type="text" id="defaultTokenImagePath" name="defaultTokenImagePath" value="{{defaultTokenImagePath}}">
             {{/if}}

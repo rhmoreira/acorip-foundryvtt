@@ -81,7 +81,8 @@
           "request-stat-roll":"Request stat roll",
           "request-dice-roll":"Request dice roll",
           "add": "Add",
-          "remove": "Remove"
+          "remove": "Remove",
+          "upload-files": "Upload Files"
        }
     }
  }
