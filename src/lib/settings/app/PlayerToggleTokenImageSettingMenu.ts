@@ -19,7 +19,8 @@ export default class PlayerToggleTokenImageSettingMenu extends ToggleTokenImageS
         this.playerTokenSettings = this.tokenSettingHelper.playerToggleTokenImageSetting as ToggleTokenImageSettingsData;
         return Promise.resolve({
             ...this.playerTokenSettings,
-            isPlayer: true
+            isPlayer: true,
+            userName: game.user.name
         });
     }
 
@@ -30,9 +31,9 @@ export default class PlayerToggleTokenImageSettingMenu extends ToggleTokenImageS
 
     private triggerRestrictedFilePicker(): void{
         new RestrictedFilePicker(
-            this.playerTokenSettings.defaultTokenImagePath,
+            `${this.playerTokenSettings.defaultTokenImagePath}/${game.user.name}`,
             "data",
-            "image"
+            this.playerTokenSettings.imgfileExt
         ).render(true);
     }
 

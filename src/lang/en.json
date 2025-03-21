@@ -15,7 +15,10 @@
              "not-in-combat":"Black-ICE '{tokenName}' is not in combat"
           },
           "token":{
-             "image-changed":"{tokenName} has changed token's appearance"
+             "image-changed":"{tokenName} has changed token's appearance",
+             "stance-image-not-found": "Stance not found [{src}]",
+             "invalid-image-type": "Image type not allowed. [{imageExt}] image file extension only",
+             "invalid-image-path": "Unauthorized image path. Uploads are allowed only into [{path}] folder"
           },
           "roll-request":{
              "title":"{rollType} roll request",

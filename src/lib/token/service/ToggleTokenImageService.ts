@@ -1,3 +1,4 @@
+import AcoripLog from "../../AcoripLog";
 import { getConfigSetting } from "../../config";
 import { SETTINGS_CONF, TEMPLATES } from "../../Constants";
 import { templateFactory } from "../../TemplateFactory";
@@ -30,8 +31,28 @@ export default class ToggleTokenImageHandler {
         canvas.scene.updateEmbeddedDocuments('Token', updates);
     }
 
-    private changeTokenImage(stance: any): any {
-        return {_id: this.token.id, img: `${this.toggleOptionSettings.defaultTokenImagePath}${this.token.name}${stance}${this.toggleOptionSettings.imgfileExt}`};
+    private changeTokenImage(stance: any): Promise<any> {
+        return this.inferBestFitForImage(stance)
+                .then(src => {
+                    return {_id: this.token.id, img: src}
+                }).catch(error => {
+                    ui.notifications.error(error.message);
+                    throw error;
+                });
+    }
+
+    private inferBestFitForImage(stance: string, userNameExtraPath?: string): Promise<string> {
+        let texturePath = `${this.toggleOptionSettings.defaultTokenImagePath}/${!!userNameExtraPath ? userNameExtraPath + "/" : ""}${this.token.name}${stance}${this.toggleOptionSettings.imgfileExt}`;
+        return TextureLoader.loader.loadTexture(texturePath)
+                .then(texture => {
+                    if (!!texture)
+                        return texturePath;
+                    else if (!userNameExtraPath){
+                        AcoripLog.warn(`Stance not found [${texturePath}]. Trying to look inside subdir with User name [${game.user.name}]`);
+                        return this.inferBestFitForImage(stance, game.user.name);
+                    }else
+                        throw Error(game.i18n.format('acorip.messages.token.stance-image-not-found', {src: texturePath}));
+                });
     }
 
     private notifyChange(): void {
@@ -41,10 +62,9 @@ export default class ToggleTokenImageHandler {
 
     private applyStance(html: any): void {
         let stance = html.find('select[name=\'token_stance\']').val();
-        let tokenUpdate = this.changeTokenImage(stance);    
-
-        this.updateToken([tokenUpdate]);
-        this.notifyChange();
+        this.changeTokenImage(stance)
+            .then(tokenUpdate => this.updateToken([tokenUpdate]))
+            .then(this.notifyChange);
     }
 
 }
