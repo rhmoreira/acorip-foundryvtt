@@ -48,7 +48,7 @@ export default class ToggleTokenImageHandler {
                     if (!!texture)
                         return texturePath;
                     else if (!userNameExtraPath){
-                        AcoripLog.warn(`Stance not found [${texturePath}]. Trying to look inside subdir with User name [${game.user.name}]`);
+                        AcoripLog.warn(`Stance not found [${texturePath}]. Trying to look inside subdir [${game.user.name}]`);
                         return this.inferBestFitForImage(stance, game.user.name);
                     }else
                         throw Error(game.i18n.format('acorip.messages.token.stance-image-not-found', {src: texturePath}));
@@ -64,7 +64,7 @@ export default class ToggleTokenImageHandler {
         let stance = html.find('select[name=\'token_stance\']').val();
         this.changeTokenImage(stance)
             .then(tokenUpdate => this.updateToken([tokenUpdate]))
-            .then(this.notifyChange);
+            .then(this.notifyChange.bind(this));
     }
 
 }
