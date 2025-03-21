@@ -1,8 +1,10 @@
 import AcoripLog from "../../AcoripLog";
-import { getConfigSetting } from "../../config";
+import { getConfigSetting, getService } from "../../config";
 import { SETTINGS_CONF, TEMPLATES } from "../../Constants";
+import FadeService from "../../effect/FadeEffect";
 import { templateFactory } from "../../TemplateFactory";
 import { ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
+import TokenServiceManager from "./TokenServiceManager";
 
 export default class ToggleTokenImageHandler {
 
@@ -28,7 +30,16 @@ export default class ToggleTokenImageHandler {
     
 
     private updateToken(updates: any[]): void {
-        canvas.scene.updateEmbeddedDocuments('Token', updates);
+        let tokenService = getService(TokenServiceManager).getById(this.token.id);
+        let fadeService = new FadeService(tokenService, 50);
+
+        fadeService.fade("out")
+            .then(() => 
+                canvas.scene.updateEmbeddedDocuments('Token', updates)
+                .then(() => fadeService.fade("in"))
+            );
+
+        
     }
 
     private changeTokenImage(stance: any): Promise<any> {
