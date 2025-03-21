@@ -11,7 +11,9 @@ export default class PlayerToggleTokenImageSettingMenu extends ToggleTokenImageS
         super("playerToggleTokenImageSettings");
     }
 
-    override async activateListeners(_: JQuery) {} //No event handlers necessary at the superclass level
+    override async activateListeners(html: JQuery) {
+        this.attachUploadButtonEvent(html);
+    }
 
     override getData(_?: Partial<FormApplicationOptions>): Promise<ToggleTokenImageSettingsData> {
         this.playerTokenSettings = this.tokenSettingHelper.playerToggleTokenImageSetting as ToggleTokenImageSettingsData;
@@ -19,10 +21,6 @@ export default class PlayerToggleTokenImageSettingMenu extends ToggleTokenImageS
             ...this.playerTokenSettings,
             isPlayer: true
         });
-    }
-
-    protected override _activateCoreListeners(html: JQuery): void {
-        this.attachUploadButtonEvent(html);
     }
 
     private attachUploadButtonEvent(html: JQuery): void {
