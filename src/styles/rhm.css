@@ -31,6 +31,25 @@
     height: 100%;
 }
 
+.rhm.tooltip{
+    position: fixed;
+    display: block;
+    border-radius: 5px;
+    background: rgb(234, 234, 234);
+    border: 7px solid rgb(185 2 2);
+    z-index: 100;
+}
+
+.rhm.skill-tooltip {
+    height: auto;
+    margin: 10px;
+    border: 3px solid rgb(185 2 2);
+    border-radius: 4px;
+    max-width: 300px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
 
 .rhm.users, .rhm.sorted-skills, .rhm.stats, .rhm.dice-formula {
     height: auto;
@@ -105,4 +124,4 @@
 .rhm-btn-submit:hover {
     background: rgb(255 195 182)!important;
     color: rgb(185 2 2)!important;
-  }
+}

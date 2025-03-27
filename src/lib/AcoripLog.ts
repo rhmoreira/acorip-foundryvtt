@@ -4,10 +4,6 @@ function info(...args: any[]): void {
     log(console.log, args);
 }
 
-function object(arg: any): void {
-    console.log(arg);
-}
-
 function error(...args: any[]): void {
     log(console.error, args);
 }
@@ -23,4 +19,20 @@ function log(logFn: (...args: any[]) => void, args: any[]): void {
         logFn(`${MODULE_ID} | `, ...args);
 }
 
-export default {info, warn, error, object}
+class AcoripLog {
+    constructor(private caller: string) {}
+
+    public info(...args: any[]): void {
+        info(`${this.caller} | `, args)
+    }
+        
+    public error(...args: any[]): void {
+        error(`${this.caller} | `, args)
+    }
+    
+    public warn(...args: any[]): void {
+        warn(`${this.caller} | `, args)
+    }
+}
+
+export {info, warn, error, AcoripLog}

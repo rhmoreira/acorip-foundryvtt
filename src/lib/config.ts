@@ -1,5 +1,7 @@
-import AcoripLog from "./AcoripLog";
+import { AcoripLog } from "./AcoripLog";
 import { MODULE_ID } from "./Constants";
+
+const logger = new AcoripLog("CacheConfig");
 
 function configure() {
     (CONFIG as any)[MODULE_ID] = {
@@ -13,7 +15,7 @@ function configure() {
 }
 
 function setConfigSetting(key: any, value: any) {
-    AcoripLog.info(`Updating cached local settings ${key}=`, value);
+    logger.info(`Updating cached local settings ${key}=`, value);
     (CONFIG as any)[MODULE_ID].settings[key] = value;
 }
 
@@ -22,7 +24,8 @@ function getConfigSetting(key: any) {
 }
 
 function setService(service: any) {
-    (CONFIG as any)[MODULE_ID].services[service.constructor.name] = service;
+    logger.info(`Setting service [${service.constructor?.name}] as config`);
+    (CONFIG as any)[MODULE_ID].services[service.constructor?.name] = service;
 }
 
 function getService<S>(service: new () => S): S {

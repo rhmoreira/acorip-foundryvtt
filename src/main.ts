@@ -9,6 +9,8 @@ import HandlebarsCustomHelpers from "./lib/HandlebarsCustomHelpers";
 import RHMSettings from "./lib/settings/RHMSettings";
 import { configure } from "./lib/config";
 import TokenServiceManager from "./lib/token/service/TokenServiceManager";
+import ActorSheetSkillTooltip from "./lib/app/ActorSheetSkillTooltip";
+import { info as logInfo } from "./lib/AcoripLog";
 
 Hooks.once("init", () => {
     configure();
@@ -28,6 +30,7 @@ Hooks.on("setup", () => {
 })
 
 Hooks.on("ready", () => {
+    ActorSheetSkillTooltip.init();
     GameMasterUIRequestRoll.init();
-    console.log("Module acoriP loaded!");
+    logInfo("Module acoriP loaded!");
 })

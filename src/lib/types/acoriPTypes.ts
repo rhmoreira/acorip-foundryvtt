@@ -20,6 +20,11 @@ export type TokenCRUDHookCallbacks = {
     select?: (tokens: TokenDocument[]) => void
 };
 
+export type ActorSheetHooking = {
+    render?: (sheet: ActorSheet) => void,
+    close?:  (sheet: ActorSheet) => void,
+}
+
 //###### UI Controls ######
 export type UIControlHook = {
     hook: string,

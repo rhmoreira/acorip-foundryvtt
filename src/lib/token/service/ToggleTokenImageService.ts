@@ -1,4 +1,4 @@
-import AcoripLog from "../../AcoripLog";
+import {AcoripLog} from "../../AcoripLog";
 import { getConfigSetting, getService } from "../../config";
 import { SETTINGS_CONF, TEMPLATES } from "../../Constants";
 import FadeService from "../../effect/FadeEffect";
@@ -8,6 +8,7 @@ import TokenServiceManager from "./TokenServiceManager";
 
 export default class ToggleTokenImageHandler {
 
+    private logger = new AcoripLog("ToggleTokenImageHandler");
     private toggleOptionSettings: ToggleTokenImageSettingsData;
 
     constructor(private token: Token){
@@ -59,7 +60,7 @@ export default class ToggleTokenImageHandler {
                     if (!!texture)
                         return texturePath;
                     else if (!userNameExtraPath){
-                        AcoripLog.warn(`Stance not found [${texturePath}]. Trying to look inside subdir [${game.user.name}]`);
+                        this.logger.warn(`Stance not found [${texturePath}]. Trying to look inside subdir [${game.user.name}]`);
                         return this.inferBestFitForImage(stance, game.user.name);
                     }else
                         throw Error(game.i18n.format('acorip.messages.token.stance-image-not-found', {src: texturePath}));

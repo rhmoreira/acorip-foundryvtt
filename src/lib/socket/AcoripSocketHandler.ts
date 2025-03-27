@@ -1,4 +1,4 @@
-import AcoripLog from "../AcoripLog";
+import { AcoripLog } from "../AcoripLog";
 import { MODULE_ID } from "../Constants";
 import { SocketAction } from "../types/acoriPTypes";
 import AttributeRollSocketActionHandler from "./actions/rolls/AttributeRollSocketActionHandler";
@@ -10,6 +10,7 @@ import UpdateClientSettingsActionHandler from "./actions/UpdateClientSettingsAct
 
 class AcoripSocketHandler {
     
+    private logger = new AcoripLog("AcoripSocketHandler");
     private socketId: string = `module.${MODULE_ID}`;
 
     private defaultSocketActionHandlers = new Map<keyof SocketAction, SocketActionHandler<keyof SocketAction, SocketAction[keyof SocketAction]>>();
@@ -31,7 +32,7 @@ class AcoripSocketHandler {
     }
 
     public emit<Action extends keyof SocketAction>(data: SocketAction[Action]): void {
-        AcoripLog.info("Emitting socket event", data);
+        this.logger.info("Emitting socket event", data);
         game.socket?.emit(this.socketId, data);
     }
 
