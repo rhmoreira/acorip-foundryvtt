@@ -54,8 +54,7 @@
                    "combat-smg":"Combat (SMG)",
                    "combat-shotgun":"Combat (Shotgun)",
                    "combat-rifle":"Combat (Rifle)",
-                   "combat-bow":"Combat (Bow)",
-                   "request-player-roll":"Request player roll"
+                   "combat-bow":"Combat (Bow)"
                 }
              },
              "netrunning-effect": {
@@ -63,6 +62,7 @@
                "hint": "Relative path to the 'webm' file to be used as netrunning effect over the token"
              } 
           },
+          "request-player-roll":"Request player roll",
           "enabled": "Enabled",
           "value":"Value",
           "description":"Description",
