@@ -23,15 +23,15 @@ class AcoripLog {
     constructor(private caller: string) {}
 
     public info(...args: any[]): void {
-        info(`${this.caller} | `, args)
+        info(`${this.caller} | `, ...args)
     }
         
     public error(...args: any[]): void {
-        error(`${this.caller} | `, args)
+        error(`${this.caller} | `, ...args)
     }
     
     public warn(...args: any[]): void {
-        warn(`${this.caller} | `, args)
+        warn(`${this.caller} | `, ...args)
     }
 }
 

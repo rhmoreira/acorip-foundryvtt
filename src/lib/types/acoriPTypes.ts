@@ -21,8 +21,8 @@ export type TokenCRUDHookCallbacks = {
 };
 
 export type ActorSheetHooking = {
-    render?: (sheet: ActorSheet) => void,
-    close?:  (sheet: ActorSheet) => void,
+    renderSheet?: (sheet: ActorSheet) => void,
+    closeSheet?:  (sheet: ActorSheet) => void,
 }
 
 //###### UI Controls ######

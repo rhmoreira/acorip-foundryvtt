@@ -33,7 +33,7 @@
 
 .rhm.tooltip{
     position: fixed;
-    display: block;
+    display: inline-block;
     border-radius: 5px;
     background: rgb(234, 234, 234);
     border: 7px solid rgb(185 2 2);

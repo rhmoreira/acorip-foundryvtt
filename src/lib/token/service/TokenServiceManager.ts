@@ -43,7 +43,7 @@ class TokenServiceManager {
     }
 
     private include(...tokens: TokenDocument[]): void {
-        this.logger.info("TokenServiceManager | New managed tokens > ", ...tokens.map(t => t.id));
+        this.logger.info("New managed tokens > ", ...tokens.map(t => t.id));
         tokens.forEach(token => {
             this.create(token);
         });
@@ -53,7 +53,7 @@ class TokenServiceManager {
         let service = this._services.find(service => service.getId() === tokenDocument.id)
         
         if (!!service && this.isUserAllowed(tokenDocument)) {
-            this.logger.info("TokenServiceManager | Token removed > ", tokenDocument.id);
+            this.logger.info("Token removed > ", tokenDocument.id);
             this._services.delete(service);
             this.emitEvent(TOKEN_CONTROL_EVENTS.deleted, service);
         }
@@ -64,7 +64,7 @@ class TokenServiceManager {
     private create(tokenDocument: TokenDocument): TokenService {
         let service = null;
         if (this.isUserAllowed(tokenDocument)){
-            this.logger.info("TokenServiceManager | Token created > ", tokenDocument.id);
+            this.logger.info("Token created > ", tokenDocument.id);
 
             service = new TokenService(tokenDocument)
             this._services.add(service);
