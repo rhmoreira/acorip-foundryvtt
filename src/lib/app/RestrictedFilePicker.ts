@@ -64,7 +64,6 @@ export default class RestrictedFilePicker extends FilePicker  {
     }
 
     static override upload(source: FilePicker.SourceType, path: string, file: File, body?: FilePicker.UploadBody, options?: FilePicker.UploadOptions): Promise<FilePicker.UploadResult | false | void | EmptyObject> {
-        console.log(file.name);
         if (RestrictedFilePicker.instance.areSourceAndTargetValid(source, path)){
             if (file.name.endsWith(RestrictedFilePicker.instance.restrictedFileExt))
                 return super.upload(source, path, file, body, options);

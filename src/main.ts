@@ -11,6 +11,7 @@ import { configure } from "./lib/config";
 import TokenServiceManager from "./lib/token/service/TokenServiceManager";
 import ActorSheetSkillTooltip from "./lib/app/ActorSheetSkillTooltip";
 import { info as logInfo } from "./lib/AcoripLog";
+import CanvasHooking from "./lib/hooking/CanvasHooking";
 
 Hooks.once("init", () => {
     configure();
@@ -30,7 +31,12 @@ Hooks.on("setup", () => {
 })
 
 Hooks.on("ready", () => {
-    ActorSheetSkillTooltip.init();
-    GameMasterUIRequestRoll.init();
     logInfo("Module acoriP loaded!");
+})
+
+CanvasHooking.hookUp({
+    ready: (_) => {
+        ActorSheetSkillTooltip.init();
+        GameMasterUIRequestRoll.init();
+    }
 })
