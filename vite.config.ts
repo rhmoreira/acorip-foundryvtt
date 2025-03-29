@@ -6,7 +6,7 @@ export default defineConfig({
         sourcemap: false,
         emptyOutDir: true,
         minify: false,
-        outDir: "C:\\Users\\rhmor\\AppData\\Local\\FoundryVTT\\Data\\modules\\acorip\\scripts",
+        outDir: "dist/scripts",
         watch: {
             include: "src/**/*.ts"
         },
@@ -25,13 +25,13 @@ export default defineConfig({
             targets: [
                 {
                     src: ["src/events/**.js"],
-                    dest: "C:\\Users\\rhmor\\AppData\\Local\\FoundryVTT\\Data\\modules\\acorip\\scripts",
+                    dest: "dist/scripts",
                     expandDirectories: true,
                     onlyFiles: true
                 },
                 {
                     src: ["src/", "!src/**/*.ts", "!src/**/*.js"],
-                    dest: "C:\\Users\\rhmor\\AppData\\Local\\FoundryVTT\\Data\\modules\\acorip",
+                    dest: "dist",
                     expandDirectories: true,
                     onlyFiles: true
                 }
