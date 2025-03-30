@@ -95,6 +95,5 @@ class ActorSheetHookingControl implements ActorSheetHooking {
         let skillToolip = this.sheetMap.get(sheet);
         skillToolip?.close();
         this.sheetMap.delete(sheet);
-        logger.info(this.sheetMap);
     }
 }
