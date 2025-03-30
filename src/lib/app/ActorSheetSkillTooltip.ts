@@ -78,11 +78,7 @@ export default class ActorSheetSkillTooltip extends BaseUI {
     }
 
     public static init(): void {
-        let control = new ActorSheetHookingControl();
-        ActorHooking.hookup({
-            renderSheet: control.renderSheet.bind(control),
-            closeSheet: control.closeSheet.bind(control)
-        });
+        ActorHooking.hookup(new ActorSheetHookingControl());
     }
 }
 
