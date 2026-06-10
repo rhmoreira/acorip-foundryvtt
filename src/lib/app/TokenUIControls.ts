@@ -71,7 +71,6 @@ export class TokenUIControls extends BaseUI {
 
     public static init(): void {
         if (!game.user.isGM) {
-            new TokenUIControls();
             CanvasHooking.hookUp({
                 ready: () => {
                     new TokenUIControls();

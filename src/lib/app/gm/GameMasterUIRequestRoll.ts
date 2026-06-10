@@ -134,11 +134,18 @@ export default class GameMasterUIRequestRoll extends BaseUI{
                     else return 0;
                 });
 
-            let stats = [];
-            for (let statName in (game.system as any).model.Actor.character.stats) 
-                stats.push({statName});
-
-            GameMasterUIRequestRoll.STATS = stats;
+            GameMasterUIRequestRoll.STATS = [
+                {statName: "int"}, 
+                {statName: "ref"}, 
+                {statName: "dex"}, 
+                {statName: "tech"},
+                {statName: "cool"},
+                {statName: "will"},
+                {statName: "luck"},
+                {statName: "move"},
+                {statName: "body"},
+                {statName: "emp" }
+            ];;
         }
     }
 }

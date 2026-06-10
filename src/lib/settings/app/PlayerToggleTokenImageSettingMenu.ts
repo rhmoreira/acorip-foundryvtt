@@ -1,5 +1,5 @@
 import RestrictedFilePicker from "../../app/RestrictedFilePicker";
-import { ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
+import { defaultRestrictFilePickerConfig, ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
 import utils from "../../utils";
 import ToggleTokenImageSettingsMenu from "./ToggleTokenImageSettingMenu";
 
@@ -30,11 +30,10 @@ export default class PlayerToggleTokenImageSettingMenu extends ToggleTokenImageS
     }
 
     private triggerRestrictedFilePicker(): void{
-        new RestrictedFilePicker(
-            `${this.playerTokenSettings.defaultTokenImagePath}/${game.user.name}`,
-            "data",
-            this.playerTokenSettings.imgfileExt
-        ).render(true);
+        new RestrictedFilePicker({
+            ...defaultRestrictFilePickerConfig,
+            restrictedFolder: `${this.playerTokenSettings.defaultTokenImagePath}/${game.user.name}`
+        }).render(true);
     }
 
     override async _updateObject(_: any, formData?: any) {

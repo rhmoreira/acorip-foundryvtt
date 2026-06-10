@@ -90,3 +90,17 @@ export type ToggleTokenImageSettingsData = {
     defaultTokenImagePath: string,
     imgfileExt: string
 }
+
+//### Restricted File Picker ###
+export type RestrictedFilePickerConfigType = {
+    restrictedFolder?: string,
+    restrictedTab: "data" | "public",
+    restrictedFileExt: string,
+    fileType: FilePicker.Type,
+}
+
+export const defaultRestrictFilePickerConfig: RestrictedFilePickerConfigType = {
+    restrictedTab: "data",
+    restrictedFileExt: ".png",
+    fileType: "image",
+}

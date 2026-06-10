@@ -26,6 +26,17 @@ function registerSettings(): void {
         restricted: false
     });
 
+    (game.settings as any).register(MODULE_ID, SETTINGS_CONF.playerToggleTokenImage, {
+        scope: "client",
+        config: false,
+        type: Object,
+        default: createToggleTokenImageDefaultSettings(),
+        onChange: (value: string) => {
+            setConfigSetting(SETTINGS_CONF.playerToggleTokenImage, value);
+            new TokenSettingHelper().toggleTokenImageSetting = value;
+        }
+    });
+
     (game.settings as any).register(MODULE_ID, SETTINGS_CONF.toggleTokenImage, {
         scope: "world",
         config: false,
@@ -35,13 +46,6 @@ function registerSettings(): void {
             setConfigSetting(SETTINGS_CONF.toggleTokenImage, value);
             new TokenSettingHelper().playerToggleTokenImageSetting = value;
         }
-    });
-
-    (game.settings as any).register(MODULE_ID, SETTINGS_CONF.playerToggleTokenImage, {
-        scope: "client",
-        config: false,
-        type: Object,
-        onChange: (value: string) => setConfigSetting(SETTINGS_CONF.playerToggleTokenImage, value)
     });
 
     (game.settings as any).register(MODULE_ID, SETTINGS_CONF.netrunningEffectFile, {

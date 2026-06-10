@@ -1,17 +1,16 @@
 import { EmptyObject } from "@league-of-foundry-developers/foundry-vtt-types/src/types/utils.mjs";
+import { RestrictedFilePickerConfigType as FilePickerType } from "../types/acoriPTypes";
 
 export default class RestrictedFilePicker extends FilePicker  {
  
     private ready: boolean = false;
     private static INSTANCE: RestrictedFilePicker = null;
+    private config: FilePickerType;
 
-    constructor(
-        private restrictedFolder: string,
-        private restrictedTab: "data" | "public" = "data",
-        private restrictedFileExt: string = ".png",
-        private fileType: FilePicker.Type = "image",
-    ){
-        super();
+    constructor(config: FilePickerType | Partial<FilePickerOptions>)
+    {
+        super(config as Partial<FilePickerOptions>);
+        this.config = config as FilePickerType;
         RestrictedFilePicker.instance = this;
     }
 
@@ -27,9 +26,9 @@ export default class RestrictedFilePicker extends FilePicker  {
     }
     
     private navigateDefault(): Promise<FilePicker.BrowseResult> {
-        this.fileType;
-        super.activateTab(this.restrictedTab);
-        return super.browse(this.restrictedFolder);
+        this.config.fileType;
+        super.activateTab(this.config.restrictedTab);
+        return super.browse(this.config.restrictedFolder);
     }
 
     override browse(target?: string, options?: FilePicker.BrowseOptions): Promise<FilePicker.BrowseResult> {
@@ -40,15 +39,15 @@ export default class RestrictedFilePicker extends FilePicker  {
     }
 
     private browseRestricted(target?: string, options?: FilePicker.BrowseOptions): Promise<FilePicker.BrowseResult> {
-        return this.restrictedFolder.startsWith(target ?? "")
+        return game.user.isGM || this.config.restrictedFolder.startsWith(target ?? "")
             ? super.browse(target, options)
             : Promise.reject(Error(`Access restricted to unauthorized path >> ${target}`));
     }
 
     protected override _onChangeTab(_event: MouseEvent | null, _tabs: Tabs, active: this["activeSource"]): void {
         if (this.ready)
-            if (active != this.restrictedTab)
-                super.activateTab(this.restrictedTab);
+            if (active != this.config.restrictedTab)
+                super.activateTab(this.config.restrictedTab);
     }
 
     override close(options?: Application.CloseOptions): Promise<void> {
@@ -65,18 +64,18 @@ export default class RestrictedFilePicker extends FilePicker  {
 
     static override upload(source: FilePicker.SourceType, path: string, file: File, body?: FilePicker.UploadBody, options?: FilePicker.UploadOptions): Promise<FilePicker.UploadResult | false | void | EmptyObject> {
         if (RestrictedFilePicker.instance.areSourceAndTargetValid(source, path)){
-            if (file.name.endsWith(RestrictedFilePicker.instance.restrictedFileExt))
+            if (file.name.endsWith(RestrictedFilePicker.instance.config.restrictedFileExt))
                 return super.upload(source, path, file, body, options);
             else
-                ui.notifications.error(game.i18n.format('acorip.messages.token.invalid-image-type', {imageExt: RestrictedFilePicker.instance.restrictedFileExt}));
+                ui.notifications.error(game.i18n.format('acorip.messages.token.invalid-image-type', {imageExt: RestrictedFilePicker.instance.config.restrictedFileExt}));
         } else{
-            ui.notifications.error(game.i18n.format('acorip.messages.token.invalid-image-path', {path: RestrictedFilePicker.instance.restrictedFolder}));
+            ui.notifications.error(game.i18n.format('acorip.messages.token.invalid-image-path', {path: RestrictedFilePicker.instance.config.restrictedFolder}));
         }
         return Promise.reject(Error('Uauthorized access or Invalid image'));
     }
 
     private areSourceAndTargetValid(source: FilePicker.SourceType, target: string): boolean {
-        return source === this.restrictedTab && this.restrictedFolder === target;
+        return source === this.config.restrictedTab && this.config.restrictedFolder === target;
     }
 
 

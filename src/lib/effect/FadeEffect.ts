@@ -6,7 +6,7 @@ export default class FadeService {
 
     private content: string = templateFactory.parseTemplate(TEMPLATES.fadeElementDialog);
 
-    constructor(private fadeable: Fadeable, private interval: number = 100){}
+    constructor(private fadeable: Fadeable, private interval: number = 50){}
 
     public async fade(type?: FadeType): Promise<void> {
         if (!type) {
@@ -30,28 +30,28 @@ export default class FadeService {
     private doFade(fadeType: FadeType): Promise<void> {
         let isFadeOut = fadeType === "out";
         let fadeOptions = isFadeOut 
-                          ? this.createAlphaOptions(0.05, (alpha: any) => alpha < 0, 0)
-                          : this.createAlphaOptions(-0.05, (alpha: any) => alpha > 1, 1);
+                          ? this.createAlphaOptions(0.1, (alpha: any) => alpha < 0, 0)
+                          : this.createAlphaOptions(-0.1, (alpha: any) => alpha > 1, 1);
       
         let fadeValue = isFadeOut ? 1 : 0;
       
         return new Promise((resolve, _) => {
-            let fade = setInterval(() => {
+            let fade = setInterval(async () => {
                 fadeValue = fadeValue - fadeOptions.alphaFactor;
                 let update = this.fadeable.createFadeUpdate(fadeValue)
-                if (fadeOptions.alphaLimitCheck(fadeValue)) {
+                if (fadeOptions.isFinished(fadeValue)) {
                     clearInterval(fade);
-                    update = this.fadeable.createFadeUpdate(fadeOptions.alphaLimit);
-                    resolve();
-                }
-                canvas?.scene?.updateEmbeddedDocuments(this.fadeable.getDocumentName(), [update]);
+                    await canvas?.scene?.updateEmbeddedDocuments(this.fadeable.getDocumentName(), [update])
+                    resolve()
+                } else
+                    await canvas?.scene?.updateEmbeddedDocuments(this.fadeable.getDocumentName(), [update]);
             }, this.interval);
         })
         
     }
     
-    private createAlphaOptions(alphaFactor: number, alphaLimitCheck: any, alphaLimit: number): any {
-        return {alphaFactor, alphaLimitCheck, alphaLimit};
+    private createAlphaOptions(alphaFactor: number, isFinished: any, alphaLimit: number): any {
+        return {alphaFactor, isFinished, alphaLimit};
     }
     
 }
