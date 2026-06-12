@@ -1,4 +1,5 @@
-import { MODULE_ID } from "../../Constants";
+import { MODULE_ID, SETTINGS_CONF } from "../../Constants";
+import { getSetting } from "../../settings/PersistedSettingsHelper";
 import AcoripSocketHandler from "../../socket/AcoripSocketHandler";
 import { SocketAction, SocketRequestRollActionData } from "../../types/acoriPTypes";
 import BaseUI from "../BaseUI";
@@ -10,12 +11,19 @@ interface RequestRollFormData{
     diceFormula: string;
 }
 
+type Skill = {
+    id: string,
+    name: string,
+}
+
+type SkillGroup = {
+    groupName: string,
+    skills: Skill[]
+}
+
 export default class GameMasterUIRequestRoll extends BaseUI{
 
-    private static SKILLS: {
-        id: string,
-        name: string,        
-    }[] = [];
+    private static SKILL_GROUP: SkillGroup[] = [];
 
     private static STATS: {
         statName: string,    
@@ -42,9 +50,13 @@ export default class GameMasterUIRequestRoll extends BaseUI{
 
     override async getData(_?: Partial<ApplicationOptions>): Promise<any> {
         let users = game.users.filter(u => (u as any).active && u.hasPlayerOwner);
+
+        let extraSkills = (getSetting(SETTINGS_CONF.cutomSkillPacks) as string)
+            ?.split("/(,|\s)/")
+            ?.map(packIndexedName => GameMasterUIRequestRoll.loadPackSkills(packIndexedName, 'Extra Skills')) ?? [];
         return {
             users: users,
-            skills: GameMasterUIRequestRoll.SKILLS,
+            skillGroup: [...GameMasterUIRequestRoll.SKILL_GROUP, ...extraSkills],
             stats: GameMasterUIRequestRoll.STATS
         }        
     }
@@ -124,28 +136,49 @@ export default class GameMasterUIRequestRoll extends BaseUI{
 
     public static init(): void {
         if(game.user.isGM) {
-            GameMasterUIRequestRoll.SKILLS = game.packs
-                .get('cyberpunk-red-core.internal_skills')
-                .index
-                .map(entry => {return {id: entry._id, name: entry.name}})
-                .sort( ({name: name1}, {name: name2}) => {
-                    if (name1 > name2) return 1;
-                    else if (name1 < name2) return -1;
-                    else return 0;
-                });
-
-            GameMasterUIRequestRoll.STATS = [
-                {statName: "int"}, 
-                {statName: "ref"}, 
-                {statName: "dex"}, 
-                {statName: "tech"},
-                {statName: "cool"},
-                {statName: "will"},
-                {statName: "luck"},
-                {statName: "move"},
-                {statName: "body"},
-                {statName: "emp" }
-            ];;
+            this.loadStats();
+            this.loadSkills();
         }
+    }
+
+    private static loadStats() {
+        GameMasterUIRequestRoll.STATS = [
+            { statName: "int" },
+            { statName: "ref" },
+            { statName: "dex" },
+            { statName: "tech" },
+            { statName: "cool" },
+            { statName: "will" },
+            { statName: "luck" },
+            { statName: "move" },
+            { statName: "body" },
+            { statName: "emp" }
+        ];
+    }
+
+    private static loadSkills() {
+        GameMasterUIRequestRoll.SKILL_GROUP.push(this.loadPackSkills('cyberpunk-red-core.internal_skills', "Cyberpunk RED: Core"));
+        GameMasterUIRequestRoll.SKILL_GROUP.push(this.loadPackSkills('cyberpunk-red-core.core_skills-languages', "Cyberpunk RED: Core"));
+        GameMasterUIRequestRoll.SKILL_GROUP.push(this.loadPackSkills('cyberpunk-red-core.core_skills-martial-arts', "Cyberpunk RED: Core"));
+        GameMasterUIRequestRoll.SKILL_GROUP.push(this.loadPackSkills('cyberpunk-red-core.core_skills-science', "Cyberpunk RED: Core"));
+    }
+
+    private static loadPackSkills(packIndexedName: string, groupNamePrefix: string = ""): SkillGroup {
+        let skills = game.packs
+            .get(packIndexedName)
+            ?.index
+            .filter(entry => (entry as any).type === 'skill')
+            .map( ({_id: id, name}) => ({id, name}) )
+            .sort( ({name: name1}, {name: name2}) => {
+                if (name1 > name2) return 1;
+                else if (name1 < name2) return -1;
+                else return 0;
+            });
+        
+        if (!!skills) {
+            const compendiumName = game.packs.get(packIndexedName)?.metadata.label;
+            return {groupName: `${groupNamePrefix} - ${compendiumName}`, skills}
+        } else 
+            return null
     }
 }

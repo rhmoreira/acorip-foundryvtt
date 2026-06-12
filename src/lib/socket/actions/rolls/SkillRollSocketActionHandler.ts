@@ -20,16 +20,20 @@ export default class SkillRollSocketActionHandler extends BaseRollActionHandler 
         let actor = game.user.character;
         let skill = game.user.character.items.find(i => (i.type as any) === "skill" && i.name === data.data.skillName);
 
-        let skillRoll = (skill as any).createRoll(skill.type, actor);
+        if (!!skill) {
+            let skillRoll = (skill as any).createRoll(skill.type, actor);
 
-        skillRoll.handleRollDialog({}, actor, skill)
-        .then( (confirmed: boolean) => {
-            if (confirmed) {
-                skillRoll
-                    .roll()
-                    .then(() => super.showMessageResult(this.createMessageRollParams(skillRoll)) )
-            }
-        });
+            skillRoll.handleRollDialog({}, actor, skill)
+            .then( (confirmed: boolean) => {
+                if (confirmed) {
+                    skillRoll
+                        .roll()
+                        .then(() => super.showMessageResult(this.createMessageRollParams(skillRoll)) )
+                }
+            });
+        } else {
+            ui.notifications.error(game.i18n.format("acorip.messages.actor-skill-not-found", {skill: data.data.skillName}), {permanent: true});
+        }
     }
 
     private createMessageRollParams(skillRoll: any): any {

@@ -20,17 +20,20 @@
             <label for="diceTabRadio" class="rhm header-label rhm-tab-label" data-content=".rhm.dice-formula">{{localize 'acorip.labels.dice'}}</label>
         </div>
         <div class="rhm sorted-skills tab-current">
-            <div class="rhm grid" style="--rhm-grid-columns: 3">
-                {{#each skills}}
+            {{#each skillGroup}}
+                <label>{{groupName}}</label><hr>
+                <div class="rhm grid" style="--rhm-grid-columns: 3">
+                    {{#each skills}}
                     <div class="rhm item-row text-nowrap">
                         <input id="skill_index_{{id}}" type="radio" name="skill" value="{{name}}">
                         <label for="skill_index_{{id}}">{{name}}</label>
                     </div>
-                {{/each}}
-            </div>
-             <div class="rhm-btn-area">
-                <button class="rhm-btn rhm-btn-submit" type="submit" data-action="rollSkill">{{localize 'acorip.labels.request-skill-roll'}}</button>
-            </div>
+                    {{/each}}
+                </div>
+                <div class="rhm-btn-area">
+                    <button class="rhm-btn rhm-btn-submit" type="submit" data-action="rollSkill">{{localize 'acorip.labels.request-skill-roll'}}</button>
+                </div>
+            {{/each}}
         </div>
         <div class="rhm stats hide">
             <div class="rhm grid" style="--rhm-grid-columns: auto-fit; --rhm-grid-column-min: 1rem">

@@ -7,7 +7,6 @@ export default abstract class BaseUI extends FormApplication {
     public get isClosed(): boolean {return this._closed;};
 
     constructor(private uiControlPropertyName: string, private hasTabs: boolean = false) {
-
         super({});
         (ui as any)[this.uiControlPropertyName]?.close();
         (ui as any)[this.uiControlPropertyName] = this;

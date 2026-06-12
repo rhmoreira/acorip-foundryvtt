@@ -25,5 +25,6 @@ export const TEMPLATES = {
 export const SETTINGS_CONF = {
     toggleTokenImage: "toggleTokenImageSettings",
     playerToggleTokenImage: "playerToggleTokenImageSettings",
-    netrunningEffectFile: "netrunningEffectFileSettings"
+    netrunningEffectFile: "netrunningEffectFileSettings",
+    cutomSkillPacks: "customSkillPackSettings"
 } as const

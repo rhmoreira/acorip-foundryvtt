@@ -59,6 +59,16 @@ function registerSettings(): void {
         onChange: (value: string) => setConfigSetting(SETTINGS_CONF.netrunningEffectFile, value)
     });
 
+    (game.settings as any).register(MODULE_ID, SETTINGS_CONF.cutomSkillPacks, {
+        name: game.i18n.localize("acorip.labels.settings.request-skill-roll-extra.name"),
+        hint: game.i18n.localize("acorip.labels.settings.request-skill-roll-extra.hint"),
+        config: true,
+        type: String,
+        default: null,
+        restricted: true,
+        onChange: (value: string) => setConfigSetting(SETTINGS_CONF.cutomSkillPacks, value)
+    });
+
     updateConfigSettings();
 }
 
