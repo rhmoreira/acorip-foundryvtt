@@ -1,10 +1,11 @@
 <form>
     <div class="form-group">
-        <label>{{localize 'acorip.labels.choose_stance'}}</label>
-        <select name="token_stance">
-            {{#each stances}}
-            <option value="{{suffix}}">{{description}}</option>
-            {{/each}}
-        </select>
+        {{#each files}}
+            <label>
+                <input class="rhm-radio" type="radio" value="{{this}}" name="image">
+                <img class="rhm-img" src="{{this}}" width="110" height="130">
+            </label>
+        {{/each}}
     </div>
+    <button type="submit" data-action="confirm">{{localize 'acorip.labels.select-button'}}</button>
 </form>

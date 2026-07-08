@@ -5,10 +5,13 @@ function hookUp(canvasCallbacks: CanvasHookCallbacks = {}): void {
         canvasCallbacks.ready?.(canvas)
         canvasCallbacks.tokens?.(...loadTokenServices(canvas))
     });
+    
+    if (!!canvasCallbacks.once)
+        Hooks.once("canvasReady", canvasCallbacks.once)
 }
 
 function loadTokenServices(_: Canvas): TokenDocument[] {
     return game.scenes?.current?.tokens.map(token => token);
 }
 
-export default {hookUp}
+export default { hookUp }

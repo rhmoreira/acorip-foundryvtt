@@ -10,7 +10,8 @@ export type TemplateType = typeof TEMPLATES[TemplateKeys];
 //###### Hooking ######
 export type CanvasHookCallbacks = {
     tokens?: (...tokens: TokenDocument[]) => void,
-    ready?: (canvas: Canvas) => void
+    ready?: (canvas: Canvas) => void,
+    once?: (canvas: Canvas) => void
 };
 
 export type TokenCRUDHookCallbacks = {

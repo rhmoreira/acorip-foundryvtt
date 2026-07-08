@@ -75,7 +75,11 @@ export default class RestrictedFilePicker extends FilePicker  {
     }
 
     private areSourceAndTargetValid(source: FilePicker.SourceType, target: string): boolean {
-        return source === this.config.restrictedTab && this.config.restrictedFolder === target;
+        return game.user.isGM || 
+            (
+                source === this.config.restrictedTab
+                && this.config.restrictedFolder === target
+            );
     }
 
 

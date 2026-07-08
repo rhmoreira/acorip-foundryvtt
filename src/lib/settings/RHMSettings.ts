@@ -94,7 +94,7 @@ function createToggleTokenImageDefaultSettings(): ToggleTokenImageSettingsData {
             ,{enabled: true, suffix: "_combat_smg_",    description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-smg")}
             ,{enabled: true, suffix: "_combat_bow_",    description: game.i18n.localize("acorip.labels.settings.token-toggle-image.default.combat-bow")}
         ],
-        defaultTokenImagePath: "assets/cyberpunk-red/",
+        defaultTokenImagePath: "assets/cyberpunk-red/players",
         imgfileExt: ".png"
     }
 }

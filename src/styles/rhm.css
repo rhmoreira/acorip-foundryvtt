@@ -125,3 +125,19 @@
     background: rgb(255 195 182)!important;
     color: rgb(185 2 2)!important;
 }
+
+[type=radio].rhm-radio { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img.rhm-img {
+  cursor: pointer;
+}
+
+[type=radio]:checked + img.rhm-img {
+  outline: 2px solid #f00;
+}

@@ -15,6 +15,7 @@
              "not-in-combat":"Black-ICE '{tokenName}' is not in combat"
           },
           "token":{
+             "image-required":"Select an image to change appearance",
              "image-changed":"{tokenName} has changed token's appearance",
              "stance-image-not-found": "Stance not found [{src}]",
              "invalid-image-type": "Image type not allowed. [{imageExt}] image file extension only",
@@ -81,7 +82,9 @@
           "request-dice-roll":"Request dice roll",
           "add": "Add",
           "remove": "Remove",
-          "upload-files": "Upload Files"
+          "upload-files": "Upload Files",
+          "select-button": "Select",
+          "cancel-button": "Cancel"
        },
        "tooltip": {}
     }

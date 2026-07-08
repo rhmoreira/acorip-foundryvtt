@@ -2,6 +2,7 @@ import {TokenSettingHelper} from "../../settings/PersistedSettingsHelper";
 import { getService } from "../../config";
 import { defaultRestrictFilePickerConfig, ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
 import TokenServiceManager from "./TokenServiceManager";
+import { TokenImagePickerUI } from "../../app/TokenImagePickerUI";
 import RestrictedFilePicker from "../../app/RestrictedFilePicker";
 
 export default class ToggleTokenImageHandler {
@@ -24,23 +25,22 @@ export default class ToggleTokenImageHandler {
 
     public toggleTokenImage(): void{
 
-        new RestrictedFilePicker({
-            ...defaultRestrictFilePickerConfig,
-            restrictedFolder: `${this.toggleOptionSettings.defaultTokenImagePath}/${game.user.name}`,
-            callback: this.applyStance.bind(this),
-            displayMode: "tiles"
-        }).render(true);
+        if (game.user.isGM) {
+            new FilePicker({
+                ...defaultRestrictFilePickerConfig,
+                callback: this.applyStance.bind(this),
+                displayMode: "tiles"
+            }).render(true)
+            .browse(`${this.toggleOptionSettings.defaultTokenImagePath}/${game.user.name}`);
+        } else {
+            new TokenImagePickerUI(
+                `${this.toggleOptionSettings.defaultTokenImagePath}/${game.user.name}`,
+                this.applyStance.bind(this)
+            ).render(true)
+        }
         
-/*         this.toggleOptionSettings.stances = this.toggleOptionSettings.stances.filter(s => s.enabled);
-        
-        let content = templateFactory.parseTemplate(TEMPLATES.tokenToggleImageDialog, this.toggleOptionSettings)
-        const dialogOptions: DialogData = {
-            title: game.i18n.localize("acorip.labels.change_token_stance"),
-            content: content,
-            buttons: {confirm: {label: game.i18n.localize("acorip.labels.confirm"), callback: this.applyStance.bind(this)}},
-            default: "confirm",
-        };
-        new Dialog(dialogOptions).render(true); */
+
+         
     }
 
     private applyStance(path: string): void {
