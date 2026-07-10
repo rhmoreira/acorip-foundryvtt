@@ -19,7 +19,7 @@ export class TokenImagePickerUI extends BaseUI {
             title: game.i18n.localize("acorip.features.token.toggle-image"),
             template: `modules/${MODULE_ID}/templates/token-toggle-image-dialog.hbs`,
             resizable: false,
-            popOut: true,
+            popOut: false,
         }
     }
 

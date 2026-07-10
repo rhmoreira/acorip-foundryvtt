@@ -1,9 +1,6 @@
 import {TokenSettingHelper} from "../../settings/PersistedSettingsHelper";
-import { getService } from "../../config";
 import { defaultRestrictFilePickerConfig, ToggleTokenImageSettingsData } from "../../types/acoriPTypes";
-import TokenServiceManager from "./TokenServiceManager";
 import { TokenImagePickerUI } from "../../app/TokenImagePickerUI";
-import RestrictedFilePicker from "../../app/RestrictedFilePicker";
 
 export default class ToggleTokenImageHandler {
 
@@ -37,10 +34,7 @@ export default class ToggleTokenImageHandler {
                 `${this.toggleOptionSettings.defaultTokenImagePath}/${game.user.name}`,
                 this.applyStance.bind(this)
             ).render(true)
-        }
-        
-
-         
+        } 
     }
 
     private applyStance(path: string): void {
@@ -54,8 +48,7 @@ export default class ToggleTokenImageHandler {
     }
 
     private updateToken(updates: any): void {
-        let tokenService = getService(TokenServiceManager).getById(this.token.id);
-        tokenService.getToken().update(updates)
+        this.token.document.update(updates)
     }    
 
     private notifyChange(): void {
