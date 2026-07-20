@@ -3,6 +3,7 @@ export const TOKEN_CONTROL_EVENTS = {
     deleted: "tokenServiceDeleted"
 }
 export const MODULE_ID: string = "acorip";
+
 export const FLAGS = {
     INVALID_TOKEN: "Invalid Token",
     NETRUNNING: "Netrunning"
@@ -28,3 +29,5 @@ export const SETTINGS_CONF = {
     netrunningEffectFile: "netrunningEffectFileSettings",
     cutomSkillPacks: "customSkillPackSettings"
 } as const
+
+export const DEFAULT_TOKEN_IMAGE_GEAR_FLAG = "DefaultTokenImageGear";

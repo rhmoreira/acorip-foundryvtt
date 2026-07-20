@@ -10,6 +10,7 @@ import { configure } from "./lib/config";
 import TokenServiceManager from "./lib/token/service/TokenServiceManager";
 import { info as logInfo } from "./lib/AcoripLog";
 import CanvasHooking from "./lib/hooking/CanvasHooking";
+import TokenImageToggleHooking from "./lib/hooking/TokenImageToggleHooking";
 
 Hooks.once("init", () => {
     configure();
@@ -30,6 +31,7 @@ Hooks.on("setup", () => {
 
 Hooks.on("ready", () => {
     logInfo("Module acoriP loaded!");
+    TokenImageToggleHooking.hookUp();
 })
 
 CanvasHooking.hookUp({

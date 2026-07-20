@@ -2,12 +2,13 @@ import { MODULE_ID } from "../Constants";
 import BaseUI from "./BaseUI";
 
 interface TokenImagePickerFormData {
-    image: string
+    image: string,
+    defaultGear: boolean
 }
 
 export class TokenImagePickerUI extends BaseUI {
 
-    constructor(private path: string, private callback: (selectedImage: string) => void) {
+    constructor(private path: string, private callback: (selectedImage: string, setDefaultGear: boolean) => void) {
         super("rhmToggleTokenImageUI");
     }
 
@@ -19,7 +20,7 @@ export class TokenImagePickerUI extends BaseUI {
             title: game.i18n.localize("acorip.features.token.toggle-image"),
             template: `modules/${MODULE_ID}/templates/token-toggle-image-dialog.hbs`,
             resizable: false,
-            popOut: false,
+            popOut: true,
         }
     }
 
@@ -38,7 +39,7 @@ export class TokenImagePickerUI extends BaseUI {
         switch (action) {
             case "confirm":
                 this.validateSelectedImage(formData?.image)
-                this.callback(formData?.image);
+                this.callback(formData?.image, formData?.defaultGear ?? false);
                 break;        
             default:
                 break;

@@ -105,3 +105,8 @@ export const defaultRestrictFilePickerConfig: RestrictedFilePickerConfigType = {
     restrictedFileExt: ".png",
     fileType: "image",
 }
+
+export type DefaultTokenImageEquipmentFlag = {
+    imagePath: string,
+    equippedGear: string
+}
