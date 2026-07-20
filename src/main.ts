@@ -9,7 +9,6 @@ import RHMSettings from "./lib/settings/RHMSettings";
 import { configure } from "./lib/config";
 import TokenServiceManager from "./lib/token/service/TokenServiceManager";
 import { info as logInfo } from "./lib/AcoripLog";
-import CanvasHooking from "./lib/hooking/CanvasHooking";
 import TokenImageToggleHooking from "./lib/hooking/TokenImageToggleHooking";
 
 Hooks.once("init", () => {
@@ -19,8 +18,6 @@ Hooks.once("init", () => {
     templateFactory.init();
 
     HandlebarsCustomHelpers.registerHelpers();
-
-    
 });
 
 Hooks.on("setup", () => {
@@ -31,11 +28,7 @@ Hooks.on("setup", () => {
 Hooks.once("canvasInit", (_: Canvas) => {
     TokenUIControls.init();
     GameMasterUIControls.init();
-    CanvasHooking.hookUp({
-        ready: (_) => {
-            GameMasterUIRequestRoll.init();
-        }
-    })
+    GameMasterUIRequestRoll.init();
     TokenServiceManager.init();
 })
 

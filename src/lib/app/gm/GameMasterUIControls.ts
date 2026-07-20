@@ -1,5 +1,4 @@
 import { MODULE_ID } from "../../Constants";
-import CanvasHooking from "../../hooking/CanvasHooking";
 import BaseUI from "../BaseUI";
 import GameMasterUIRequestRoll from "./GameMasterUIRequestRoll";
 
@@ -46,11 +45,7 @@ export default class GameMasterUIControls extends BaseUI {
 
     public static init(): void {
         if (game.user.isGM) {
-            CanvasHooking.hookUp({
-                ready: () => {
-                    new GameMasterUIControls().render(true);
-                }
-            });
+            new GameMasterUIControls().render(true);
         }        
     }
 }
