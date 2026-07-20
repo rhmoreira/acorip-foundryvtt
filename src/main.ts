@@ -16,26 +16,30 @@ Hooks.once("init", () => {
     configure();
 
     AcoripSocketHandler.init();
-    TokenServiceManager.init();
     templateFactory.init();
 
     HandlebarsCustomHelpers.registerHelpers();
+
+    
 });
 
 Hooks.on("setup", () => {
     RHMSettings.registerSettings();
-    GameMasterUIControls.init();
-    TokenUIControls.init();
     TokenHUDHooking.hookUp();
 })
 
-Hooks.on("ready", () => {
-    logInfo("Module acoriP loaded!");
-    TokenImageToggleHooking.hookUp();
+Hooks.once("canvasInit", (_: Canvas) => {
+    TokenUIControls.init();
+    GameMasterUIControls.init();
+    CanvasHooking.hookUp({
+        ready: (_) => {
+            GameMasterUIRequestRoll.init();
+        }
+    })
+    TokenServiceManager.init();
 })
 
-CanvasHooking.hookUp({
-    ready: (_) => {
-        GameMasterUIRequestRoll.init();
-    }
+Hooks.on("ready", () => {
+    TokenImageToggleHooking.hookUp();
+    logInfo("Module acoriP loaded!");
 })

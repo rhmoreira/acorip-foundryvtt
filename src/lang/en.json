@@ -20,7 +20,7 @@
              "stance-image-not-found": "Stance not found [{src}]",
              "invalid-image-type": "Image type not allowed. [{imageExt}] image file extension only",
              "invalid-image-path": "Unauthorized image path. Uploads are allowed only into [{path}] folder",
-             "default-weapon-image": "Defaults this stance for the equiped Weapon"
+             "default-gear-image": "Defaults this stance for the equiped gear and weapons"
           },
           "roll-request":{
              "title":"{rollType} roll request",
